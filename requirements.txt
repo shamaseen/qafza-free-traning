@@ -1,0 +1,14 @@
+# DVC session
+dvc>=3.0
+dvclive>=3.0
+
+# MLflow session
+mlflow>=2.9
+
+# shared: something real to train on
+scikit-learn
+pandas
+numpy
+matplotlib
+pyyaml
+psutil          # optional: enables MLflow system metrics

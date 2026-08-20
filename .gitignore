@@ -1,0 +1,26 @@
+# --- the whole point of the DVC session: data never goes into Git ---
+data.zip
+data/
+photos/
+*.pkl
+*.joblib
+
+# sandboxes the notebooks create when you run them
+dvc_demo/
+mlflow_demo/
+dvc_remote/
+
+# MLflow local stores
+mlruns/
+mlartifacts/
+mlflow.db
+
+# DVCLive output
+dvclive/
+
+# python / jupyter
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
