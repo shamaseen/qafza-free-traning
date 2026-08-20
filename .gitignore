@@ -1,5 +1,6 @@
-# --- the whole point of the DVC session: data never goes into Git ---
-data.zip
+# --- data does not belong in Git ---
+# ...with one deliberate exception: dvc/data.zip is committed so the tutorial is
+# self-contained for anyone who clones this repo. See the note in README.md.
 data/
 photos/
 *.pkl

@@ -33,18 +33,19 @@ Each notebook builds a **throwaway sandbox folder** next to itself (`dvc_demo/`,
 `mlflow_demo/`), does all its work there, and has a cleanup cell at the end. Nothing outside
 the folder is touched, and the sandboxes are git-ignored.
 
-## About `data.zip`
+## About `dvc/data.zip`
 
-Part 5 of the DVC notebook uses the real course dataset — `data.zip`, about 39 MB of cat and
-dog photographs — to version a genuinely large folder rather than a toy CSV.
+Part 5 of the DVC notebook uses the real course dataset — `dvc/data.zip`, 39 MB of cat and dog
+photographs — so you version a genuinely large folder instead of a toy CSV. It is committed
+here, so the tutorial works the moment you clone the repo.
 
-**That file is deliberately not in this repository.** Keeping 39 MB of images out of Git is
-the entire lesson of the DVC session: Git carries a few hundred bytes of pointer, and the
-photos live in DVC storage.
+**That is a deliberate exception, not a recommendation.** Committing 39 MB to Git is precisely
+what the DVC session spends 53 slides arguing against: it sits in the history forever and every
+clone pays for it. It is in here for one reason — a training repo that needs no setup.
 
-Put `data.zip` next to this repository (or in your home folder) and Part 5 finds it
-automatically. Without it, Part 5 skips itself cleanly and the rest of the notebook still
-runs.
+What you do in Part 5 is the right way round: `dvc add` the unpacked photos, push the bytes to
+a DVC remote, and let Git carry a five-line pointer. Run it and compare — `photos/` is 43 MB,
+the Git repository holding it is 61 KB.
 
 ## What each session covers
 
