@@ -33,6 +33,19 @@ Each notebook builds a **throwaway sandbox folder** next to itself (`dvc_demo/`,
 `mlflow_demo/`), does all its work there, and has a cleanup cell at the end. Nothing outside
 the folder is touched, and the sandboxes are git-ignored.
 
+Both notebooks are committed **with their outputs**, so you can read them on GitHub — charts,
+tables and command output included — without running anything. Re-running replaces them.
+
+### Seeing the MLflow UI
+
+Step 1.8 of the MLflow notebook **starts the MLflow UI for you** and embeds it in the notebook,
+so there is no server to set up by hand. It also prints the URL — open that in a real browser
+tab, it is much nicer than the embedded frame. The last cell shuts the server down.
+
+> MLflow 3.x opens on the **GenAI** view, which tracks LLM traces and will look empty. Click
+> **Model training → Training runs** to see the runs you just logged. The deck shows every
+> screen.
+
 ## About `dvc/data.zip`
 
 Part 5 of the DVC notebook uses the real course dataset — `dvc/data.zip`, 39 MB of cat and dog
