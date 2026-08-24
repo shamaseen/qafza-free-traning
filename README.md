@@ -18,9 +18,15 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 | 10 | Monitoring | Prometheus, Grafana | [`10-monitoring`](10-monitoring) |
 | 11 | Automation | Ray Serve, GitHub Actions | [`11-automation`](11-automation) |
 | 12 | Infrastructure | Terraform | [`12-infrastructure`](12-infrastructure) |
-| 13 | End-to-End ML System | the complete stack | `13-end-to-end` |
+| 13 | End-to-End ML System | the complete stack | [`13-end-to-end`](13-end-to-end) |
 
-Folders without a link are not built yet.
+All thirteen are built. Session 13 is the capstone: it wires DVC, scikit-learn, MLflow,
+FastAPI, Docker and CI into one chain, and then proves the chain holds by recovering a model
+from nothing but its run id.
+
+Two sessions need more than `pip`: session 4 and 13 need a running **Docker** daemon, and
+session 12 needs the **Terraform** CLI. Each notebook checks for its tools in the first cells
+and says so plainly if one is missing.
 
 ## Using the decks
 

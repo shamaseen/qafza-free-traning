@@ -29,11 +29,19 @@ onnxruntime
 # --- session 8 (distributed ML) ---
 ray[train]
 
+# --- session 9 (feature management) ---
+feast
+
+# --- sessions 10 and 13 (monitoring, and the API that exposes /metrics) ---
+prometheus-client
+
 # --- session 11 (automation) ---
 ray[serve]
 
-# --- added as later sessions land ---
-# torch / transformers           (session 2)
-# ray[default]                   (sessions 8, 11)
-# feast                          (session 9)
-# prometheus-client              (session 10)
+# --- session 13 (end to end) ---
+joblib
+
+# Not installable with pip, and needed by some sessions:
+#   Docker Engine + compose  (sessions 4, 10, 13)
+#   Terraform CLI            (session 12)
+#   git                      (sessions 6, 7, 13)

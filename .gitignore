@@ -10,6 +10,8 @@ photos/
 dvc_demo/
 mlflow_demo/
 dvc_remote/
+e2e_demo/
+e2e_dvc_remote/
 
 # MLflow local stores
 mlruns/
