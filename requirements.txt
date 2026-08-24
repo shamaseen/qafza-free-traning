@@ -26,6 +26,9 @@ accelerate
 onnx
 onnxruntime
 
+# --- session 8 (distributed ML) ---
+ray[train]
+
 # --- added as later sessions land ---
 # torch / transformers           (session 2)
 # ray[default]                   (sessions 8, 11)
