@@ -16,6 +16,9 @@ uvicorn
 requests
 httpx
 
+# --- session 5 (ETL) ---
+sqlalchemy
+
 # --- added as later sessions land ---
 # torch / transformers           (session 2)
 # ray[default]                   (sessions 8, 11)
