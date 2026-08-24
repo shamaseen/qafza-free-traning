@@ -8,7 +8,7 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 |---|---|---|---|
 | 1 | Leakage-proof ML Pipeline | Python, scikit-learn | [`01-leakage-proof-pipeline`](01-leakage-proof-pipeline) |
 | 2 | Deep Learning Pipeline | PyTorch, Hugging Face | `02-deep-learning` |
-| 3 | Production API | FastAPI, Pydantic | `03-production-api` |
+| 3 | Production API | FastAPI, Pydantic | [`03-production-api`](03-production-api) |
 | 4 | Docker | Docker Engine | `04-docker` |
 | 5 | ETL Pipeline | Python, SQLAlchemy | `05-etl` |
 | 6 | **Versioning** | **DVC** | [`dvc`](dvc) |
