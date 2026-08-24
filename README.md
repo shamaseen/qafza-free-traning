@@ -67,6 +67,10 @@ It fails the notebook on any unexecuted cell, any exception, **any failing shell
 (`!cmd` errors never raise in Jupyter, and have hidden two real bugs in this repo), and any
 missing claim.
 
+Some sessions fail on purpose — session 7 renames a column to show MLflow's model signature
+rejecting it. Those lines are declared with `--expect`, so they are still printed and a
+deliberate failure can never quietly turn into an undeclared one.
+
 `tools/deck.py` and `tools/nbbuild.py` build the decks and notebooks, so a fourteenth session
 is cheap to add.
 

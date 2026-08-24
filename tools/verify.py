@@ -1,6 +1,6 @@
 """Execute a notebook and prove it actually worked.
 
-    python3 tools/verify.py <notebook> [timeout] [--claim "text that must appear"]...
+    python3 tools/verify.py <notebook> [timeout] [--claim "must appear"] [--expect "demonstrated failure"]...
 
 Checks, in order:
   1. every code cell ran (has an execution_count)
@@ -10,6 +10,10 @@ Checks, in order:
      bugs in this course hid exactly there.
   4. every --claim string appears somewhere in the output, so the notebook's headline
      demonstration is proved rather than assumed.
+
+Some notebooks fail on purpose -- session 7 renames a column to show MLflow's model
+signature rejecting it. Name those lines with --expect. They are still printed, so a
+deliberate failure can never quietly become an undeclared one.
 Exit code 0 only if all pass.
 """
 import json, re, subprocess, sys, tempfile, os
@@ -39,6 +43,7 @@ def main():
     nb_path = sys.argv[1]
     timeout = next((a for a in sys.argv[2:] if a.isdigit()), "900")
     claims = [sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--claim"]
+    expected = [sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--expect"]
 
     out = os.path.join(tempfile.mkdtemp(), "out.ipynb")
     cmd = ["jupyter", "nbconvert", "--to", "notebook", "--execute", nb_path,
@@ -55,8 +60,10 @@ def main():
             for i, c in enumerate(nb["cells"]) for o in c.get("outputs", [])
             if o.get("output_type") == "error"]
     alltext = "\n".join(outputs_text(c) for c in nb["cells"])
-    shell = [l.strip()[:110] for l in alltext.splitlines()
-             if FAIL.search(l) and not IGNORE.search(l)]
+    failing = [l.strip()[:110] for l in alltext.splitlines()
+               if FAIL.search(l) and not IGNORE.search(l)]
+    shell = [l for l in failing if not any(e in l for e in expected)]
+    ondemand = [l for l in failing if l not in shell]
     missing = [c for c in claims if c not in alltext]
 
     print(f"{nb_path}")
@@ -66,6 +73,9 @@ def main():
     for e in errs: print("     ", e)
     print(f"  shell failures   {len(shell)}")
     for s in shell: print("      !", s)
+    if expected:
+        print(f"  failures on purpose {len(ondemand)}/{len(expected)} declared")
+        for s in ondemand: print("      (demo)", s)
     print(f"  claims proved    {len(claims) - len(missing)}/{len(claims)}")
     for m in missing: print("      MISSING:", m)
 
