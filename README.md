@@ -14,7 +14,7 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 | 6 | **Versioning** | **DVC** | [`dvc`](dvc) |
 | 7 | **Experiment tracking** | **MLflow** | [`mlflow`](mlflow) |
 | 8 | Distributed ML | Ray Core, Ray Train | `08-distributed-ml` |
-| 9 | Feature Management | Feast, Ray | `09-feature-management` |
+| 9 | Feature Management | Feast | [`09-feature-management`](09-feature-management) |
 | 10 | Monitoring | Prometheus, Grafana | `10-monitoring` |
 | 11 | Automation | Ray Serve, GitHub Actions | `11-automation` |
 | 12 | Infrastructure | Terraform | `12-infrastructure` |
