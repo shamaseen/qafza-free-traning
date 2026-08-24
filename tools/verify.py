@@ -19,7 +19,11 @@ FAIL = re.compile(r"(validation failed|^ERROR:|\bERROR\b:|fatal:|Traceback \(mos
                   r"|error: |failed to |cannot )", re.I | re.M)
 IGNORE = re.compile(r"tokenizers|dependency resolver|pip version|Experiment with name"
                     r"|WARNING|warn|numexpr|bottleneck|Downloading|already exists"
-                    r"|deprecat|InsecureRequest", re.I)
+                    r"|deprecat|InsecureRequest"
+                    # Ray logs this from the raylet while the Serve controller is torn
+                    # down. It is internal retry noise, not a failure of the notebook --
+                    # the only named exception in this list, kept narrow on purpose.
+                    r"|ServeController\.graceful_shutdown", re.I)
 
 
 def outputs_text(cell):

@@ -29,6 +29,9 @@ onnxruntime
 # --- session 8 (distributed ML) ---
 ray[train]
 
+# --- session 11 (automation) ---
+ray[serve]
+
 # --- added as later sessions land ---
 # torch / transformers           (session 2)
 # ray[default]                   (sessions 8, 11)

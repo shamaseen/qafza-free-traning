@@ -16,7 +16,7 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 | 8 | Distributed ML | Ray Core, Ray Train | [`08-distributed-ml`](08-distributed-ml) |
 | 9 | Feature Management | Feast | [`09-feature-management`](09-feature-management) |
 | 10 | Monitoring | Prometheus, Grafana | [`10-monitoring`](10-monitoring) |
-| 11 | Automation | Ray Serve, GitHub Actions | `11-automation` |
+| 11 | Automation | Ray Serve, GitHub Actions | [`11-automation`](11-automation) |
 | 12 | Infrastructure | Terraform | [`12-infrastructure`](12-infrastructure) |
 | 13 | End-to-End ML System | the complete stack | `13-end-to-end` |
 
@@ -63,6 +63,9 @@ missing claim.
 
 `tools/deck.py` and `tools/nbbuild.py` build the decks and notebooks, so a fourteenth session
 is cheap to add.
+
+Session 11 builds a CI workflow that runs exactly these checks over the whole repository — see
+[`11-automation/workflows/`](11-automation/workflows) for it and the one command that activates it.
 
 ## About `dvc/data.zip`
 

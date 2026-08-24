@@ -1,0 +1,63 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:          # so you can also run it by hand
+
+jobs:
+  decks-and-notebooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: every deck must be balanced and offline
+        run: |
+          python - <<'PY'
+          import glob, re, sys
+          bad = []
+          for f in glob.glob("*/*_slides.html"):
+              t = open(f).read()
+              if t.count("<section") != t.count("</section>"):
+                  bad.append(f"{f}: unbalanced sections")
+              ext = re.findall(r'(?:src|href)="(?!#|data:)[^"]+"', t)
+              if ext:
+                  bad.append(f"{f}: external reference {ext[:2]}")
+              print(f"{f}: {t.count('<section')} slides")
+          if bad:
+              print("FAILURES:", *bad, sep="\n  "); sys.exit(1)
+          PY
+
+      - name: every notebook must be valid and carry its outputs
+        run: |
+          python - <<'PY'
+          import glob, json, sys
+          bad = []
+          for f in glob.glob("*/*_tutorial.ipynb"):
+              nb = json.load(open(f))
+              code = [c for c in nb["cells"] if c["cell_type"] == "code"]
+              errs = [o for c in nb["cells"] for o in c.get("outputs", [])
+                      if o.get("output_type") == "error"]
+              if errs:
+                  bad.append(f"{f}: {len(errs)} stored error outputs")
+              print(f"{f}: {len(nb['cells'])} cells, {len(code)} code, {len(errs)} errors")
+          if bad:
+              print("FAILURES:", *bad, sep="\n  "); sys.exit(1)
+          PY
+
+      - name: the course index must link every built session
+        run: |
+          python - <<'PY'
+          import glob, os, re, sys
+          readme = open("README.md").read()
+          missing = [d for d in sorted(glob.glob("*/"))
+                     if glob.glob(os.path.join(d, "*_slides.html"))
+                     and f"({d.rstrip('/')})" not in readme]
+          print("unlinked sessions:", missing or "none")
+          sys.exit(1 if missing else 0)
+          PY
