@@ -15,9 +15,9 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 | 7 | **Experiment tracking** | **MLflow** | [`mlflow`](mlflow) |
 | 8 | Distributed ML | Ray Core, Ray Train | [`08-distributed-ml`](08-distributed-ml) |
 | 9 | Feature Management | Feast | [`09-feature-management`](09-feature-management) |
-| 10 | Monitoring | Prometheus, Grafana | `10-monitoring` |
+| 10 | Monitoring | Prometheus, Grafana | [`10-monitoring`](10-monitoring) |
 | 11 | Automation | Ray Serve, GitHub Actions | `11-automation` |
-| 12 | Infrastructure | Terraform | `12-infrastructure` |
+| 12 | Infrastructure | Terraform | [`12-infrastructure`](12-infrastructure) |
 | 13 | End-to-End ML System | the complete stack | `13-end-to-end` |
 
 Folders without a link are not built yet.
