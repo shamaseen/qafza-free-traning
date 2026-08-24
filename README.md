@@ -1,77 +1,71 @@
-# Qafza Free Training — DVC & MLflow
+# Qafza Free Training — MLOps, from zero
 
-Two self-contained MLOps sessions, taught from zero. No prior DVC, MLflow or MLOps
-experience assumed.
+Thirteen self-contained sessions. Each folder holds **a slide deck** (`*_slides.html`, one
+offline file — open it in any browser) and **a notebook** (`*_tutorial.ipynb`) that runs the
+same material on your machine. No prior MLOps experience assumed anywhere.
 
-| | Slides | Notebook |
-|---|---|---|
-| **Data versioning** | [`dvc/dvc_slides.html`](dvc/dvc_slides.html) — 53 slides | [`dvc/dvc_tutorial.ipynb`](dvc/dvc_tutorial.ipynb) |
-| **Experiment tracking** | [`mlflow/mlflow_slides.html`](mlflow/mlflow_slides.html) — 41 slides | [`mlflow/mlflow_tutorial.ipynb`](mlflow/mlflow_tutorial.ipynb) |
+| # | Session | Core tools | Folder |
+|---|---|---|---|
+| 1 | Leakage-proof ML Pipeline | Python, scikit-learn | [`01-leakage-proof-pipeline`](01-leakage-proof-pipeline) |
+| 2 | Deep Learning Pipeline | PyTorch, Hugging Face | `02-deep-learning` |
+| 3 | Production API | FastAPI, Pydantic | `03-production-api` |
+| 4 | Docker | Docker Engine | `04-docker` |
+| 5 | ETL Pipeline | Python, SQLAlchemy | `05-etl` |
+| 6 | **Versioning** | **DVC** | [`dvc`](dvc) |
+| 7 | **Experiment tracking** | **MLflow** | [`mlflow`](mlflow) |
+| 8 | Distributed ML | Ray Core, Ray Train | `08-distributed-ml` |
+| 9 | Feature Management | Feast, Ray | `09-feature-management` |
+| 10 | Monitoring | Prometheus, Grafana | `10-monitoring` |
+| 11 | Automation | Ray Serve, GitHub Actions | `11-automation` |
+| 12 | Infrastructure | Terraform | `12-infrastructure` |
+| 13 | End-to-End ML System | the complete stack | `13-end-to-end` |
 
-The two sessions are independent — take either one first.
+Folders without a link are not built yet.
 
-## The slides
+## Using the decks
 
-Open the `.html` file in any browser. Everything is embedded, so **no internet is needed**
-in the room.
+Open the `.html` file in a browser. Everything is embedded, so **no internet is needed** in
+the room.
 
-* `←` `→` or `space` to move, click the left/right third of the screen
-* `f` fullscreen, `p` print (one slide per page — that is how you get a PDF)
+`←` `→` or `space` to move · click the left/right third of the screen · `f` fullscreen ·
+`p` print (one slide per page, which is how you get a PDF)
 
-## The notebooks
-
-Each notebook is the hands-on half of its deck, and every part names the slides it covers.
-Run top to bottom.
+## Using the notebooks
 
 ```bash
-python -m venv .venv && source .venv/bin/activate    # Windows: .venv\Scripts\activate
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-jupyter lab            # or: jupyter notebook
+jupyter lab
 ```
 
-Each notebook builds a **throwaway sandbox folder** next to itself (`dvc_demo/`,
-`mlflow_demo/`), does all its work there, and has a cleanup cell at the end. Nothing outside
-the folder is touched, and the sandboxes are git-ignored.
+Every notebook builds a **throwaway sandbox folder** beside itself, does all its work there,
+and deletes it in the last cell. Nothing outside the folder is touched, and the sandboxes are
+git-ignored.
 
-Both notebooks are committed **with their outputs**, so you can read them on GitHub — charts,
-tables and command output included — without running anything. Re-running replaces them.
+Notebooks are committed **with their outputs**, so you can read the results — numbers, charts,
+command output — on GitHub without running anything.
 
-### Seeing the MLflow UI
+## A note on how this material is checked
 
-Step 1.8 of the MLflow notebook **starts the MLflow UI for you** and embeds it in the notebook,
-so there is no server to set up by hand. It also prints the URL — open that in a real browser
-tab, it is much nicer than the embedded frame. The last cell shuts the server down.
+Every notebook is executed end to end before it ships, and each one has to *prove its headline
+claim* rather than merely run. For example session 1 must actually print a cross-validation
+score of ~0.765 on data that contains no signal at all, next to the honest 0.520 — the whole
+point of the session. `tools/verify.py` enforces this:
 
-> MLflow 3.x opens on the **GenAI** view, which tracks LLM traces and will look empty. Click
-> **Model training → Training runs** to see the runs you just logged. The deck shows every
-> screen.
+```bash
+python3 tools/verify.py 01-leakage-proof-pipeline/leakage_tutorial.ipynb 900 \
+        --claim "GAP:" --claim "optimism from group leakage"
+```
+
+It fails the notebook on any unexecuted cell, any exception, **any failing shell command**
+(`!cmd` errors never raise in Jupyter, and have hidden two real bugs in this repo), and any
+missing claim.
+
+`tools/deck.py` and `tools/nbbuild.py` build the decks and notebooks, so a fourteenth session
+is cheap to add.
 
 ## About `dvc/data.zip`
 
-Part 5 of the DVC notebook uses the real course dataset — `dvc/data.zip`, 39 MB of cat and dog
-photographs — so you version a genuinely large folder instead of a toy CSV. It is committed
-here, so the tutorial works the moment you clone the repo.
-
-**That is a deliberate exception, not a recommendation.** Committing 39 MB to Git is precisely
-what the DVC session spends 53 slides arguing against: it sits in the history forever and every
-clone pays for it. It is in here for one reason — a training repo that needs no setup.
-
-What you do in Part 5 is the right way round: `dvc add` the unpacked photos, push the bytes to
-a DVC remote, and let Git carry a five-line pointer. Run it and compare — `photos/` is 43 MB,
-the Git repository holding it is 61 KB.
-
-## What each session covers
-
-**DVC** — why Git breaks on data · `dvc add` and the pointer file · remotes, `push`/`pull` ·
-time travel with `git checkout` + `dvc checkout` · pipelines (`dvc.yaml`, `dvc repro`) ·
-metrics · DVCLive · experiments · the run cache · `.dvcignore` · `artifacts:` · credentials ·
-merge conflicts · CI with CML
-
-**MLflow** — runs, params, metrics, artifacts · the UI · sweeps and `search_runs` · autolog ·
-saving and loading models properly · the Model Registry and aliases · dataset tracking ·
-nested runs · custom `pyfunc` models · signatures · `mlflow.evaluate` · system metrics ·
-serving · what MLflow 3 changed
-
-## Requirements
-
-Python 3.9+ and Git. Everything else is in `requirements.txt`.
+Session 6 uses a real 39 MB folder of photographs, committed here so the tutorial works the
+moment you clone. That is a deliberate exception for teaching — see
+[`dvc/`](dvc) — not a practice to copy.

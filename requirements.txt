@@ -1,14 +1,17 @@
-# DVC session
-dvc>=3.0
-dvclive>=3.0
-
-# MLflow session
-mlflow>=2.9
-
-# shared: something real to train on
+# --- sessions 1, 6, 7 (leakage, DVC, MLflow) ---
 scikit-learn
 pandas
 numpy
 matplotlib
 pyyaml
-psutil          # optional: enables MLflow system metrics
+dvc>=3.0
+dvclive>=3.0
+mlflow>=2.9
+psutil            # optional: MLflow system metrics
+
+# --- added as later sessions land ---
+# fastapi / pydantic / uvicorn   (session 3)
+# torch / transformers           (session 2)
+# ray[default]                   (sessions 8, 11)
+# feast                          (session 9)
+# prometheus-client              (session 10)
