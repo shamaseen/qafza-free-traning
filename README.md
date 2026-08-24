@@ -7,7 +7,7 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 | # | Session | Core tools | Folder |
 |---|---|---|---|
 | 1 | Leakage-proof ML Pipeline | Python, scikit-learn | [`01-leakage-proof-pipeline`](01-leakage-proof-pipeline) |
-| 2 | Deep Learning Pipeline | PyTorch, Hugging Face | `02-deep-learning` |
+| 2 | Deep Learning Pipeline | PyTorch, Hugging Face | [`02-deep-learning`](02-deep-learning) |
 | 3 | Production API | FastAPI, Pydantic | [`03-production-api`](03-production-api) |
 | 4 | Docker | Docker Engine | [`04-docker`](04-docker) |
 | 5 | ETL Pipeline | Python, SQLAlchemy | [`05-etl`](05-etl) |
