@@ -398,8 +398,9 @@ discharge_disposition   <span class="r"># decided at the end of the stay</span>
 <pre><code><span class="k">from</span> sklearn.inspection <span class="k">import</span> permutation_importance
 imp = permutation_importance(model, X, y, scoring=<span class="s">"roc_auc"</span>)
 <span class="o">retention_call_made   +0.2333
-support_calls         +0.0121
-tenure_months         +0.0064</span></code></pre>
+tenure_months         +0.0245
+monthly_charge        +0.0093
+support_calls         +0.0075</span></code></pre>
       <p class="sub">One feature carrying the whole model is a smell, not a win.</p>
     </div>
   </div>
@@ -501,9 +502,9 @@ joblib.dump(clf.fit(X, y), <span class="s">"pipeline.joblib"</span>)    <span cl
 flat   = grid.fit(X, y).best_score_                      <span class="c"># tuned AND reported here</span>
 nested = cross_val_score(grid, X, y, cv=<span class="k">3</span>).mean()      <span class="c"># tuning inside each outer fold</span>
 
-<span class="o">flat   0.8459
-nested 0.8342
-optimism +0.0117</span>
+<span class="o">flat   (tuned and reported on the same folds): 0.8178
+nested (tuning never saw the outer fold):      0.8061
+optimism from tuning: +0.0117</span>
 </code></pre>
   <p class="sub">Cost: the grid runs once per outer fold. Use it when the decision matters — model
   selection for a launch, or a number that goes in a report.</p>

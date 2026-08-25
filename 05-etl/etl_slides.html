@@ -320,7 +320,7 @@ table before retry 1415, after retry 1415
 
 <span class="c"># 2. retry transient faults, with backoff and jitter</span>
 with_retry(fetch, attempts=4, retry_on=(ConnectionError, TimeoutError))
-<span class="o">attempt 1 failed (ConnectionError), retrying in 0.20s
+<span class="o">attempt 1 failed (ConnectionError), retrying in 0.21s
 attempt 2 failed (ConnectionError), retrying in 0.48s
 result: payload after 3 attempts</span>
 </code></pre>

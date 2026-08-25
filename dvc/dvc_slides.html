@@ -635,12 +635,14 @@ test_size: 0.2</code></pre>
 <section>
   <h2>Metrics, plots, experiments</h2>
 <pre><code><span class="k">dvc metrics show</span>
-<span class="o">Path           accuracy   f1
-metrics.json   0.874      0.851</span>
+<span class="o">Path          accuracy  f1      roc_auc
+metrics.json  0.852     0.8452  0.9172</span>
 
-<span class="k">dvc metrics diff</span> main         <span class="c"># am I better than main?</span>
-<span class="o">Path          Metric     main    workspace   Change
-metrics.json  accuracy   0.861   0.874       0.013</span>
+<span class="k">dvc metrics diff</span> HEAD        <span class="c"># am I better than the last commit?</span>
+<span class="o">Path          Metric    HEAD    workspace  Change
+metrics.json  accuracy  0.808   0.852      0.044
+metrics.json  f1        0.8008  0.8452     0.0444
+metrics.json  roc_auc   0.8889  0.9172     0.0283</span>
 
 <span class="k">dvc plots diff</span> HEAD~1 --targets ROC   <span class="c"># renders an HTML chart</span>
 

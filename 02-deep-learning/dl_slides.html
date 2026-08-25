@@ -240,6 +240,12 @@ cannot import name 'DEFAULT_CIPHERS' from 'urllib3.util.ssl_'</span>
     afternoon reinstalling transformers. The notebook carries a two-line shim for environments you
     cannot change.</div>
   </div>
+  <p class="oops"><b>A second one, found while building this course:</b>
+  <code>Unable to compare versions for tokenizers&gt;=0.19,&lt;0.20: found=None</code>. Nothing is
+  wrong with tokenizers — an interrupted <code>pip install</code> had left an empty
+  <code>*.dist-info/</code> beside the real one, so the version reads as <code>None</code>. Delete the
+  <code>dist-info</code> directory that has no <code>METADATA</code> file. <b>A half-finished install
+  can break a package that is perfectly installed</b>, and the error blames the package.</p>
 </section>
 
 <section class="chapter">

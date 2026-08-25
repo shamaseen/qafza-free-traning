@@ -230,7 +230,7 @@ svg{max-width:100%;height:auto}
 </code></pre>
       <h3>Check it worked</h3>
 <pre class="mlf"><code><span class="k">mlflow --version</span>
-<span class="o">mlflow, version 2.17.0</span>
+<span class="o">mlflow, version 3.1.4</span>
 
 <span class="k">python</span> -c <span class="s">"import mlflow; print(mlflow.__version__)"</span>
 </code></pre>
@@ -551,7 +551,7 @@ mlflow.set_experiment(<span class="s">"churn-sweep"</span>)
 best = mlflow.search_runs(experiment_names=[<span class="s">"churn-sweep"</span>],
                           order_by=[<span class="s">"metrics.roc_auc DESC"</span>]).iloc[0]
 <span class="k">print</span>(best[<span class="s">"params.n_estimators"</span>], best[<span class="s">"metrics.roc_auc"</span>])
-<span class="o">300  0.9241</span>
+<span class="o">150  0.879375</span>
 </code></pre>
   <p class="win"><b>This is the moment people convert.</b> Eight runs, zero bookkeeping, and the table is queryable from Python and browsable in the UI.</p>
 </section>
@@ -562,10 +562,13 @@ best = mlflow.search_runs(experiment_names=[<span class="s">"churn-sweep"</span>
 <pre class="mlf"><code><span class="k">from</span> mlflow <span class="k">import</span> MlflowClient
 runs = mlflow.search_runs(experiment_names=[<span class="s">"churn-model"</span>],
                           order_by=[<span class="s">"metrics.accuracy DESC"</span>])
-runs[[<span class="s">"run_id"</span>, <span class="s">"params.n_estimators"</span>, <span class="s">"metrics.accuracy"</span>]].head()
-<span class="o">                        run_id params.n_estimators  metrics.accuracy
-0  8f21c4e9d7b04a1e9c2f0a3b...                 300             0.891
-1  2a77b0c1e5f34d8a91ee44cd...                 200             0.874</span>
+runs[[<span class="s">"tags.mlflow.runName"</span>, <span class="s">"params.n_estimators"</span>,
+      <span class="s">"params.max_depth"</span>, <span class="s">"metrics.roc_auc"</span>]].head()
+<span class="o">  tags.mlflow.runName params.n_estimators params.max_depth  metrics.roc_auc
+0            rf-final                 150                8         0.879375
+1           rf-150-d8                 150                8         0.879375
+2           rf-300-d8                 300                8         0.878974
+3            rf-60-d8                  60                8         0.876623</span>
 </code></pre>
   <p class="lead">It returns a <b>pandas DataFrame</b>. Sort it, plot it, pick the winner programmatically — the "results spreadsheet" is now generated, not typed.</p>
 </section>
@@ -713,8 +716,12 @@ result = mlflow.evaluate(
     evaluators=<span class="s">"default"</span>,
 )
 <span class="k">print</span>(result.metrics)
-<span class="o">{'accuracy_score': 0.874, 'roc_auc': 0.924, 'f1_score': 0.851, ...}</span>
+<span class="o">{'score': 0.7575, 'true_negatives': 155, 'false_positives': 50,
+ 'false_negatives': 47, 'true_positives': 148, 'example_count': 400}</span>
 </code></pre>
+  <p class="oops"><b>MLflow 3 renamed it.</b> <code>mlflow.evaluate</code> still runs but warns; the
+  current call is <code>mlflow.models.evaluate</code>, and the returned metric keys changed with it —
+  which is why the dictionary above looks nothing like older tutorials.</p>
   <p class="sub"><code>mlflow.evaluate</code> also logs confusion matrix, ROC/PR curves and SHAP-based feature importance as artifacts on the run — for free.</p>
 </section>
 

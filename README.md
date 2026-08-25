@@ -71,6 +71,27 @@ Some sessions fail on purpose — session 7 renames a column to show MLflow's mo
 rejecting it. Those lines are declared with `--expect`, so they are still printed and a
 deliberate failure can never quietly turn into an undeclared one.
 
+To check the whole course at once — every notebook, with the claims each one has to prove:
+
+```bash
+python3 tools/verify_all.py          # all thirteen
+python3 tools/verify_all.py 04 13    # just these
+```
+
+`tools/verify_all.py` holds the claim list for every session, so "what this notebook must
+prove" is written down rather than remembered. Editing a session means editing its claims.
+
+Two more checks cover the slides, because a deck can be wrong while every notebook passes:
+
+```bash
+python3 tools/audit_decks.py      # every figure quoted as output must come from its notebook
+python3 tools/audit_pointers.py   # "deck slides 20–21" must point at slides that exist
+```
+
+Both were written after they found real defects: six decks quoting numbers their notebook
+never printed, one quoting a run id from an earlier run, and eleven notebooks pointing past
+the end of their own deck.
+
 `tools/deck.py` and `tools/nbbuild.py` build the decks and notebooks, so a fourteenth session
 is cheap to add.
 
