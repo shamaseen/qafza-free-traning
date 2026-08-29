@@ -36,6 +36,11 @@ the room.
 `←` `→` or `space` to move · click the left/right third of the screen · `f` fullscreen ·
 `p` print (one slide per page, which is how you get a PDF)
 
+Two markers appear throughout: a slide tagged **skip on first read** is depth you can come back
+to, and one tagged **reference — not for reading** is a lookup table, not a slide to present.
+Every session defines its vocabulary in a **crash course** slide before using it — you are
+expected to know Python, and nothing else.
+
 ## Using the notebooks
 
 ```bash
