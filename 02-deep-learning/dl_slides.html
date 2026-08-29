@@ -248,6 +248,27 @@ cannot import name 'DEFAULT_CIPHERS' from 'urllib3.util.ssl_'</span>
   can break a package that is perfectly installed</b>, and the error blames the package.</p>
 </section>
 
+<section>
+  <h2>Crash course — the words a training loop is made of</h2>
+  <table>
+    <tr><th>Word</th><th>What it means</th></tr>
+    <tr><td><b>tensor</b></td><td>PyTorch's array. Like a NumPy array, but it can live on a GPU and
+      remembers how it was computed so gradients can be worked out.</td></tr>
+    <tr><td><b>batch</b></td><td>a handful of rows processed together — 32 or 64 is typical. Bigger
+      batches are faster per row and use more memory.</td></tr>
+    <tr><td><b>epoch</b></td><td>one full pass over the training data. Ten epochs = the model saw
+      every row ten times.</td></tr>
+    <tr><td><b>loss</b></td><td>one number saying how wrong the model currently is. Training is
+      nothing but making it smaller.</td></tr>
+    <tr><td><b>optimiser step</b></td><td>the moment the weights actually change, using the gradient
+      of the loss. One step per batch, normally.</td></tr>
+    <tr><td><b>checkpoint</b></td><td>the weights written to a file, so you can stop, resume, or go
+      back to the best version.</td></tr>
+  </table>
+  <p class="win">The loop is always the same four lines: predict, measure the loss, work out the
+  gradients, take a step. Everything else is bookkeeping around that.</p>
+</section>
+
 <section class="chapter">
   <h1><span class="n">PART 01</span>Data and the loop</h1>
   <p class="lead">Dataset, DataLoader, and the five lines.</p>

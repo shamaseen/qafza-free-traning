@@ -301,6 +301,8 @@ INFO:     Application startup complete.</span>
 
 <section>
   <h2>Load the model once — <code>lifespan</code></h2>
+  <p class="lead"><b>Lifespan</b> is FastAPI's startup/shutdown hook: everything before
+  <code>yield</code> runs once when the server starts, everything after it runs once when it stops.</p>
 <pre><code><span class="k">from</span> contextlib <span class="k">import</span> asynccontextmanager
 
 STATE = {}
@@ -342,7 +344,7 @@ app = FastAPI(title=<span class="s">"Churn API"</span>, version=<span class="s">
 </section>
 
 <section>
-  <h2>Status codes worth knowing</h2>
+  <h2>The status codes an API actually needs</h2>
   <table>
     <tr><th>Code</th><th>Means</th><th>Whose fault</th></tr>
     <tr><td><b>200</b></td><td>here is your prediction</td><td>—</td></tr>
@@ -424,7 +426,7 @@ requests.post(<span class="s">"/predict/batch"</span>, json={<span class="s">"cu
 
 <section>
   <span class="tag">skip on first read</span>
-  <h2>Advanced 1 — <code>async def</code>, and the trap</h2>
+  <h2>Advanced 1 — <code>async def</code>, and the mistake it invites</h2>
   <div class="two">
     <div>
       <h3>Use plain <code>def</code></h3>
@@ -526,7 +528,7 @@ settings = Settings()   <span class="c"># reads env, validates</span></code></pr
 
 <section>
   <span class="tag">skip on first read</span>
-  <h2>Advanced 5 — running it in anger</h2>
+  <h2>Advanced 5 — running it in production</h2>
 <pre><code><span class="c"># development</span>
 uvicorn app.main:app --reload
 

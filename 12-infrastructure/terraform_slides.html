@@ -243,7 +243,7 @@ Terraform has been successfully initialized!</span>
 </section>
 
 <section>
-  <h2>Converge, do not repeat</h2>
+  <h2>Run it again and nothing happens — that is the point</h2>
 <pre><code>terraform apply     <span class="c"># first time: creates</span>
 <span class="o">Apply complete! Resources: 2 added</span>
 
@@ -332,7 +332,7 @@ terraform apply
 </section>
 
 <section>
-  <h2>Remote state, and why locking is the point</h2>
+  <h2>Shared state, and why it needs a lock</h2>
 <pre><code>terraform {
   backend <span class="s">"s3"</span> {
     bucket         = <span class="s">"acme-tfstate"</span>
@@ -374,7 +374,7 @@ terraform import docker_container.web &lt;container-id&gt;
 </section>
 
 <section>
-  <h2>The habits that prevent incidents</h2>
+  <h2>Habits that keep Terraform from breaking production</h2>
   <table>
     <tr><th>Habit</th><th>Why</th></tr>
     <tr><td><b>Read every plan</b>, especially <code>-/+</code></td><td>that is destroy-and-recreate, on real data</td></tr>

@@ -108,7 +108,7 @@ svg{max-width:100%;height:auto}
 </section>
 
 <section>
-  <h2>Three words, precisely</h2>
+  <h2>Crash course — image, container, layer</h2>
   <table>
     <tr><th>Word</th><th>Is</th><th>Analogy</th></tr>
     <tr><td><b>image</b></td><td>a read-only filesystem plus a default command</td><td>the class</td></tr>
@@ -172,7 +172,7 @@ docker run churn:1.3.0-9f8e7d6       <span class="c"># thirty seconds later, bac
 </section>
 
 <section>
-  <h2>The honest caveat</h2>
+  <h2>What Docker does not fix</h2>
   <table>
     <tr><th>Docker does</th><th>Docker does not</th></tr>
     <tr><td>pin your dependencies</td><td>make your code correct</td></tr>
@@ -275,6 +275,8 @@ slim      467.2 MB   (70% smaller)</span>
 
 <section>
   <h2>Fix 3 — multi-stage</h2>
+  <p class="lead">A <b>stage</b> is one <code>FROM</code> block. Build in the first, copy only the
+  finished files into the second — so compilers and build tools never reach the shipped image.</p>
 <pre><code><span class="c"># ---------- stage 1: build ----------</span>
 FROM python:3.12-slim AS builder
 WORKDIR /srv
@@ -335,7 +337,7 @@ CMD [<span class="s">"uvicorn"</span>, <span class="s">"app.main:app"</span>, <s
 </section>
 
 <section>
-  <h2>Measuring it honestly</h2>
+  <h2>How to time a build without fooling yourself</h2>
 <pre><code><span class="c"># a benchmark whose starting state you do not control is not a benchmark</span>
 t_cold = build(<span class="s">"Dockerfile.multi"</span>, no_cache=<span class="k">True</span>)   <span class="o"># 75.4s</span>
 t_warm = build(<span class="s">"Dockerfile.multi"</span>)                  <span class="o">#  0.2s</span>

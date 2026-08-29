@@ -131,6 +131,24 @@ svg{max-width:100%;height:auto}
   a Monday-morning retrain.</p>
 </section>
 
+<section>
+  <h2>Crash course — the words in this session</h2>
+  <table>
+    <tr><th>Word</th><th>What it means</th></tr>
+    <tr><td><b>deployment</b></td><td>a class Ray Serve runs for you and puts behind an HTTP address.</td></tr>
+    <tr><td><b>replica</b></td><td>one running copy of that class. Three replicas = three processes
+      answering the same URL, so one slow request does not block the rest.</td></tr>
+    <tr><td><b>autoscaling</b></td><td>letting Serve add and remove replicas based on load, instead of
+      you picking a number and hoping.</td></tr>
+    <tr><td><b>batching</b></td><td>collecting requests that arrive at the same moment and running them
+      through the model in one call — usually the biggest single speed win.</td></tr>
+    <tr><td><b>workflow</b></td><td>on the CI side: a YAML file GitHub runs for you on a push, a pull
+      request, or a schedule.</td></tr>
+    <tr><td><b>gate</b></td><td>a step in that workflow that can <b>fail</b>, and therefore blocks the
+      thing after it. A check that cannot fail protects nothing.</td></tr>
+  </table>
+</section>
+
 <section class="chapter">
   <h1><span class="n">PART 01</span>Ray Serve</h1>
   <p class="lead">A managed pool of actors, with HTTP.</p>
@@ -260,7 +278,7 @@ jobs:
 </section>
 
 <section>
-  <h2>The gate, in full</h2>
+  <h2>The full quality gate, line by line</h2>
 <pre><code>- name: refuse to promote a worse model
   run: |
     python - &lt;&lt;'PY'

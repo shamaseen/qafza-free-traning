@@ -209,6 +209,23 @@ ray.cluster_resources()
   </div>
 </section>
 
+<section>
+  <h2>Crash course — the four words Ray is built from</h2>
+  <table>
+    <tr><th>Word</th><th>What it means</th></tr>
+    <tr><td><b>task</b></td><td>a plain function marked <code>@ray.remote</code>. Calling it with
+      <code>.remote()</code> runs it in another process, on another core.</td></tr>
+    <tr><td><b>reference</b></td><td>what <code>.remote()</code> hands back <i>immediately</i> — a receipt,
+      not a result. <code>ray.get(ref)</code> is where you wait.</td></tr>
+    <tr><td><b>actor</b></td><td>a class marked <code>@ray.remote</code>. Unlike a task it <b>keeps
+      state</b> between calls, so a model is loaded once and reused.</td></tr>
+    <tr><td><b>object store</b></td><td>shared memory on each machine. Put a big array in it once with
+      <code>ray.put</code> and every worker reads it without a copy being sent.</td></tr>
+  </table>
+  <p class="win">Task for work that just needs doing. Actor when something expensive has to stay
+  loaded. That single distinction covers most of Ray.</p>
+</section>
+
 <section class="chapter">
   <h1><span class="n">PART 01</span>Tasks and actors</h1>
   <p class="lead">The two primitives, properly.</p>
@@ -273,7 +290,7 @@ completion order: 0 4 5 1 2 6 3 7        # measured</span>
 <section>
   <h2>Four changes to a training loop</h2>
 <pre><code><span class="k">def</span> train_func(config):                       <span class="c"># runs on EVERY worker</span>
-    dl = ray.train.torch.prepare_data_loader(dl)   <span class="c"># shards the data</span>
+    dl = ray.train.torch.prepare_data_loader(dl)   <span class="c"># shards it: each worker gets a different slice</span>
     model = ray.train.torch.prepare_model(model)   <span class="c"># wraps in DDP</span>
     <span class="k">for</span> epoch <span class="k">in</span> range(epochs):
         ...                                        <span class="c"># your loop, unchanged</span>
@@ -351,7 +368,7 @@ each worker saw 4000 of 8000 rows -- the loader sharded the data</span>
 </section>
 
 <section>
-  <h2>The rest of the stack</h2>
+  <h2>The other Ray libraries, in one line each</h2>
   <table>
     <tr><th>Library</th><th>For</th><th>Relation to this session</th></tr>
     <tr><td><b>Ray Data</b></td><td>datasets larger than memory, <code>map_batches</code></td><td>tasks, with streaming built in</td></tr>

@@ -184,7 +184,7 @@ driver_hourly_stats = FeatureView(
 </section>
 
 <section>
-  <h2>The honest cost — when <i>not</i> to</h2>
+  <h2>What a feature store costs — and when to skip it</h2>
   <table>
     <tr><th>Situation</th><th>Verdict</th></tr>
     <tr><td>One model, one team, features computed in the same job that trains</td><td class="sub">skip it — you have no skew to remove</td></tr>
@@ -266,7 +266,7 @@ FileSource(path=str(DATA), ...)</code></pre>
 </section>
 
 <section>
-  <h2>An honest training set</h2>
+  <h2>A training set that does not contain the future</h2>
 <pre><code>entity_df = pd.DataFrame({
     <span class="s">"driver_id"</span>:       [1001, 1002, 1001, 1003],
     <span class="s">"event_timestamp"</span>: label_times,          <span class="c"># WHEN each label happened</span>
