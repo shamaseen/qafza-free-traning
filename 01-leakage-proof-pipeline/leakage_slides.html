@@ -52,7 +52,7 @@ pre code{background:none;padding:0}
 .card h4{font-size:clamp(16px,1.65vw,22px);margin-bottom:.4em}
 .tag{display:inline-block;font-size:clamp(11px,1.05vw,14px);letter-spacing:.12em;
      text-transform:uppercase;font-weight:700;padding:.25em .7em;border-radius:99px;
-     border:1px solid currentColor}
+     border:1px solid currentColor;align-self:flex-start;margin-bottom:.6em}
 .tag.dvc{color:var(--dvc)} .tag.mlf{color:var(--mlf)}
 .chapter{background:linear-gradient(135deg,#0d1117,#161b22)}
 .chapter h1 .n{display:block;font-size:.35em;color:var(--dim);letter-spacing:.3em;margin-bottom:.6em}
@@ -489,11 +489,13 @@ joblib.dump(clf.fit(X, y), <span class="s">"pipeline.joblib"</span>)    <span cl
 </section>
 
 <section class="chapter">
+  <span class="tag">skip on first read</span>
   <h1><span class="n">ADVANCED</span>Beyond the basics</h1>
   <p class="lead">The 10% you want in month two.</p>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 1 — nested cross-validation</h2>
   <p>If you tune with CV and then report that same CV score, the score is optimistic: you chose
   the settings that happened to suit those folds.</p>
@@ -512,6 +514,7 @@ optimism from tuning: +0.0117</span>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 2 — target encoding without leaking</h2>
   <p>Replacing a category with the mean target for that category is powerful, and it leaks badly
   when computed on the whole dataset — every row sees its own label.</p>
@@ -530,6 +533,7 @@ pre = ColumnTransformer([
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 3 — your own transformer</h2>
 <pre><code><span class="k">from</span> sklearn.base <span class="k">import</span> BaseEstimator, TransformerMixin
 
@@ -549,6 +553,7 @@ pre = ColumnTransformer([
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 4 — imbalanced data</h2>
 <pre><code><span class="k">from</span> imblearn.pipeline <span class="k">import</span> Pipeline <span class="k">as</span> ImbPipeline   <span class="c"># NOT sklearn's</span>
 <span class="k">from</span> imblearn.over_sampling <span class="k">import</span> SMOTE
@@ -567,6 +572,7 @@ pipe = ImbPipeline([
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 5 — keep your column names</h2>
 <pre><code>pre.set_output(transform=<span class="s">"pandas"</span>)      <span class="c"># sklearn >= 1.2</span>
 pre.fit_transform(X).head()
@@ -582,6 +588,7 @@ clf[:-1].get_feature_names_out()[:4]
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 6 — probabilities and thresholds</h2>
 <pre><code><span class="c"># the decision threshold is a hyperparameter -- tune it on VALIDATION</span>
 X_tr, X_tmp, y_tr, y_tmp = train_test_split(X, y, test_size=.4)
@@ -600,6 +607,7 @@ best_t = max(np.linspace(.2, .8, 61), key=<span class="k">lambda</span> t: f1_sc
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 7 — what a code review should ask</h2>
   <table>
     <tr><th>Look for</th><th>Why it is suspicious</th></tr>
@@ -615,6 +623,7 @@ best_t = max(np.linspace(.2, .8, 61), key=<span class="k">lambda</span> t: f1_sc
 </section>
 
 <section>
+  <span class="tag">reference — not for reading</span>
   <h2>Cheat sheet</h2>
 <pre><code><span class="c"># the fix for 90% of leaks</span>
 Pipeline([(<span class="s">"pre"</span>, ColumnTransformer([...])), (<span class="s">"model"</span>, clf)])

@@ -52,7 +52,7 @@ pre code{background:none;padding:0}
 .card h4{font-size:clamp(16px,1.65vw,22px);margin-bottom:.4em}
 .tag{display:inline-block;font-size:clamp(11px,1.05vw,14px);letter-spacing:.12em;
      text-transform:uppercase;font-weight:700;padding:.25em .7em;border-radius:99px;
-     border:1px solid currentColor}
+     border:1px solid currentColor;align-self:flex-start;margin-bottom:.6em}
 .tag.dvc{color:var(--dvc)} .tag.mlf{color:var(--mlf)}
 .chapter{background:linear-gradient(135deg,#0d1117,#161b22)}
 .chapter h1 .n{display:block;font-size:.35em;color:var(--dim);letter-spacing:.3em;margin-bottom:.6em}
@@ -155,7 +155,7 @@ svg{max-width:100%;height:auto}
   <h2>Crash course: what Git actually does</h2>
   <p>Git stores <b>snapshots of your text files</b> and lets you name each snapshot.</p>
 <pre><code><span class="k">git init</span>                  <span class="c"># turn this folder into a repo</span>
-<span class="k">git add</span> train.py           <span class="c"># stage: "include this in the next snapshot"</span>
+<span class="k">git add</span> train.py           <span class="c"># "include this in the next snapshot"</span>
 <span class="k">git commit</span> -m <span class="s">"first model"</span>  <span class="c"># snapshot, with a message</span>
 <span class="k">git log</span> --oneline         <span class="c"># list snapshots</span>
 <span class="o">a1b2c3d first model</span>
@@ -571,6 +571,11 @@ stages:
 <!-- 19 -->
 <section>
   <h2>The DAG and <code>dvc repro</code></h2>
+  <p class="oops"><b>One word, two meanings.</b> In git, <i>staging</i> means marking a file for
+  the next commit. In a DVC pipeline, a <b>stage</b> is one step — a command with declared
+  inputs and outputs. From here on, "stage" always means the second one.</p>
+  <p class="lead">A <b>DAG</b> is just the picture below: which step feeds which. DVC works it out
+  from what each stage reads and writes — you never draw it yourself.</p>
   <svg viewBox="0 0 880 130" role="img" aria-label="pipeline DAG from raw data to metrics">
     <defs><marker id="g" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
       <path d="M0,0 L0,6 L9,3 z" fill="#945dd6"/></marker></defs>
@@ -869,11 +874,13 @@ steps:
 
 <!-- 35 -->
 <section class="chapter">
+  <span class="tag">skip on first read</span>
   <h1><span class="n">ADVANCED</span>Beyond the basics</h1>
   <p class="lead">Everything so far is the 90%. Here is the 10% you will want in month two.</p>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 1 — data registries: reuse a dataset across repos</h2>
 <pre><code><span class="c"># take a file FROM another DVC repo, and keep the link tracked</span>
 <span class="k">dvc import</span> https://github.com/acme/datasets data/customers.csv
@@ -894,6 +901,7 @@ steps:
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 2 — templated and matrix stages</h2>
 <pre><code><span class="c"># dvc.yaml — stop copy-pasting near-identical stages</span>
 stages:
@@ -918,6 +926,7 @@ stages:
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 3 — experiments at scale</h2>
 <pre><code><span class="c"># queue a grid without committing anything, then run it</span>
 <span class="k">dvc exp run</span> --queue -S n_estimators=100 -S max_depth=4
@@ -936,6 +945,7 @@ stages:
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 4 — a shared cache for the whole team</h2>
 <pre><code><span class="c"># one cache on a shared mount = one copy of every dataset per server</span>
 <span class="k">dvc cache dir</span> /mnt/shared/dvc-cache
@@ -955,6 +965,7 @@ stages:
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 5 — plots that reviewers actually read</h2>
 <pre><code><span class="c"># dvc.yaml</span>
 plots:
@@ -977,6 +988,7 @@ plots:
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 6 — migrating an existing mess</h2>
 <pre><code><span class="c"># 1. a big file is already committed and the repo is now huge</span>
 <span class="c">#    remove it from history first (rewrites history - coordinate with the team!)</span>
@@ -996,6 +1008,7 @@ plots:
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 7 — credentials, without leaking them</h2>
   <p><code>.dvc/config</code> is <b>committed to Git</b>. Secrets must never go in it. That is what
   <code>--local</code> is for: it writes to <code>.dvc/config.local</code>, which DVC git-ignores.</p>
@@ -1020,7 +1033,8 @@ plots:
 </section>
 
 <section>
-  <h2>Advanced 8 — the run cache, and everyday surgery</h2>
+  <span class="tag">skip on first read</span>
+  <h2>Advanced 8 — the run cache, and how to untrack, rename or freeze</h2>
   <div class="two">
     <div>
       <h3>Why a stage sometimes doesn't run at all</h3>
@@ -1031,7 +1045,7 @@ plots:
 <span class="o">Restored stage 'train' from run-cache
 Skipping run, checking out outputs</span>
 </code></pre>
-      <p class="sub">DVC keeps a signature of every stage run in <code>.dvc/cache/runs</code>. Seen this
+      <p class="sub">DVC keeps a record of the exact inputs of every stage run in <code>.dvc/cache/runs</code>. Seen this
       exact combination of inputs before? It restores the outputs instead of recomputing them —
       even from a colleague's push.</p>
 <pre><code><span class="k">dvc repro</span> --no-run-cache      <span class="c"># force actual execution</span>
@@ -1040,7 +1054,7 @@ Skipping run, checking out outputs</span>
 </code></pre>
     </div>
     <div>
-      <h3>Everyday surgery</h3>
+      <h3>Untrack, rename, freeze</h3>
 <pre><code><span class="c"># stop tracking, keep the file</span>
 <span class="k">dvc remove</span> data/raw.csv.dvc
 <span class="c"># edit .gitignore to un-ignore it, then git add</span>
@@ -1062,6 +1076,7 @@ Skipping run, checking out outputs</span>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 9 — merge conflicts on data</h2>
   <p>Two branches both added rows. Git sees two different <code>md5:</code> lines and gives up.
   DVC ships a <b>merge driver</b> for exactly this.</p>
@@ -1081,6 +1096,7 @@ dvc.lock  merge=dvc
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 10 — stage options you have not met</h2>
 <pre><code>stages:
   train:
@@ -1099,6 +1115,7 @@ dvc.lock  merge=dvc
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 10b — params and outputs, in detail</h2>
   <div class="two">
     <div>
@@ -1127,6 +1144,7 @@ dvc.lock  merge=dvc
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 11 — <code>artifacts:</code>, DVC's model registry</h2>
 <pre><code><span class="c"># dvc.yaml — annotate what matters, so people can find it by name</span>
 artifacts:
@@ -1149,7 +1167,8 @@ dvc.api.artifacts_show(<span class="s">"churn-classifier"</span>, repo=<span cla
 </section>
 
 <section>
-  <h2>Advanced 12 — version notes and the rest of the ecosystem</h2>
+  <span class="tag">skip on first read</span>
+  <h2>Advanced 12 — version differences, and other DVC tools</h2>
   <div class="two">
     <div>
       <h3>DVC 2.x &rarr; 3.x (read before trusting a blog post)</h3>
@@ -1181,6 +1200,7 @@ scratch/
 </section>
 
 <section>
+  <span class="tag">reference — not for reading</span>
   <h2>Cheat sheet</h2>
 <pre><code>dvc init                       <span class="c"># set up (after git init)</span>
 dvc add data/raw.csv           <span class="c"># track a file or folder</span>

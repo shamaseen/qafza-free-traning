@@ -52,7 +52,7 @@ pre code{background:none;padding:0}
 .card h4{font-size:clamp(16px,1.65vw,22px);margin-bottom:.4em}
 .tag{display:inline-block;font-size:clamp(11px,1.05vw,14px);letter-spacing:.12em;
      text-transform:uppercase;font-weight:700;padding:.25em .7em;border-radius:99px;
-     border:1px solid currentColor}
+     border:1px solid currentColor;align-self:flex-start;margin-bottom:.6em}
 .tag.dvc{color:var(--dvc)} .tag.mlf{color:var(--mlf)}
 .chapter{background:linear-gradient(135deg,#0d1117,#161b22)}
 .chapter h1 .n{display:block;font-size:.35em;color:var(--dim);letter-spacing:.3em;margin-bottom:.6em}
@@ -151,6 +151,8 @@ svg{max-width:100%;height:auto}
 append-only table after two runs : 942     <span class="r"># every row duplicated</span>
 upsert  table after two runs     : 471     <span class="s"># unchanged</span>
 </code></pre>
+  <p class="sub"><b>Upsert</b> = update-or-insert: if a row with that key is already in the table,
+  update it; otherwise insert it. That one rule is what makes the second run harmless.</p>
   <ul>
     <li>Backfills become safe — just run the range again.</li>
     <li>Retries become free, so your orchestrator can be aggressive about them.</li>
@@ -240,6 +242,8 @@ engine = create_engine(<span class="s">"snowflake://..."</span>)
 
 <section>
   <h2>Property 1 — make it idempotent</h2>
+  <p class="lead"><b>Idempotent</b> means running the job twice leaves the same result as running
+  it once. It is the property everything else here depends on.</p>
 <pre><code><span class="k">from</span> sqlalchemy.dialects.sqlite <span class="k">import</span> insert <span class="k">as</span> sqlite_insert
 
 events = Table(<span class="s">"events"</span>, meta,
@@ -269,6 +273,8 @@ stmt = stmt.on_conflict_do_update(
 
 <section>
   <h2>The watermark, in code</h2>
+  <p class="lead">A <b>watermark</b> is a bookmark: the timestamp of the newest row you have
+  already loaded. Next run starts from there instead of re-reading everything.</p>
 <pre><code><span class="k">def</span> run_incremental(path, lateness=pd.Timedelta(<span class="s">"1D"</span>)):
     hw     = get_watermark()          <span class="c"># what we processed last time</span>
     cutoff = hw - lateness            <span class="c"># deliberately go back a bit</span>
@@ -299,7 +305,7 @@ table before retry 1415, after retry 1415
   <h2>What to check, and what to tolerate</h2>
   <table>
     <tr><th>Check</th><th>Catches</th><th>Action</th></tr>
-    <tr><td>required columns present</td><td>schema drift upstream</td><td><b>refuse the batch</b></td></tr>
+    <tr><td>required columns present</td><td>the source changed its columns</td><td><b>refuse the batch</b></td></tr>
     <tr><td>row count within a sane range</td><td>truncated or duplicated export</td><td>refuse</td></tr>
     <tr><td>null rate per critical column</td><td>a broken join upstream</td><td>refuse</td></tr>
     <tr><td>values in an allowed set</td><td>a new category nobody told you about</td><td>refuse</td></tr>
@@ -319,6 +325,8 @@ table before retry 1415, after retry 1415
 <span class="o">rows before 1415, after the failed load 1415</span>
 
 <span class="c"># 2. retry transient faults, with backoff and jitter</span>
+<span class="c">#    backoff = wait longer after each failure; jitter = a small random</span>
+<span class="c">#    extra, so many clients do not all retry at the same instant</span>
 with_retry(fetch, attempts=4, retry_on=(ConnectionError, TimeoutError))
 <span class="o">attempt 1 failed (ConnectionError), retrying in 0.21s
 attempt 2 failed (ConnectionError), retrying in 0.48s
@@ -352,11 +360,13 @@ result: payload after 3 attempts</span>
 </section>
 
 <section class="chapter">
+  <span class="tag">skip on first read</span>
   <h1><span class="n">ADVANCED</span>Beyond the basics</h1>
   <p class="lead">Where this goes next.</p>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 1 — an orchestrator runs it, it is not the job</h2>
   <div class="two">
     <div>
@@ -378,12 +388,14 @@ result: payload after 3 attempts</span>
       </ul>
     </div>
   </div>
-  <p class="oops"><b>The mistake:</b> putting business logic in the orchestrator's DAG file. Now it
+  <p class="oops"><b>The mistake:</b> putting business logic in the orchestrator's DAG file (a <b>DAG</b>
+  is just the graph of which job runs after which). Now it
   can only run inside Airflow, cannot be unit-tested, and cannot be run by hand at 3am.</p>
   <p class="win"><b>Keep the job a plain Python callable.</b> The DAG should be a one-line wrapper.</p>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 2 — bigger than memory</h2>
 <pre><code><span class="c"># stream it in pieces; each chunk is its own transaction</span>
 <span class="k">for</span> chunk <span class="k">in</span> pd.read_csv(path, chunksize=100_000, parse_dates=[<span class="s">"occurred_at"</span>]):
@@ -406,6 +418,7 @@ result: payload after 3 attempts</span>
 </section>
 
 <section>
+  <span class="tag">skip on first read</span>
   <h2>Advanced 3 — ELT, CDC, and formal contracts</h2>
   <table>
     <tr><th>Idea</th><th>What changes</th><th>Worth it when</th></tr>
@@ -419,6 +432,7 @@ result: payload after 3 attempts</span>
 </section>
 
 <section>
+  <span class="tag">reference — not for reading</span>
   <h2>Cheat sheet</h2>
 <pre><code><span class="c"># idempotent load (SQLite / Postgres)</span>
 from sqlalchemy.dialects.sqlite import insert       <span class="c"># or .postgresql</span>
