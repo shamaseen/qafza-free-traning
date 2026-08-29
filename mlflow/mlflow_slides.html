@@ -328,6 +328,7 @@ matplotlib
 <!-- 25 -->
 <section>
   <h2>Your first tracked run</h2>
+  <p class="lead">Four lines inside your existing training code. Everything else in this session is a refinement of this.</p>
 <pre class="mlf"><code><span class="k">pip install</span> mlflow
 
 <span class="k">import</span> mlflow
@@ -427,6 +428,7 @@ model.fit(X_train, y_train)   <span class="c"># that is it. really.</span>
 
 <section>
   <h2>Saving and re-loading a model</h2>
+  <p class="lead">MLflow saves the model together with how to load it, so the code that serves it later does not need to know it was scikit-learn.</p>
 <pre class="mlf"><code><span class="k">with</span> mlflow.start_run() <span class="k">as</span> run:
     info = mlflow.sklearn.log_model(model, name=<span class="s">"model"</span>,
                                     input_example=X_test[:5])   <span class="c"># records the schema</span>
@@ -448,6 +450,7 @@ loaded = mlflow.pyfunc.load_model(<span class="s">f"runs:/{run_id}/model"</span>
 <!-- 29 -->
 <section>
   <h2>Model Registry: from "a run" to "the model"</h2>
+  <p class="lead">A run is something that happened. Registering promotes one to a named, versioned model that serving code can ask for by name.</p>
 <pre class="mlf"><code>mlflow.register_model(<span class="s">f"runs:/{run_id}/model"</span>, <span class="s">"churn-classifier"</span>)
 <span class="o">Created version '3' of model 'churn-classifier'.</span>
 
@@ -508,6 +511,7 @@ model = mlflow.pyfunc.load_model(<span class="s">"models:/churn-classifier@champ
 <!-- MLFLOW BEFORE/AFTER EXAMPLE -->
 <section>
   <h2>Example: before and after MLflow</h2>
+  <p class="lead">The same training script twice. The difference is four lines, and afterwards you can answer questions about it months later.</p>
   <div class="two">
     <div>
       <h3 style="color:var(--bad)">Before</h3>
@@ -547,6 +551,7 @@ mlflow.set_experiment(<span class="s">"churn"</span>)
 <!-- MLFLOW SWEEP EXAMPLE -->
 <section>
   <h2>Example: a hyperparameter sweep worth keeping</h2>
+  <p class="lead">Eight runs in a loop, each recording its own settings and score. Then you ask which one won instead of scrolling back through output.</p>
 <pre class="mlf"><code><span class="k">import</span> mlflow, itertools
 <span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier
 <span class="k">from</span> sklearn.metrics <span class="k">import</span> roc_auc_score
@@ -576,6 +581,7 @@ best = mlflow.search_runs(experiment_names=[<span class="s">"churn-sweep"</span>
 <!-- 30 -->
 <section>
   <h2>Query your runs from code</h2>
+  <p class="lead"><code>search_runs</code> hands back a pandas DataFrame, so picking the best run is a sort rather than a spreadsheet.</p>
 <pre class="mlf"><code><span class="k">from</span> mlflow <span class="k">import</span> MlflowClient
 runs = mlflow.search_runs(experiment_names=[<span class="s">"churn-model"</span>],
                           order_by=[<span class="s">"metrics.accuracy DESC"</span>])
@@ -722,6 +728,7 @@ mlflow.pyfunc.log_model(name=<span class="s">"model"</span>, python_model=ChurnM
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 3 — signatures and automated evaluation</h2>
+  <p class="lead">A signature records the columns a model expects, so a wrong input is refused. <code>evaluate</code> then scores it and logs the charts for you.</p>
 <pre class="mlf"><code><span class="k">from</span> mlflow.models <span class="k">import</span> infer_signature
 sig = infer_signature(X_test, model.predict(X_test))     <span class="c"># columns + dtypes</span>
 mlflow.sklearn.log_model(model, name=<span class="s">"model"</span>, signature=sig,
@@ -749,6 +756,7 @@ result = mlflow.evaluate(
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 4 — serving the model</h2>
+  <p class="lead">One command turns a registered model into an HTTP server, because the run recorded its dependencies as well as its weights.</p>
 <pre class="mlf"><code><span class="c"># local REST server, in one command</span>
 <span class="k">mlflow models serve</span> -m <span class="s">"models:/churn-classifier@champion"</span> -p 5001 --env-manager local
 
@@ -770,6 +778,7 @@ result = mlflow.evaluate(
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 5 — MLflow Projects &amp; a real tracking server</h2>
+  <p class="lead">How this changes when the team shares one server: a database behind it, artifacts in object storage, and runs described so anyone can reproduce them.</p>
   <div class="two">
     <div>
       <h3>Reproducible entry points</h3>
@@ -827,6 +836,7 @@ results = mlflow.evaluate(model=my_rag_fn, data=eval_df,
 
 <section>
   <h2>Autolog — the full picture</h2>
+  <p class="lead">One line and MLflow records what the library reports for you. Convenient — and it logs what <i>it</i> considers important, not what you do.</p>
 <pre class="mlf"><code>mlflow.autolog()          <span class="c"># every supported library you have imported</span>
 
 <span class="c"># or one at a time, with control:</span>
@@ -883,6 +893,7 @@ system/network_receive_megabytes       system/disk_available_megabytes
 
 <section>
   <h2>Searching runs, and the store that makes it possible</h2>
+  <p class="lead">Querying by metric or tag needs a database behind the tracking server. With plain files, these searches are not available.</p>
 <pre class="mlf"><code>mlflow.search_runs(
     experiment_names=[<span class="s">"churn-model"</span>],
     filter_string=<span class="s">"metrics.roc_auc > 0.9 "</span>

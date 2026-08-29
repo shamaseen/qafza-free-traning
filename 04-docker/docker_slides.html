@@ -212,6 +212,7 @@ docker run --rm hello-world
 
 <section>
   <h2>The naive Dockerfile — and its three bugs</h2>
+  <p class="lead">The Dockerfile almost everyone writes first. It works, and it is slow and huge for three reasons flagged in the comments.</p>
 <pre><code>FROM python:3.12                      <span class="c"># bug 1: the full image</span>
 WORKDIR /srv
 COPY . .                              <span class="c"># bug 2: everything. bug 3: before pip</span>
@@ -235,6 +236,7 @@ CMD uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 <section>
   <h2>Fix 1 — <code>.dockerignore</code></h2>
+  <p class="lead">A list of things Docker should not even send to the daemon. Same syntax as <code>.gitignore</code>.</p>
 <pre><code><span class="c"># .dockerignore -- same syntax as .gitignore</span>
 .git
 __pycache__/
@@ -254,6 +256,7 @@ Dockerfile*
 
 <section>
   <h2>Fix 2 — a smaller base, and no pip cache</h2>
+  <p class="lead">Two changes: a base image without the compiler toolchain, and telling pip not to keep its downloads inside the image.</p>
 <pre><code>FROM python:3.12-slim                 <span class="c"># same Python, no compiler toolchain</span>
 WORKDIR /srv
 COPY requirements.txt .
@@ -361,6 +364,7 @@ t_warm = build(<span class="s">"Dockerfile.multi"</span>)                  <span
 
 <section>
   <h2>Running a container</h2>
+  <p class="lead">Each flag maps a piece of the outside world in: a port, an environment variable, a folder, and a limit on what it may consume.</p>
 <pre><code>docker run -d --name churn \
   -p 8080:8000 \                          <span class="c"># host:container -- without this, nothing reaches it</span>
   -e MODEL_PATH=/srv/app/model.joblib \    <span class="c"># config by environment, never baked in</span>
@@ -379,6 +383,7 @@ uid=10001(appuser) gid=10001(appuser)</span>
 
 <section>
   <h2>Everyday commands</h2>
+  <p class="lead">The five you will actually type. <code>logs</code> and <code>exec</code> are the two that answer "why is it behaving like that?".</p>
 <pre><code>docker ps                          <span class="c"># what is running</span>
 docker logs -f churn               <span class="c"># follow stdout -- your app's logs, unchanged</span>
 docker exec -it churn bash         <span class="c"># a shell inside it, for when you are confused</span>
@@ -397,6 +402,7 @@ docker system prune -a             <span class="c"># reclaim it (careful: remove
 
 <section>
   <h2>Compose — describe it instead of typing it</h2>
+  <p class="lead">The same <code>docker run</code> flags, written down as a file instead of typed from memory.</p>
 <pre><code><span class="c"># compose.yaml</span>
 services:
   api:

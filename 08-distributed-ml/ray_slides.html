@@ -154,6 +154,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>Reason 1 — two functions to learn</h2>
+  <p class="lead">Three steps, and that is most of Ray: mark the function, call it with <code>.remote()</code>, collect the answers with <code>ray.get</code>.</p>
 <pre><code><span class="k">@ray.remote</span>                       <span class="c"># 1. mark it</span>
 <span class="k">def</span> work(x): ...
 
@@ -233,6 +234,7 @@ ray.cluster_resources()
 
 <section>
   <h2>Submitting is not running</h2>
+  <p class="lead">Sixteen tasks submitted in milliseconds, because none of them has run. What comes back is a receipt; the waiting happens later.</p>
 <pre><code>refs = [work.remote(i) <span class="k">for</span> i <span class="k">in</span> range(16)]
 <span class="o">submitted 16 tasks in 27.2 ms -- nothing has run yet</span>
 <span class="o">first ref: ObjectRef(c8ef45ccd0112571ffffffffffffffffffffffff0100000001000000)</span>
@@ -249,6 +251,7 @@ results = ray.get(refs)        <span class="c"># NOW we wait</span>
 
 <section>
   <h2>Actors — state that stays warm</h2>
+  <p class="lead">A class instead of a function. It loads the model once in <code>__init__</code> and keeps it, so later calls skip that cost.</p>
 <pre><code><span class="k">@ray.remote</span>
 <span class="k">class</span> Scorer:
     <span class="k">def</span> __init__(self, weights):
@@ -289,6 +292,7 @@ completion order: 0 4 5 1 2 6 3 7        # measured</span>
 
 <section>
   <h2>Four changes to a training loop</h2>
+  <p class="lead">Your existing training loop, with two wrappers added: one shards the data across workers, the other keeps their gradients in sync.</p>
 <pre><code><span class="k">def</span> train_func(config):                       <span class="c"># runs on EVERY worker</span>
     dl = ray.train.torch.prepare_data_loader(dl)   <span class="c"># shards it: each worker gets a different slice</span>
     model = ray.train.torch.prepare_model(model)   <span class="c"># wraps in DDP</span>
@@ -311,6 +315,7 @@ TorchTrainer(train_loop_per_worker=train_func,
 
 <section>
   <h2>Proving it sharded, rather than assuming</h2>
+  <p class="lead">Two workers, 4,000 rows each, from an 8,000-row dataset. If the shard wrapper had been forgotten, both would report 8,000.</p>
 <pre><code><span class="o">rank  epoch      loss  rows_seen
    0      0  0.468538       4000
    1      0  0.475658       4000
@@ -334,6 +339,7 @@ each worker saw 4000 of 8000 rows -- the loader sharded the data</span>
 
 <section>
   <h2>Asking for what you need</h2>
+  <p class="lead">Ray schedules by what a task declares. Ask for two CPUs and half a GPU and it will not start until that is free.</p>
 <pre><code><span class="k">@ray.remote</span>(num_cpus=2, num_gpus=0.5, memory=2 * 1024**3)
 <span class="k">def</span> heavy(x): ...
 

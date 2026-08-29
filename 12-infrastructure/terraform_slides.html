@@ -175,6 +175,7 @@ terraform version
 
 <section>
   <h2>One resource, end to end</h2>
+  <p class="lead">Four blocks and one command each. You describe what should exist; Terraform works out the calls to make.</p>
 <pre><code>terraform {
   required_providers {
     docker = { source = <span class="s">"kreuzwerker/docker"</span>, version = <span class="s">"~&gt; 3.0"</span> }
@@ -244,6 +245,7 @@ Terraform has been successfully initialized!</span>
 
 <section>
   <h2>Run it again and nothing happens — that is the point</h2>
+  <p class="lead">The same configuration applied twice. The second run reports no changes, because Terraform compares what exists against what you asked for.</p>
 <pre><code>terraform apply     <span class="c"># first time: creates</span>
 <span class="o">Apply complete! Resources: 2 added</span>
 
@@ -263,6 +265,7 @@ terraform plan      <span class="c"># immediately after, no config change</span>
 
 <section>
   <h2>Variables with validation</h2>
+  <p class="lead">Inputs with types and rules. A bad value is caught before anything is created, not halfway through.</p>
 <pre><code>variable <span class="s">"api_port"</span> {
   description = <span class="s">"host port for the API"</span>
   type        = number
@@ -306,6 +309,7 @@ resource <span class="s">"docker_container"</span> <span class="s">"api"</span> 
 
 <section>
   <h2>Drift — when someone changes it by hand</h2>
+  <p class="lead">Somebody deleted a container in the console. <code>plan</code> notices the difference and offers to put it back.</p>
 <pre><code><span class="c"># somebody "just fixes something quickly"</span>
 docker rm -f tf-web
 
@@ -333,6 +337,7 @@ terraform apply
 
 <section>
   <h2>Shared state, and why it needs a lock</h2>
+  <p class="lead">Once the state file is shared, two people can apply at the same time. The lock is what stops them from writing over each other.</p>
 <pre><code>terraform {
   backend <span class="s">"s3"</span> {
     bucket         = <span class="s">"acme-tfstate"</span>
@@ -351,6 +356,7 @@ terraform apply
 
 <section>
   <h2>Modules, environments, adoption</h2>
+  <p class="lead">A module is a folder of Terraform you call with different inputs — the same shape for staging and production.</p>
 <pre><code><span class="c"># a module is the unit of reuse</span>
 module <span class="s">"api"</span> {
   source   = <span class="s">"./modules/service"</span>

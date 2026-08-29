@@ -145,6 +145,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>Instrumenting, in one middleware</h2>
+  <p class="lead">Three metrics and one wrapper. Every request is counted and timed without touching a single endpoint.</p>
 <pre><code><span class="k">from</span> prometheus_client <span class="k">import</span> Counter, Histogram, Gauge, generate_latest
 
 REQUESTS = Counter(<span class="s">"api_requests_total"</span>, <span class="s">"requests"</span>, [<span class="s">"endpoint"</span>, <span class="s">"method"</span>, <span class="s">"status"</span>])
@@ -173,6 +174,7 @@ INFLIGHT = Gauge(<span class="s">"api_inflight_requests"</span>, <span class="s"
 
 <section>
   <h2>Labels: useful, until they multiply</h2>
+  <p class="lead">A label with a few values is free. A label containing a user id creates a new time series per user, and that is how monitoring bills explode.</p>
 <pre><code><span class="c"># good: a handful of values</span>
 REQUESTS.labels(endpoint=<span class="s">"/predict"</span>, method=<span class="s">"POST"</span>, status=<span class="s">"200"</span>)
 
@@ -191,6 +193,7 @@ REQUESTS.labels(request_id=uuid4().hex)   <span class="r"># one per request, for
 
 <section>
   <h2>Prometheus pulls; you do not push</h2>
+  <p class="lead">You list the addresses to scrape and how often. Your application never sends anything — it just leaves a page for Prometheus to read.</p>
 <pre><code><span class="c"># prometheus.yml</span>
 global:
   scrape_interval: 15s
@@ -213,6 +216,7 @@ scrape_configs:
 
 <section>
   <h2>The four queries you will actually use</h2>
+  <p class="lead">Four PromQL expressions covering almost every dashboard: how much traffic, how many errors, how slow typically, and how slow for the unlucky.</p>
 <pre><code><span class="c"># 1. throughput</span>
 sum(rate(api_requests_total[1m]))                          <span class="o">6.08 req/s</span>
 
@@ -264,6 +268,7 @@ mean predicted probability, phase 2 (drifted traffic): 0.860
 
 <section>
   <h2>A rule that fires</h2>
+  <p class="lead">A condition plus a duration. <code>for: 30s</code> is what stops one bad second from waking someone up.</p>
 <pre><code>groups:
   - name: churn-api
     rules:

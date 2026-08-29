@@ -128,6 +128,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>Probe it, do not trust it</h2>
+  <p class="lead">Ask PyTorch if a GPU exists, then <b>actually multiply two matrices on it</b>. If that throws, fall back to the CPU. Saying "yes" and being able to run are different things.</p>
 <pre><code><span class="k">def</span> pick_device():
     <span class="k">if</span> torch.cuda.is_available():
         <span class="k">try</span>:
@@ -155,6 +156,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>Reason 1 — reproducibility is four generators, not one</h2>
+  <p class="lead">Four separate random number generators decide what happens in a run. Seed one and tomorrow's result still differs — which is why runs feel unreproducible.</p>
 <pre><code><span class="k">def</span> seed_everything(seed=42):
     random.seed(seed)                       <span class="c"># python: shuffles, sampling</span>
     np.random.seed(seed)                    <span class="c"># numpy: data generation, sklearn</span>
@@ -170,6 +172,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>Reason 2 — the loop, written out once</h2>
+  <p class="lead">Every training loop you will ever read is these five steps in this order: clear, predict, measure, blame, adjust.</p>
 <pre><code><span class="k">for</span> xb, yb <span class="k">in</span> train_dl:
     opt.zero_grad(set_to_none=<span class="k">True</span>)      <span class="c"># 1. clear last step's gradients</span>
     loss = loss_fn(model(xb), yb)          <span class="c"># 2. forward</span>
@@ -286,6 +289,7 @@ tokenizers&gt;=0.19,&lt;0.20: found=None</span></code></pre>
 
 <section>
   <h2><code>Dataset</code> — three methods</h2>
+  <p class="lead">A <code>Dataset</code> answers two questions: how many rows, and give me row <i>i</i>. Write those two methods and PyTorch handles batching and shuffling for you.</p>
 <pre><code><span class="k">class</span> TabularDS(Dataset):
     <span class="k">def</span> __init__(self, X, y):
         self.X = torch.from_numpy(X); self.y = torch.from_numpy(y).unsqueeze(1)
@@ -305,6 +309,7 @@ tokenizers&gt;=0.19,&lt;0.20: found=None</span></code></pre>
 
 <section>
   <h2>Loss functions: use the fused one</h2>
+  <p class="lead">Two ways to compute the same loss. The fused version does the squashing and the loss in one step, in a way that does not blow up numerically. Use it.</p>
 <pre><code><span class="c"># binary classification</span>
 model -&gt; logits            + nn.BCEWithLogitsLoss()     <span class="s"># stable</span>
 model -&gt; sigmoid -&gt; probs  + nn.BCELoss()               <span class="r"># NaN waiting to happen</span>
@@ -321,6 +326,7 @@ model -&gt; logits            + nn.CrossEntropyLoss()      <span class="s"># inc
 
 <section>
   <h2>Early stopping and a schedule</h2>
+  <p class="lead">Lower the learning rate as training goes on, and stop when the validation score has not improved for <code>patience</code> epochs.</p>
 <pre><code>sched = CosineAnnealingLR(opt, T_max=EPOCHS)   <span class="c"># smooth decay, a good default</span>
 
 <span class="k">if</span> auc &gt; best: best, bad = auc, 0; save()
@@ -344,6 +350,7 @@ model -&gt; logits            + nn.CrossEntropyLoss()      <span class="s"># inc
 
 <section>
   <h2>Three lines to a pretrained model</h2>
+  <p class="lead">Two objects: the <b>tokeniser</b> turns text into numbers, the <b>model</b> is the pretrained network with a fresh, untrained classification head on top.</p>
 <pre><code><span class="k">from</span> transformers <span class="k">import</span> AutoTokenizer, AutoModelForSequenceClassification
 
 CKPT = <span class="s">"prajjwal1/bert-tiny"</span>       <span class="c"># 17 MB. Swap for bert-base, or a 7B model.</span>
@@ -364,6 +371,7 @@ after  fine-tuning: accuracy 1.000  f1 1.000</span>
 
 <section>
   <h2>Fine-tuning is the same loop</h2>
+  <p class="lead">Exactly the loop from Part 1. The only difference: pass the labels in and the Hugging Face model returns the loss itself.</p>
 <pre><code><span class="k">for</span> batch <span class="k">in</span> train_dl:
     opt.zero_grad(set_to_none=<span class="k">True</span>)
     out = model(**batch)          <span class="c"># pass labels= and the model returns .loss itself</span>
@@ -383,6 +391,7 @@ Trainer(model=model, args=args, train_dataset=tr, eval_dataset=ev).train()
 
 <section>
   <h2>When you have little data, or little memory</h2>
+  <p class="lead">Two independent tricks. <b>Freeze</b> the pretrained body so only the small head trains. <b>Accumulate</b> gradients over several small batches to imitate one big batch.</p>
 <pre><code><span class="c"># freeze the body, train only the head</span>
 <span class="k">for</span> p <span class="k">in</span> model.bert.parameters():
     p.requires_grad = <span class="k">False</span>
@@ -409,6 +418,7 @@ loss.backward()                            <span class="c"># gradients ACCUMULAT
 
 <section>
   <h2>TorchScript and ONNX</h2>
+  <p class="lead">Two ways to save a model so it runs without your Python code. TorchScript stays inside PyTorch; ONNX leaves it entirely and runs in other runtimes.</p>
 <pre><code><span class="c"># TorchScript: still PyTorch, no Python class needed</span>
 traced = torch.jit.trace(model.eval(), example_input)
 traced.save(<span class="s">"model_traced.pt"</span>)
@@ -429,6 +439,7 @@ torch.onnx.export(model, example, <span class="s">"model.onnx"</span>,
 
 <section>
   <h2>Always diff the outputs</h2>
+  <p class="lead">Export, then feed the same input to both and compare. An export that silently changes the numbers is worse than one that fails.</p>
 <pre><code>onnx_out  = sess.run(<span class="k">None</span>, {<span class="s">"features"</span>: probe})[0]
 torch_out = model(torch.from_numpy(probe)).numpy()
 

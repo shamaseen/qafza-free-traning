@@ -319,6 +319,7 @@ table before retry 1415, after retry 1415
 
 <section>
   <h2>Property 4 — recover cleanly</h2>
+  <p class="lead">Two separate ideas: wrap the load in one transaction so a failure leaves nothing behind, and retry only the failures that are worth retrying.</p>
 <pre><code><span class="c"># 1. one transaction -- no half-finished loads to clean up by hand</span>
 <span class="k">with</span> engine.begin() <span class="k">as</span> conn:
     conn.execute(stmt)                 <span class="c"># exception here -> automatic rollback</span>
@@ -339,6 +340,7 @@ result: payload after 3 attempts</span>
 
 <section>
   <h2>Example: the whole job</h2>
+  <p class="lead">All four properties in one function: validate, transform, load only what is new, and always record what happened.</p>
 <pre><code><span class="k">def</span> run_job(path, job=<span class="s">"events"</span>):
     run_id, t0 = uuid4().hex, utcnow()
     <span class="k">try</span>:
@@ -397,6 +399,7 @@ result: payload after 3 attempts</span>
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 2 — bigger than memory</h2>
+  <p class="lead">When the file will not fit in RAM, read it in chunks — or push the work into the database and stop moving rows through Python at all.</p>
 <pre><code><span class="c"># stream it in pieces; each chunk is its own transaction</span>
 <span class="k">for</span> chunk <span class="k">in</span> pd.read_csv(path, chunksize=100_000, parse_dates=[<span class="s">"occurred_at"</span>]):
     upsert(transform(chunk))

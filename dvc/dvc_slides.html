@@ -242,6 +242,7 @@ remote: GitHub's file size limit of 100.00 MB</span>
 
 <section>
   <h2>Reason 4 — a data change becomes reviewable</h2>
+  <p class="lead">The diff a reviewer sees when the data changes: not a million rows, one line with the old and new fingerprint.</p>
   <div class="two">
     <div>
       <h3>What a reviewer sees today</h3>
@@ -424,6 +425,7 @@ To track the changes with git, run:
 <!-- 12 -->
 <section>
   <h2>Inside a <code>.dvc</code> pointer file</h2>
+  <p class="lead">The whole pointer file. It holds the fingerprint, the size and the path — and this is the file git stores instead of the data.</p>
 <pre><code><span class="k">cat</span> data/raw.csv.dvc
 
 outs:
@@ -541,6 +543,7 @@ outs:
 <!-- 18 -->
 <section>
   <h2>Defining stages</h2>
+  <p class="lead">A stage is a command plus what it reads and what it writes. Write those down and DVC can decide what needs rerunning.</p>
 <pre><code><span class="c"># dvc.yaml — write it by hand, it is just YAML</span>
 stages:
   prepare:
@@ -609,6 +612,7 @@ Stage 'train' didn't change, skipping</span>
 <!-- 20 -->
 <section>
   <h2><code>dvc.lock</code> and <code>params.yaml</code></h2>
+  <p class="lead"><code>params.yaml</code> holds the settings you edit. <code>dvc.lock</code> is written by DVC and records exactly what ran — do not edit it, do commit it.</p>
   <div class="two">
     <div>
       <h3>params.yaml — your knobs</h3>
@@ -639,6 +643,7 @@ test_size: 0.2</code></pre>
 <!-- 21 -->
 <section>
   <h2>Metrics, plots, experiments</h2>
+  <p class="lead">Three commands for comparing runs: show the current numbers, diff them against a commit, and render charts from them.</p>
 <pre><code><span class="k">dvc metrics show</span>
 <span class="o">Path          accuracy  f1      roc_auc
 metrics.json  0.852     0.8452  0.9172</span>
@@ -686,6 +691,7 @@ metrics.json  roc_auc   0.8889  0.9172     0.0283</span>
 
 <section>
   <h2>What DVCLive gives you for free</h2>
+  <p class="lead">A few lines inside your training code, and every run writes its own metrics and plots without you assembling a report.</p>
   <div class="two">
     <div>
       <h3>The <code>Live()</code> knobs worth knowing</h3>
@@ -765,6 +771,7 @@ trainer.add_callback(DVCLiveCallback())
 <!-- DVC FULL EXAMPLE -->
 <section>
   <h2>Example: a real session — <span style="color:var(--dim)">day 1</span></h2>
+  <p class="lead">A first day, end to end: track the data, write the pipeline, run it, and commit both the code and the pointers.</p>
 <pre><code><span class="c"># set the project up, once</span>
 mkdir churn &amp;&amp; cd churn
 git init &amp;&amp; dvc init
@@ -786,6 +793,7 @@ git push                                 <span class="o"># the pointer goes to G
 
 <section>
   <h2>Example: a real session — <span style="color:var(--dim)">day 12, day 20</span></h2>
+  <p class="lead">The same project later. New data arrives, the pipeline reruns only what is stale, and a colleague reproduces the result with two commands.</p>
   <div class="two">
     <div>
       <h3>New data arrives</h3>
@@ -882,6 +890,7 @@ steps:
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 1 — data registries: reuse a dataset across repos</h2>
+  <p class="lead">One repository holds the data; other projects pull it by name and version instead of copying it around.</p>
 <pre><code><span class="c"># take a file FROM another DVC repo, and keep the link tracked</span>
 <span class="k">dvc import</span> https://github.com/acme/datasets data/customers.csv
 <span class="c"># -> customers.csv.dvc records the source repo, the path AND the revision</span>
@@ -903,6 +912,7 @@ steps:
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 2 — templated and matrix stages</h2>
+  <p class="lead">One stage description that DVC expands into many — one per item in a list. Useful for per-segment or per-language training.</p>
 <pre><code><span class="c"># dvc.yaml — stop copy-pasting near-identical stages</span>
 stages:
   featurize:
@@ -928,6 +938,7 @@ stages:
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 3 — experiments at scale</h2>
+  <p class="lead">Experiments let you try something without committing to it. Each attempt is recorded, and only the one you keep becomes a commit.</p>
 <pre><code><span class="c"># queue a grid without committing anything, then run it</span>
 <span class="k">dvc exp run</span> --queue -S n_estimators=100 -S max_depth=4
 <span class="k">dvc exp run</span> --queue -S n_estimators=300 -S max_depth=8
@@ -947,6 +958,7 @@ stages:
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 4 — a shared cache for the whole team</h2>
+  <p class="lead">Point everyone's cache at one directory and the same file is stored once for the whole team instead of once per person.</p>
 <pre><code><span class="c"># one cache on a shared mount = one copy of every dataset per server</span>
 <span class="k">dvc cache dir</span> /mnt/shared/dvc-cache
 <span class="k">dvc config</span> cache.shared group
@@ -967,6 +979,7 @@ stages:
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 5 — plots that reviewers actually read</h2>
+  <p class="lead">Charts defined in the pipeline, so a pull request shows the new curve against the old one instead of a number nobody can picture.</p>
 <pre><code><span class="c"># dvc.yaml</span>
 plots:
   - eval/roc.json:
@@ -990,6 +1003,7 @@ plots:
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 6 — migrating an existing mess</h2>
+  <p class="lead">How to adopt DVC on a repository that already has large files committed, without rewriting history on day one.</p>
 <pre><code><span class="c"># 1. a big file is already committed and the repo is now huge</span>
 <span class="c">#    remove it from history first (rewrites history - coordinate with the team!)</span>
 <span class="k">pip install</span> git-filter-repo
@@ -1098,6 +1112,7 @@ dvc.lock  merge=dvc
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 10 — stage options you have not met</h2>
+  <p class="lead">The stage options that come up once a pipeline is real: always rerun this one, do not cache that output, keep this file out of the hashing.</p>
 <pre><code>stages:
   train:
     cmd: python ${codedir}/train.py --thresh ${models.us.threshold}
@@ -1117,6 +1132,7 @@ dvc.lock  merge=dvc
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 10b — params and outputs, in detail</h2>
+  <p class="lead">How to declare a subset of parameters, several parameter files, and outputs you want tracked but not cached.</p>
   <div class="two">
     <div>
       <h3>Where params come from</h3>
@@ -1146,6 +1162,7 @@ dvc.lock  merge=dvc
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 11 — <code>artifacts:</code>, DVC's model registry</h2>
+  <p class="lead">Naming a model in <code>dvc.yaml</code> so other repositories can fetch it by name and version, instead of by path.</p>
 <pre><code><span class="c"># dvc.yaml — annotate what matters, so people can find it by name</span>
 artifacts:
   churn-classifier:                      <span class="c"># the artifact ID</span>

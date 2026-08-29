@@ -315,6 +315,7 @@ TargetEncoder()         <span class="c"># learns a mean target per category</spa
 
 <section>
   <h2>The fix — <code>Pipeline</code></h2>
+  <p class="lead">Read it top to bottom: fill the gaps, scale the numbers, keep the best 20 columns, then fit the model. <b>One object</b> that does all four.</p>
 <pre><code><span class="k">from</span> sklearn.pipeline <span class="k">import</span> Pipeline
 
 pipe = Pipeline([
@@ -346,6 +347,7 @@ cross_val_score(pipe, X, y, cv=5)     <span class="c"># every step refitted per 
 
 <section>
   <h2><code>ColumnTransformer</code> — different columns, different treatment</h2>
+  <p class="lead">In plain words: <b>for the number columns</b> fill gaps then scale; <b>for the text columns</b> one-hot encode. Then hand the result to the model.</p>
 <pre><code><span class="k">from</span> sklearn.compose <span class="k">import</span> ColumnTransformer
 
 pre = ColumnTransformer([
@@ -467,6 +469,7 @@ df = df.drop_duplicates()          <span class="c"># BEFORE the split, always</s
 
 <section>
   <h2>Example: the whole thing, correct</h2>
+  <p class="lead">Everything from this session in one object: name the two kinds of column, give each its own treatment, put the model last.</p>
 <pre><code>numeric     = [<span class="s">"tenure_months"</span>, <span class="s">"monthly_charge"</span>, <span class="s">"support_calls"</span>]
 categorical = [<span class="s">"plan"</span>, <span class="s">"region"</span>]
 
@@ -535,6 +538,7 @@ pre = ColumnTransformer([
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 3 — your own transformer</h2>
+  <p class="lead">The rule for writing your own step: anything <b>learned from data</b> goes in <code>fit</code> and is stored with a trailing underscore. <code>transform</code> only applies what <code>fit</code> already learned.</p>
 <pre><code><span class="k">from</span> sklearn.base <span class="k">import</span> BaseEstimator, TransformerMixin
 
 <span class="k">class</span> ClipOutliers(BaseEstimator, TransformerMixin):
@@ -555,6 +559,7 @@ pre = ColumnTransformer([
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 4 — imbalanced data</h2>
+  <p class="lead">Resampling must happen <b>inside</b> the cross-validation, on training rows only. imbalanced-learn's Pipeline knows that; scikit-learn's does not.</p>
 <pre><code><span class="k">from</span> imblearn.pipeline <span class="k">import</span> Pipeline <span class="k">as</span> ImbPipeline   <span class="c"># NOT sklearn's</span>
 <span class="k">from</span> imblearn.over_sampling <span class="k">import</span> SMOTE
 
@@ -574,6 +579,7 @@ pipe = ImbPipeline([
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 5 — keep your column names</h2>
+  <p class="lead">By default scikit-learn hands back a bare NumPy array and your column names are gone. One setting keeps them, which makes every later error message readable.</p>
 <pre><code>pre.set_output(transform=<span class="s">"pandas"</span>)      <span class="c"># sklearn >= 1.2</span>
 pre.fit_transform(X).head()
 <span class="o">   num__tenure_months  num__monthly_charge  cat__plan_pro  ...</span>
@@ -590,6 +596,7 @@ clf[:-1].get_feature_names_out()[:4]
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 6 — probabilities and thresholds</h2>
+  <p class="lead">A model outputs a probability; <b>you</b> choose the cut-off that turns it into yes/no. Choose it on validation data — choosing it on the test set is leakage.</p>
 <pre><code><span class="c"># the decision threshold is a hyperparameter -- tune it on VALIDATION</span>
 X_tr, X_tmp, y_tr, y_tmp = train_test_split(X, y, test_size=.4)
 X_val, X_test, y_val, y_test = train_test_split(X_tmp, y_tmp, test_size=.5)

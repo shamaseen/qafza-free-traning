@@ -263,6 +263,7 @@ INFO:     Application startup complete.</span>
 
 <section>
   <h2>Pydantic — declare what you accept</h2>
+  <p class="lead">Describe the request as a class. Each field's type and range is the rule; anything that breaks a rule is rejected before your code runs.</p>
 <pre><code><span class="k">from</span> typing <span class="k">import</span> Literal, Optional
 <span class="k">from</span> pydantic <span class="k">import</span> BaseModel, Field, ConfigDict
 
@@ -323,6 +324,7 @@ app = FastAPI(title=<span class="s">"Churn API"</span>, version=<span class="s">
 
 <section>
   <h2>The handler, and refusing to guess</h2>
+  <p class="lead">The whole prediction endpoint. Note what it does when the model is missing: it says so with 503, rather than guessing or crashing.</p>
 <pre><code><span class="k">@app.post</span>(<span class="s">"/predict"</span>, response_model=Prediction)
 <span class="k">def</span> predict(customer: Customer):              <span class="c"># plain def: predict() is CPU work</span>
     b = STATE.get(<span class="s">"bundle"</span>)
@@ -361,6 +363,7 @@ app = FastAPI(title=<span class="s">"Churn API"</span>, version=<span class="s">
 
 <section>
   <h2>Never leak a stack trace</h2>
+  <p class="lead">One handler for anything unexpected: the full detail goes to your logs, the caller gets a generic message. A stack trace in a response is a security problem.</p>
 <pre><code><span class="k">@app.exception_handler</span>(Exception)
 <span class="k">async def</span> unhandled(request: Request, exc: Exception):
     log.exception(<span class="s">"unhandled error on %s"</span>, request.url.path)   <span class="c"># full detail, for you</span>
@@ -376,6 +379,7 @@ app = FastAPI(title=<span class="s">"Churn API"</span>, version=<span class="s">
 
 <section>
   <h2>Testing — no server required</h2>
+  <p class="lead"><code>TestClient</code> runs the app in-process. No port, no waiting, no cleanup — which is why it belongs in CI.</p>
 <pre><code><span class="k">from</span> fastapi.testclient <span class="k">import</span> TestClient
 <span class="k">from</span> app.main <span class="k">import</span> app
 
@@ -404,6 +408,7 @@ app = FastAPI(title=<span class="s">"Churn API"</span>, version=<span class="s">
 
 <section>
   <h2>Why batching wins so much</h2>
+  <p class="lead">The same 100 predictions, two ways. One call over 100 rows pays the fixed costs once instead of a hundred times.</p>
 <pre><code><span class="c"># 100 separate requests: 100x (HTTP + validation + DataFrame + predict)</span>
 <span class="k">for</span> c <span class="k">in</span> customers:
     requests.post(<span class="s">"/predict"</span>, json=c)          <span class="o"># 8.32 ms each</span>
@@ -453,6 +458,7 @@ requests.post(<span class="s">"/predict/batch"</span>, json={<span class="s">"cu
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 2 — who is calling?</h2>
+  <p class="lead">A dependency that runs before the handler. Return normally and the request proceeds; raise and it never reaches your code.</p>
 <pre><code><span class="k">import</span> secrets
 <span class="k">from</span> fastapi <span class="k">import</span> Depends, Header, HTTPException
 
@@ -475,6 +481,7 @@ requests.post(<span class="s">"/predict/batch"</span>, json={<span class="s">"cu
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 3 — middleware, CORS, background work</h2>
+  <p class="lead">Middleware wraps every request, so this timing header costs one function and applies everywhere.</p>
 <pre><code><span class="c"># every response carries its own timing -- cheap, priceless when things slow down</span>
 <span class="k">@app.middleware</span>(<span class="s">"http"</span>)
 <span class="k">async def</span> add_timing(request, call_next):
@@ -501,6 +508,7 @@ app.add_middleware(CORSMiddleware, allow_origins=[<span class="s">"https://app.a
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 4 — versions and configuration</h2>
+  <p class="lead">Two routers mounted at different prefixes: old callers keep working while new ones move.</p>
   <div class="two">
     <div>
       <h3>Never break a caller</h3>
@@ -529,6 +537,7 @@ settings = Settings()   <span class="c"># reads env, validates</span></code></pr
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 5 — running it in production</h2>
+  <p class="lead"><code>--reload</code> is for your laptop only. In production you run several worker processes and let something in front handle TLS.</p>
 <pre><code><span class="c"># development</span>
 uvicorn app.main:app --reload
 

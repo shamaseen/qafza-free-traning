@@ -136,6 +136,7 @@ labels.merge(current_features, on=<span class="s">"driver_id"</span>)     <span 
 
 <section>
   <h2>Reason 1 — one definition, both sides</h2>
+  <p class="lead">One file defines the feature. Training reads it and serving reads it, so the two cannot drift apart.</p>
 <pre><code><span class="c"># features.py -- the only place this feature is defined</span>
 driver_hourly_stats = FeatureView(
     name=<span class="s">"driver_hourly_stats"</span>,
@@ -222,6 +223,7 @@ driver_hourly_stats = FeatureView(
 
 <section>
   <h2>Define it once</h2>
+  <p class="lead">Two files: <code>feature_store.yaml</code> says where things live, <code>features.py</code> says what the features are. Only the first changes when you move to the cloud.</p>
 <pre><code><span class="c"># feature_store.yaml -- infrastructure, not logic</span>
 project: driver_ranking
 provider: local
@@ -267,6 +269,7 @@ FileSource(path=str(DATA), ...)</code></pre>
 
 <section>
   <h2>A training set that does not contain the future</h2>
+  <p class="lead">You bring the labels and <b>when</b> each one happened. Feast returns each feature as it was at that moment.</p>
 <pre><code>entity_df = pd.DataFrame({
     <span class="s">"driver_id"</span>:       [1001, 1002, 1001, 1003],
     <span class="s">"event_timestamp"</span>: label_times,          <span class="c"># WHEN each label happened</span>
@@ -289,6 +292,7 @@ what Feast returned:                      0.3986   -> no future value leaked</sp
 
 <section>
   <h2>Serving, and what "fast" means here</h2>
+  <p class="lead">Two steps: on a schedule, copy the newest values into the online store; then per request, look them up by id.</p>
 <pre><code><span class="c"># once, on a schedule: copy the latest values into the online store</span>
 feast materialize 2026-03-01T00:00:00 2026-03-11T00:00:00
 
@@ -310,6 +314,7 @@ store.get_online_features(
 
 <section>
   <h2>The payoff, measured</h2>
+  <p class="lead">The same features fetched both ways and compared. Zero difference is the whole point of a feature store.</p>
 <pre><code><span class="c"># train from the offline store, serve from the online store, compare the values</span>
  driver_id  conv_rate_offline  conv_rate_online  conv_diff
       1001             0.1500            0.1500       0.0
@@ -333,6 +338,7 @@ store.get_online_features(
 <section>
   <span class="tag">skip on first read</span>
   <h2>Advanced 1 — features computed at request time</h2>
+  <p class="lead">Some features are cheap to derive and pointless to store — a ratio of two values you already have. Those can be computed at request time instead.</p>
 <pre><code><span class="k">from</span> feast.on_demand_feature_view <span class="k">import</span> on_demand_feature_view
 <span class="c"># NOT `from feast import on_demand_feature_view` -- that imports the MODULE, and</span>
 <span class="c"># calling it raises "TypeError: 'module' object is not callable"</span>

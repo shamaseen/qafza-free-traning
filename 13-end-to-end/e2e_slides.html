@@ -207,6 +207,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>The pipeline is a file, not a habit</h2>
+  <p class="lead">The command, what it reads, and what it writes — written down. Now <code>dvc repro</code> can decide for itself whether anything needs rerunning.</p>
 <pre><code><span class="c"># dvc.yaml</span>
 stages:
   train:
@@ -292,6 +293,7 @@ changed = [l[3:] <span class="k">for</span> l <span class="k">in</span> status <
 
 <section>
   <h2>What the run recorded</h2>
+  <p class="lead">Everything the run stored, in one place: the settings you chose, the scores it got, and the three tags that say which code and which data produced them.</p>
 <pre><code><span class="o">run id: dd7f97911a7e400a82deae16d3889120</span>
 
 <span class="o">params : {'test_size': '0.25', 'random_state': '42',</span>
@@ -380,6 +382,7 @@ count(count by (run_id) (model_info)) > 1
 
 <section>
   <h2>Rebuild the model from nothing but a run id</h2>
+  <p class="lead">Read the tags off the run, check out that commit, restore that data, run it again. Four commands, no guessing.</p>
 <pre><code>r = mlflow.get_run(mystery_run)               <span class="c"># the only thing we kept</span>
 want_commit = r.data.tags[<span class="s">"git_commit"</span>]
 want_data   = r.data.tags[<span class="s">"dvc_data_md5"</span>]

@@ -161,6 +161,7 @@ svg{max-width:100%;height:auto}
 
 <section>
   <h2>A deployment is a class</h2>
+  <p class="lead">An ordinary class with two decorators: one says how many copies to run, the other lets it speak HTTP through FastAPI.</p>
 <pre><code><span class="k">@serve.deployment</span>(num_replicas=2, ray_actor_options={<span class="s">"num_cpus"</span>: 1})
 <span class="k">@serve.ingress</span>(api)                    <span class="c"># it speaks FastAPI -- same as session 3</span>
 <span class="k">class</span> ChurnService:
@@ -183,6 +184,7 @@ serve.run(ChurnService.bind(), name=<span class="s">"churn"</span>, route_prefix
 
 <section>
   <h2>Autoscaling and batching, as configuration</h2>
+  <p class="lead">Both are settings, not code you write. You state the range of replicas and the load you want each to carry.</p>
 <pre><code><span class="k">@serve.deployment</span>(autoscaling_config={
     <span class="s">"min_replicas"</span>: 1,
     <span class="s">"max_replicas"</span>: 4,
@@ -203,6 +205,7 @@ serve.run(ChurnService.bind(), name=<span class="s">"churn"</span>, route_prefix
 
 <section>
   <h2>Composition — three deployments, one endpoint</h2>
+  <p class="lead">One deployment holding handles to two others. Callers see a single URL; behind it, two models run and their answers are combined.</p>
 <pre><code><span class="k">@serve.deployment</span>
 <span class="k">class</span> Router:
     <span class="k">def</span> __init__(self, risk, value):
@@ -232,6 +235,7 @@ serve.run(Router.bind(RiskModel.bind(), ValueModel.bind()), route_prefix=<span c
 
 <section>
   <h2>The first workflow is not a deployment</h2>
+  <p class="lead">A workflow is a YAML file GitHub runs for you. <code>on:</code> lists what triggers it — here, every push and every pull request.</p>
   <p class="lead">It is the one that stops broken work reaching <code>main</code>.</p>
 <pre><code>name: validate
 on:
@@ -279,6 +283,7 @@ jobs:
 
 <section>
   <h2>The full quality gate, line by line</h2>
+  <p class="lead">The step that can say no. It compares the new model's score against the one in production and exits non-zero if it is worse.</p>
 <pre><code>- name: refuse to promote a worse model
   run: |
     python - &lt;&lt;'PY'
