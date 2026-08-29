@@ -40,3 +40,5 @@ def predict(c: Customer):
     frame = pd.DataFrame([c.model_dump()])[b["features"]]
     p = float(b["pipeline"].predict_proba(frame)[0, 1])
     return {"churn": p >= .5, "probability": round(p, 4), "model_version": b["version"]}
+
+# a one-line change, like any Tuesday

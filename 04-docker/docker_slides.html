@@ -338,6 +338,9 @@ CMD [<span class="s">"uvicorn"</span>, <span class="s">"app.main:app"</span>, <s
 
 <section>
   <h2>How to time a build without fooling yourself</h2>
+  <p class="lead">Two ways to fool yourself, both hit while building this session: timing a
+  "cold" build on a warm cache, and re-running a cache demo whose file change is <i>identical</i>
+  to last time — Docker still has that layer, so the slow step never happens.</p>
 <pre><code><span class="c"># a benchmark whose starting state you do not control is not a benchmark</span>
 t_cold = build(<span class="s">"Dockerfile.multi"</span>, no_cache=<span class="k">True</span>)   <span class="o"># 75.4s</span>
 t_warm = build(<span class="s">"Dockerfile.multi"</span>)                  <span class="o">#  0.2s</span>

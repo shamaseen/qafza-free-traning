@@ -1,0 +1,26 @@
+# ---------- stage 1: build the dependencies ----------
+FROM python:3.12-slim AS builder
+WORKDIR /srv
+COPY requirements.txt .
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+# ---------- stage 2: the runtime image ----------
+FROM python:3.12-slim
+
+# a non-root user: a container process should not be root
+RUN useradd --create-home --uid 10001 appuser
+WORKDIR /srv
+
+# NOTE: comments go on their OWN line. A trailing "# ..." after COPY is NOT a
+# comment -- Docker parses it as more source paths. That mistake fails with
+# `failed to compute cache key: "/#": not found`, which tells you nothing.
+COPY --from=builder /install /usr/local
+COPY app/ ./app/
+RUN chown -R appuser:appuser /srv
+
+USER appuser
+ENV MODEL_PATH=/srv/app/model.joblib PYTHONUNBUFFERED=1
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+  CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/health')"
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

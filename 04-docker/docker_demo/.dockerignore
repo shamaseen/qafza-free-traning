@@ -1,0 +1,12 @@
+# never belongs in an image
+.git
+.gitignore
+__pycache__/
+*.pyc
+.venv/
+venv/
+notes/
+*.ipynb
+.ipynb_checkpoints/
+Dockerfile*
+.dockerignore
