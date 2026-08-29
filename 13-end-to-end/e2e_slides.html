@@ -161,7 +161,7 @@ svg{max-width:100%;height:auto}
   <table>
     <tr><th>Word</th><th>What it means here</th></tr>
     <tr><td><b>run</b></td><td>one execution of your training script. MLflow gives each one an
-      <b>id</b> — a random string like <code>e1d76959…</code> — and stores what it used and what it scored.</td></tr>
+      <b>id</b> — a random string like <code>dd7f9791…</code> — and stores what it used and what it scored.</td></tr>
     <tr><td><b>commit</b></td><td>git's snapshot of your code at a moment, named by a hash.
       "Which code trained this?" is answered by a commit.</td></tr>
     <tr><td><b>clean tree</b></td><td>git-speak for "no unsaved edits". With uncommitted edits, the
@@ -292,14 +292,14 @@ changed = [l[3:] <span class="k">for</span> l <span class="k">in</span> status <
 
 <section>
   <h2>What the run recorded</h2>
-<pre><code><span class="o">run id: e1d76959c7a04cf7b3987f8270044bc8</span>
+<pre><code><span class="o">run id: dd7f97911a7e400a82deae16d3889120</span>
 
 <span class="o">params : {'test_size': '0.25', 'random_state': '42',</span>
 <span class="o">          'n_estimators': '200', 'max_depth': '8'}</span>
 <span class="o">metrics: {'roc_auc': 0.8874, 'accuracy': 0.8099, 'f1': 0.8129}</span>
 
 <span class="o">dvc_data_md5   = 977ddb47130abcf45cf9b16e2ccc74f7</span>
-<span class="o">git_commit     = 4e2c17fd93bbf9d84679f93500b3aadd6186eb7e</span>
+<span class="o">git_commit     = 045fa531a697fb134b82b5a643c4530df8c7e2d1</span>
 <span class="o">splitter       = GroupShuffleSplit(customer_id)</span>
 <span class="o">git_dirty      = false</span>
 </code></pre>
@@ -316,7 +316,7 @@ changed = [l[3:] <span class="k">for</span> l <span class="k">in</span> status <
 <section>
   <h2>The API answers the provenance question too</h2>
 <pre><code><span class="o">GET /health : {'status': 'ok', 'model_loaded': True, 'version': '1.0.0',</span>
-<span class="o">               'run_id': 'e1d76959', 'offline_roc_auc': 0.8874}</span>
+<span class="o">               'run_id': 'dd7f9791', 'offline_roc_auc': 0.8874}</span>
 <span class="o">POST /predict: {'churn': True, 'probability': 0.9996, ...}</span>
 <span class="o">bad request -> 422</span>
 </code></pre>
@@ -329,7 +329,7 @@ changed = [l[3:] <span class="k">for</span> l <span class="k">in</span> status <
 
 <section>
   <h2>Provenance as a metric, so alerts can use it</h2>
-<pre><code><span class="o">model_info{run_id="e1d76959",version="1.0.0"} 1.0</span>
+<pre><code><span class="o">model_info{run_id="dd7f9791",version="1.0.0"} 1.0</span>
 </code></pre>
   <p>Session 10 gave every request a counter and a histogram. This one line adds the thing
   those numbers are useless without: <b>which model produced them</b>.</p>

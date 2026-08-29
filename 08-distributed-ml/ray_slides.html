@@ -234,7 +234,7 @@ ray.cluster_resources()
 <section>
   <h2>Submitting is not running</h2>
 <pre><code>refs = [work.remote(i) <span class="k">for</span> i <span class="k">in</span> range(16)]
-<span class="o">submitted 16 tasks in 3.4 ms -- nothing has run yet</span>
+<span class="o">submitted 16 tasks in 27.2 ms -- nothing has run yet</span>
 <span class="o">first ref: ObjectRef(c8ef45ccd0112571ffffffffffffffffffffffff0100000001000000)</span>
 
 results = ray.get(refs)        <span class="c"># NOW we wait</span>
@@ -261,7 +261,7 @@ results = ray.get(refs)        <span class="c"># NOW we wait</span>
 
 pool = [Scorer.remote(w) <span class="k">for</span> _ <span class="k">in</span> range(4)]
 refs = [pool[i % 4].score.remote(x) <span class="k">for</span> i, x <span class="k">in</span> enumerate(work)]
-<span class="o">200 scores across 4 actors in 438 ms   ·   calls per actor: [50, 50, 50, 50]</span>
+<span class="o">200 scores across 4 actors in 356 ms   ·   calls per actor: [50, 50, 50, 50]</span>
 </code></pre>
   <p class="win"><b>That is the model-serving pattern</b>, in six lines: load once per worker, spread
   requests across the pool. Ray Serve is this with autoscaling and HTTP attached.</p>
@@ -312,10 +312,10 @@ TorchTrainer(train_loop_per_worker=train_func,
 <section>
   <h2>Proving it sharded, rather than assuming</h2>
 <pre><code><span class="o">rank  epoch      loss  rows_seen
-   0      0  0.521800       4000
-   1      0  0.523349       4000
+   0      0  0.468538       4000
+   1      0  0.475658       4000
    ...
-mean loss: epoch 0 0.5226  ->  epoch 4 0.1388
+mean loss: epoch 0 0.4721  ->  epoch 4 0.1385
 each worker saw 4000 of 8000 rows -- the loader sharded the data</span>
 </code></pre>
   <p class="lead">Two workers, 4,000 rows each, from an 8,000-row dataset. If

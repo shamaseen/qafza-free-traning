@@ -222,30 +222,40 @@ epoch 15  train 0.1651  val 0.1481  auc 0.9877        &lt;- what you would have 
 </section>
 
 <section>
-  <h2>Installing, and one environment warning</h2>
-<pre><code><span class="k">pip install</span> torch transformers accelerate onnx onnxruntime
+  <h2>Installing</h2>
+<pre><code>pip install torch transformers accelerate onnx onnxruntime
 <span class="c"># GPU: take the index URL from pytorch.org that matches your card</span>
-<span class="k">pip install</span> torch --index-url https://download.pytorch.org/whl/cu128
+pip install torch --index-url https://download.pytorch.org/whl/cu128
 </code></pre>
-<pre><code><span class="r">RuntimeError: Failed to import transformers.models.bert.modeling_bert ...
-cannot import name 'DEFAULT_CIPHERS' from 'urllib3.util.ssl_'</span>
-</code></pre>
-  <p class="lead">Nothing to do with transformers. <code>urllib3</code> 2.0 removed that constant;
-  an old <code>botocore</code> still imports it, and transformers touches botocore through its
-  integrations.</p>
+  <p class="lead">That is the whole setup. If <code>import transformers</code> then fails with an
+  error naming a library you have never heard of, the next slide has the two that came up while
+  building this course — otherwise skip it.</p>
+</section>
+
+<section>
+  <span class="tag">skip on first read</span>
+  <h2>If the import fails: two errors that blame the wrong library</h2>
   <div class="two">
-    <div class="win"><b>Fix:</b> <code>pip install -U botocore boto3</code>, or pin
-    <code>urllib3&lt;2</code>. In a fresh venv you will never see it.</div>
-    <div class="oops"><b>Why mention it:</b> the error names the wrong library, so people spend an
-    afternoon reinstalling transformers. The notebook carries a two-line shim for environments you
-    cannot change.</div>
+    <div class="card">
+      <h4><code>DEFAULT_CIPHERS</code></h4>
+<pre><code><span class="r">cannot import name 'DEFAULT_CIPHERS'
+from 'urllib3.util.ssl_'</span></code></pre>
+      <p class="sub">Nothing to do with transformers. urllib3 2.0 removed that constant and an old
+      botocore still imports it.</p>
+      <p class="win"><b>Fix:</b> <code>pip install -U botocore boto3</code>.</p>
+    </div>
+    <div class="card">
+      <h4><code>found=None</code></h4>
+<pre><code><span class="r">Unable to compare versions for
+tokenizers&gt;=0.19,&lt;0.20: found=None</span></code></pre>
+      <p class="sub">Nothing wrong with tokenizers. An interrupted <code>pip install</code> left an
+      empty <code>*.dist-info/</code> next to the real one.</p>
+      <p class="win"><b>Fix:</b> delete the <code>dist-info</code> folder with no
+      <code>METADATA</code> file.</p>
+    </div>
   </div>
-  <p class="oops"><b>A second one, found while building this course:</b>
-  <code>Unable to compare versions for tokenizers&gt;=0.19,&lt;0.20: found=None</code>. Nothing is
-  wrong with tokenizers — an interrupted <code>pip install</code> had left an empty
-  <code>*.dist-info/</code> beside the real one, so the version reads as <code>None</code>. Delete the
-  <code>dist-info</code> directory that has no <code>METADATA</code> file. <b>A half-finished install
-  can break a package that is perfectly installed</b>, and the error blames the package.</p>
+  <p class="oops">Both name the wrong library, which is why they cost people an afternoon. When an
+  import fails, suspect the <b>environment</b> before the package.</p>
 </section>
 
 <section>
