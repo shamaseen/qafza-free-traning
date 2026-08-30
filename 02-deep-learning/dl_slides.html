@@ -397,6 +397,40 @@ model -&gt; logits            + nn.CrossEntropyLoss()      <span class="s"># inc
 </section>
 
 <section>
+  <h2>Start here: <code>pipeline()</code></h2>
+  <p class="lead">The simplest thing that works. Name a task, get something you can call — no
+  tokeniser, no tensors, no loop.</p>
+<pre><code><span class="k">from</span> transformers <span class="k">import</span> pipeline
+
+classify = pipeline(<span class="s">"sentiment-analysis"</span>, model=<span class="s">"prajjwal1/bert-tiny"</span>)
+classify(<span class="s">"the service was fantastic"</span>)
+<span class="o">0.503   the service was fantastic</span>
+
+classify(<span class="s">"broke after a week, waste of money"</span>)
+<span class="o">0.545   broke after a week, waste of money</span>
+</code></pre>
+  <p class="oops"><b>Both come back as the same label, around 0.5.</b> It cannot tell a
+  compliment from a complaint — it is more confident about the <i>complaint</i> being positive.
+  Hugging Face warns you outright: <i>"You should probably TRAIN this model on a down-stream
+  task."</i></p>
+</section>
+
+<section>
+  <h2>Why: the body is trained, the head is not</h2>
+  <table>
+    <tr><th>Part of the model</th><th>State</th><th>What it knows</th></tr>
+    <tr><td>the <b>body</b></td><td>pretrained on a huge pile of text</td>
+        <td>English — grammar, that "terrible" and "awful" are alike</td></tr>
+    <tr><td>the <b>head</b></td><td>randomly initialised</td><td>nothing at all</td></tr>
+  </table>
+  <p class="lead"><b>Fine-tuning</b> trains the head, and nudges the body, on your examples. A few
+  hundred labelled sentences is often enough — because the hard part, the language, is already
+  done.</p>
+  <p class="win">That is why deep learning is practical without a data centre: you are renting
+  100,000 GPU-hours somebody else paid for.</p>
+</section>
+
+<section>
   <h2>Three lines to a pretrained model</h2>
   <p class="lead">Two objects: the <b>tokeniser</b> turns text into numbers, the <b>model</b> is the pretrained network with a fresh, untrained classification head on top.</p>
 <pre><code><span class="k">from</span> transformers <span class="k">import</span> AutoTokenizer, AutoModelForSequenceClassification
@@ -410,8 +444,9 @@ model = AutoModelForSequenceClassification.from_pretrained(CKPT, num_labels=2)
     <li><b>Save them together.</b> A model without its tokeniser is unusable.</li>
     <li>The classification head is newly initialised and random. That is what you fine-tune.</li>
   </ul>
-<pre><code><span class="o">before fine-tuning: accuracy 0.534  f1 0.400   &lt;- a random head
-after  fine-tuning: accuracy 1.000  f1 1.000</span>
+<pre><code><span class="o">before fine-tuning: accuracy 0.552   &lt;- a random head, so this is a coin flip
+epoch 1   loss 0.3397   accuracy 0.845
+epoch 4   loss 0.0084   accuracy 1.000</span>
 </code></pre>
   <p class="sub">1.000 there means the toy task was easy — 58 eval sentences from 24 templates. On
   real data, expect a number below 1 and be suspicious if you do not get one.</p>
@@ -492,8 +527,8 @@ torch.onnx.export(model, example, <span class="s">"model.onnx"</span>,
 torch_out = model(torch.from_numpy(probe)).numpy()
 
 <span class="k">assert</span> np.allclose(onnx_out, torch_out, atol=1e-5)
-<span class="o">original -1.842269   torchscript -1.842269   max diff 0.00e+00
-onnx vs torch                            max diff 1.19e-07</span>
+<span class="o">original -1.748245   torchscript -1.748245   max diff 0.00e+00
+onnx vs torch                            max diff 1.19e-07
 </code></pre>
   <p class="lead">Two lines that catch a whole class of production bug: an export that runs happily
   and returns subtly different numbers.</p>
