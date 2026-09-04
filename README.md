@@ -11,8 +11,8 @@ same material on your machine. No prior MLOps experience assumed anywhere.
 | 3 | Production API | FastAPI, Pydantic | [`03-production-api`](03-production-api) |
 | 4 | Docker | Docker Engine | [`04-docker`](04-docker) |
 | 5 | ETL Pipeline | Python, SQLAlchemy | [`05-etl`](05-etl) |
-| 6 | **Versioning** | **DVC** | [`dvc`](dvc) |
-| 7 | **Experiment tracking** | **MLflow** | [`mlflow`](mlflow) |
+| 6 | **Experiment tracking** | **MLflow** | [`06-mlflow`](06-mlflow) |
+| 7 | **Versioning** | **DVC** | [`07-dvc`](07-dvc) |
 | 8 | Distributed ML | Ray Core, Ray Train | [`08-distributed-ml`](08-distributed-ml) |
 | 9 | Feature Management | Feast | [`09-feature-management`](09-feature-management) |
 | 10 | Monitoring | Prometheus, Grafana | [`10-monitoring`](10-monitoring) |
@@ -58,53 +58,35 @@ command output — on GitHub without running anything.
 
 ## A note on how this material is checked
 
-Every notebook is executed end to end before it ships, and each one has to *prove its headline
-claim* rather than merely run. For example session 1 must actually print a cross-validation
-score of ~0.765 on data that contains no signal at all, next to the honest 0.520 — the whole
-point of the session. `tools/verify.py` enforces this:
+Every notebook here was **executed end to end** before it shipped, and each one has to *prove its
+headline claim* rather than merely run. Session 1 must actually print a cross-validation score of
+0.765 on data containing no signal at all, next to the honest 0.520. Session 4 must show a code
+edit rebuilding in 0.1s against a dependency edit taking 162s. Session 13 must recover a model
+from nothing but a run id and get the same metric back, to six decimal places.
 
-```bash
-python3 tools/verify.py 01-leakage-proof-pipeline/leakage_tutorial.ipynb 900 \
-        --claim "GAP:" --claim "optimism from group leakage"
-```
+Three rules are enforced mechanically, because each one caught real defects while this course was
+being written:
 
-It fails the notebook on any unexecuted cell, any exception, **any failing shell command**
-(`!cmd` errors never raise in Jupyter, and have hidden two real bugs in this repo), and any
-missing claim.
+* **no unexecuted cell, no exception, and no failing shell command.** `!cmd` failures never raise
+  in Jupyter, so a broken build or a rejected config looks like success unless you read the
+  output. That hid two genuine bugs here.
+* **every figure quoted on a slide must appear in its notebook's output.** This caught six decks
+  quoting numbers their notebook never printed, and one quoting a run id from an earlier run.
+* **every "deck slides 20–21" pointer must land on slides that exist.** Eleven notebooks had
+  drifted past the end of their own deck after the decks were rebuilt.
 
 Some sessions fail on purpose — session 7 renames a column to show MLflow's model signature
-rejecting it. Those lines are declared with `--expect`, so they are still printed and a
-deliberate failure can never quietly turn into an undeclared one.
+rejecting it — so those failures are declared, and a deliberate failure cannot quietly become an
+undeclared one.
 
-To check the whole course at once — every notebook, with the claims each one has to prove:
-
-```bash
-python3 tools/verify_all.py          # all thirteen
-python3 tools/verify_all.py 04 13    # just these
-```
-
-`tools/verify_all.py` holds the claim list for every session, so "what this notebook must
-prove" is written down rather than remembered. Editing a session means editing its claims.
-
-Two more checks cover the slides, because a deck can be wrong while every notebook passes:
-
-```bash
-python3 tools/audit_decks.py      # every figure quoted as output must come from its notebook
-python3 tools/audit_pointers.py   # "deck slides 20–21" must point at slides that exist
-```
-
-Both were written after they found real defects: six decks quoting numbers their notebook
-never printed, one quoting a run id from an earlier run, and eleven notebooks pointing past
-the end of their own deck.
-
-`tools/deck.py` and `tools/nbbuild.py` build the decks and notebooks, so a fourteenth session
-is cheap to add.
+The scripts that run these checks and build the decks are kept locally rather than shipped, so
+this repository stays what it is for: the material.
 
 Session 11 builds a CI workflow that runs exactly these checks over the whole repository — see
 [`11-automation/workflows/`](11-automation/workflows) for it and the one command that activates it.
 
-## About `dvc/data.zip`
+## About `07-dvc/data.zip`
 
 Session 6 uses a real 39 MB folder of photographs, committed here so the tutorial works the
 moment you clone. That is a deliberate exception for teaching — see
-[`dvc/`](dvc) — not a practice to copy.
+[`07-dvc/`](07-dvc) — not a practice to copy.

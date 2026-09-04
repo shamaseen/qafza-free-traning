@@ -8,6 +8,7 @@ photos/
 
 # sandboxes the notebooks create when you run them
 dvc_demo/
+dl_demo/
 mlflow_demo/
 dvc_remote/
 e2e_demo/
@@ -27,3 +28,6 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 venv/
+
+# build and check scripts: kept locally, not shipped
+tools/
