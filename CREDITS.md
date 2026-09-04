@@ -12,9 +12,11 @@ Each one also carries its source and licence on the slide it appears on.
 | Container vs virtual machine (cropped to the two panels that compare) | `04-docker` | [kubernetes.io/docs/concepts/overview](https://kubernetes.io/docs/concepts/overview/) | CC BY 4.0 |
 | Prometheus architecture — pull, store, query, alert | `10-monitoring` | [prometheus.io/docs/introduction/overview](https://prometheus.io/docs/introduction/overview/) | Apache 2.0 |
 | Feast architecture — sources, store, online and offline serving | `09-feature-management` | [feast.dev](https://docs.feast.dev/) | Apache 2.0 |
-| The parts of an HTTP request | `03-production-api` | [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview) | CC BY-SA 2.5 — © Mozilla contributors |
+| Image layers — the stack, and layer reuse across images | `04-docker` | [docs.docker.com/get-started/docker-concepts/building-images](https://docs.docker.com/get-started/docker-concepts/building-images/understanding-image-layers/) | Apache 2.0 — © Docker, Inc. |
+| The parts of an HTTP request, and of a response | `03-production-api` | [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview) | CC BY-SA 2.5 — © Mozilla contributors |
 
-Six are used unmodified; the Kubernetes one is cropped to its two right-hand panels, as its
+Most are used unmodified; the Kubernetes one is cropped to two panels and Docker's layer
+diagrams are trimmed of their white margins to its two right-hand panels, as its
 licence permits with attribution. All are embedded rather than linked, so the decks keep working with no
 network. Terraform's diagrams were deliberately left out: HashiCorp's licensing changed and I
 could not establish a clean reuse licence for them.
