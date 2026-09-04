@@ -85,6 +85,12 @@ this repository stays what it is for: the material.
 Session 11 builds a CI workflow that runs exactly these checks over the whole repository — see
 [`11-automation/workflows/`](11-automation/workflows) for it and the one command that activates it.
 
+## Image credits
+
+Four diagrams come from the official Docker, MLflow, DVC and MDN documentation, reused under
+Apache 2.0 and CC BY-SA 2.5 with attribution on the slide. Everything else was made for this
+course or produced by running the notebooks — see [`CREDITS.md`](CREDITS.md).
+
 ## About `07-dvc/data.zip`
 
 Session 6 uses a real 39 MB folder of photographs, committed here so the tutorial works the

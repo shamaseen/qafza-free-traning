@@ -266,9 +266,8 @@ svg{max-width:100%;height:auto}
     torch.save({<span class="s">"epoch"</span>: epoch, <span class="s">"model"</span>: model.state_dict(),
                 <span class="s">"opt"</span>: opt.state_dict(), <span class="s">"val_auc"</span>: val_auc}, <span class="s">"best.pt"</span>)
 </code></pre>
-<pre><code><span class="o">epoch 11  train 0.1675  val 0.1452  auc 0.9879  &lt;- saved
-epoch 12  train 0.1658  val 0.1485  auc 0.9879
-epoch 15  train 0.1651  val 0.1481  auc 0.9877        &lt;- what you would have shipped</span>
+<pre><code><span class="o">epoch 3  train 0.1823  val 0.1414  auc 0.9889  &lt;- saved
+epoch 6  train 0.1696  val 0.1487  auc 0.9880        &lt;- what you would have shipped</span>
 </code></pre>
   <div class="two">
     <div class="win"><b>Save the optimiser too.</b> Without it you cannot resume, and a long run that
@@ -404,10 +403,10 @@ model -&gt; logits            + nn.CrossEntropyLoss()      <span class="s"># inc
 
 classify = pipeline(<span class="s">"sentiment-analysis"</span>, model=<span class="s">"prajjwal1/bert-tiny"</span>)
 classify(<span class="s">"the service was fantastic"</span>)
-<span class="o">0.503   the service was fantastic</span>
+<span class="o">0.570   the service was fantastic</span>
 
 classify(<span class="s">"broke after a week, waste of money"</span>)
-<span class="o">0.545   broke after a week, waste of money</span>
+<span class="o">0.591   broke after a week, waste of money</span>
 </code></pre>
   <p class="oops"><b>Both come back as the same label, around 0.5.</b> It cannot tell a
   compliment from a complaint — it is more confident about the <i>complaint</i> being positive.

@@ -7,12 +7,23 @@ photos/
 *.joblib
 
 # sandboxes the notebooks create when you run them
-dvc_demo/
+# every notebook builds one of these beside itself and deletes it in the last cell.
+# all fifteen are listed, so an interrupted run cannot leak a sandbox into a commit.
+api_demo/
+auto_demo/
 dl_demo/
-mlflow_demo/
+docker_demo/
+dvc_demo/
 dvc_remote/
 e2e_demo/
 e2e_dvc_remote/
+etl_demo/
+feast_demo/
+leakage_demo/
+mlflow_demo/
+mon_demo/
+ray_demo/
+tf_demo/
 
 # MLflow local stores
 mlruns/
