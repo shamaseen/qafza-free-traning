@@ -41,6 +41,13 @@ to, and one tagged **reference — not for reading** is a lookup table, not a sl
 Every session defines its vocabulary in a **crash course** slide before using it — you are
 expected to know Python, and nothing else.
 
+## Presenting these sessions
+
+Session 4 really builds four Docker images, which is right for a reader and wrong for a live
+room — a cold build is three minutes of silence. [`04-docker/PRESENTING.md`](04-docker/PRESENTING.md)
+is the live path: which commands to run in a terminal (none take more than two seconds), which
+numbers to read off the slides instead of reproducing, and what to do if Docker is unavailable.
+
 ## Using the notebooks
 
 ```bash

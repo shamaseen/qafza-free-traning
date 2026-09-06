@@ -525,11 +525,11 @@ app = FastAPI(title=<span class="s">"Churn API"</span>, version=<span class="s">
   <p class="lead">The same 100 predictions, two ways. One call over 100 rows pays the fixed costs once instead of a hundred times.</p>
 <pre><code><span class="c"># 100 separate requests: 100x (HTTP + validation + DataFrame + predict)</span>
 <span class="k">for</span> c <span class="k">in</span> customers:
-    requests.post(<span class="s">"/predict"</span>, json=c)          <span class="o"># 8.32 ms each</span>
+    requests.post(<span class="s">"/predict"</span>, json=c)          <span class="o"># 8.91 ms each</span>
 
 <span class="c"># one request: 1x HTTP, one DataFrame, ONE predict call over 100 rows</span>
 requests.post(<span class="s">"/predict/batch"</span>, json={<span class="s">"customers"</span>: customers})
-<span class="o"># 9.62 ms total -> 0.096 ms per customer</span>
+<span class="o"># 10.32 ms total -> 0.103 ms per customer</span>
 </code></pre>
   <p>Model libraries are built for arrays. <code>predict</code> on 100 rows costs barely more than
   on one; the per-request overhead is what you were paying for.</p>
