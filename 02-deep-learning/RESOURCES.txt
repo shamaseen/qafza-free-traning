@@ -7,21 +7,68 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
+    https://course.fast.ai/
+      Practical Deep Learning for Coders — fast.ai. START HERE: you
+      train a working model in lesson one, then learn why it worked
+    https://d2l.ai/
+      Dive into Deep Learning — a free book where every chapter is
+      runnable PyTorch
+    http://neuralnetworksanddeeplearning.com/
+      Neural Networks and Deep Learning — Michael Nielsen. Free, and
+      builds a network from nothing but arithmetic. The site is http-
+      only, so your browser will say 'not secure' — it is a static book,
+      there is nothing to type into it
     https://pytorch.org/tutorials/beginner/basics/intro.html
       Learn the Basics — PyTorch official tutorials (free)
     https://huggingface.co/learn/nlp-course
       The Hugging Face NLP Course (free)
 
+  Blogs and articles
+    https://jalammar.github.io/illustrated-transformer/
+      The Illustrated Transformer — Jay Alammar. The single clearest
+      explanation of the architecture behind every model in session 2's
+      part 2
+    https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+      Understanding LSTMs — Chris Olah. Ten years old and still the
+      reference
+    https://karpathy.github.io/2019/04/25/recipe/
+      A Recipe for Training Neural Networks — Andrej Karpathy. What to
+      do when your network trains but does not learn
+    https://distill.pub/
+      Distill — interactive explanations of deep learning ideas, free
+      and beautiful
+
+  Going deeper - the research
+    https://www.deeplearningbook.org/
+      Deep Learning — Goodfellow, Bengio and Courville. The textbook,
+      free online. Heavy maths; go here when the intuition is already
+      solid
+
   Video - English
-    https://www.youtube.com/watch?v=GJ9-u3ySTmQ
-      Machine Learning theory in one video — Elgouhary AI
+    https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
+      Neural networks — 3Blue1Brown. Watch this before anything else: it
+      shows you what a network is doing, geometrically, with no code at
+      all
+    https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
+      Neural Networks: Zero to Hero — Andrej Karpathy. Twelve hours,
+      from backpropagation by hand to a working GPT, every line typed on
+      screen
 
   Video - Arabic
     https://www.youtube.com/watch?v=p93xuOXP1jI
       الدورة الكاملة للتعلم العميق — Hesham Asem
-    https://www.youtube.com/watch?v=dWKffQja3Fs
-      الدورة الكاملة لتعلم الآلة — Hesham Asem
+    https://www.youtube.com/playlist?list=PLhx4zaYkEjI9kTHTV34iQqRcFoO8RvuxV
+      Introduction to Artificial Neural Networks and Deep Learning —
+      Hashim EduTech
+    https://www.youtube.com/watch?v=hyPHJI-KGf4
+      أساسيات التعلم العميق: كيف تتعلم الشبكة العصبونية — ML Made Simple
+    https://www.youtube.com/watch?v=GJ9-u3ySTmQ
+      الأساسيات النظرية لتعلم الآلة كاملة في فيديو واحد — Elgouhary AI
+
+  ! Deep learning has real Arabic coverage. Even so, watch the
+  ! 3Blue1Brown series above with subtitles — the pictures carry it, and
+  ! nothing in Arabic matches them yet.
 
 
 NOTES

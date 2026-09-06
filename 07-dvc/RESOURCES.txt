@@ -7,7 +7,7 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://dvc.org/doc/start
       Get Started — DVC official docs (free, hands-on)
     https://github.com/DataTalksClub/mlops-zoomcamp

@@ -7,13 +7,14 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://developer.hashicorp.com/terraform/tutorials
       Terraform Tutorials — HashiCorp (free, official)
 
   Video - English
     https://www.youtube.com/watch?v=fqMOX6JJhGo
-      DevOps full course — freeCodeCamp (containers, which Terraform provisions here)
+      DevOps full course — freeCodeCamp (containers, which Terraform
+      provisions here)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt

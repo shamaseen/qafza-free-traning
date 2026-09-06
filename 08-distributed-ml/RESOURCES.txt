@@ -7,13 +7,14 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://docs.ray.io/en/latest/ray-overview/getting-started.html
       Ray — Getting Started (free, official)
 
   Video - English
     https://www.youtube.com/watch?v=x3cxvsUFVZA
-      Managing the ML lifecycle — Databricks (context for distributed training)
+      Managing the ML lifecycle — Databricks (context for distributed
+      training)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH

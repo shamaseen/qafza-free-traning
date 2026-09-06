@@ -7,24 +7,64 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
+    https://www.kaggle.com/code/alexisbcook/data-leakage
+      Data Leakage — Kaggle Learn. START HERE: 20 minutes, runs in your
+      browser, nothing to install, and it is about this exact subject
+    https://www.kaggle.com/learn/intermediate-machine-learning
+      Intermediate Machine Learning — the free Kaggle course the lesson
+      above belongs to
+    https://carpentries-incubator.github.io/machine-learning-novice-python/08-leakage/index.html
+      Data leakage — The Carpentries, from their Python ML lesson (free,
+      hands-on)
     https://scikit-learn.org/stable/common_pitfalls.html
-      Common pitfalls and recommended practices — scikit-learn (the official page on exactly this)
-    https://scikit-learn.org/stable/modules/cross_validation.html
-      Cross-validation — scikit-learn user guide
+      Common pitfalls — scikit-learn. A reference page, not a tutorial:
+      read it after one of the above, when you want the exact API rules
+
+  Blogs and articles
+    https://machinelearningmastery.com/data-leakage-machine-learning/
+      Data Leakage in Machine Learning — Jason Brownlee. The plain-
+      English explanation most people learn this from
+    https://machinelearningmastery.com/data-preparation-without-data-leakage/
+      How to Avoid Data Leakage When Performing Data Preparation — Jason
+      Brownlee. This is precisely what this session builds
+    https://www.ibm.com/think/topics/data-leakage-machine-learning
+      What is Data Leakage in Machine Learning? — IBM. Short, with
+      worked examples
+    https://en.wikipedia.org/wiki/Leakage_(machine_learning)
+      Leakage (machine learning) — Wikipedia. The taxonomy, and where
+      the term came from
+
+  Going deeper - the research
+    https://arxiv.org/abs/2207.07048
+      Leakage and the Reproducibility Crisis in ML-based Science —
+      Kapoor & Narayanan (Princeton). Found leakage in 294 published
+      papers across 17 disciplines, and gives a taxonomy of eight kinds.
+      If you read one thing after this session, this
+    https://reproducible.cs.princeton.edu/
+      The project behind that paper — the model info sheets and the
+      REFORMS checklist, both free to use on your own work
 
   Video - English
-    https://www.youtube.com/watch?v=0sOvCWFmrtA
-      Python API Development — freeCodeCamp (covers the sklearn workflow this builds on)
+    https://www.youtube.com/watch?v=n9jz7G68pVg
+      What is Data Leakage In Machine Learning? — Krish Naik
+    https://www.youtube.com/watch?v=UYHCwBUjxeQ
+      What is Data Leakage? Target Leakage and Preprocessing Leakage —
+      Six Sigma Pro SMART (the same split this session teaches)
 
   Video - Arabic
+    https://www.youtube.com/watch?v=Ts0vGcc7fuE
+      الضبط الناقص والزائد — Underfitting and Overfitting — Hesham Asem
+    https://www.youtube.com/watch?v=8zk0aY39nq0
+      شرح بسيط حول K-Fold Cross Validation — أكاديمية الذكاء الإصطناعي
+    https://www.youtube.com/watch?v=KPol_D16gA4
+      Cross validation and its types — شرح عربي — Ahmed ibrahim
     https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
       تعلم الآلة بالعربي — Elgouhary AI
-    https://www.youtube.com/watch?v=dWKffQja3Fs
-      الدورة الكاملة لتعلم الآلة — Hesham Asem
 
-  ! Leakage is rarely taught on its own — the Arabic courses above cover
-  ! the cross-validation it depends on.
+  ! No Arabic video on leakage itself was found. The three above cover
+  ! overfitting and cross-validation, which is the machinery leakage
+  ! breaks — do those first, then read the Kaggle lesson in English.
 
 
 NOTES

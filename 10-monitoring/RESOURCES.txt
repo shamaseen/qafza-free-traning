@@ -7,7 +7,7 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://prometheus.io/docs/introduction/overview/
       Prometheus — Overview and docs (free)
     https://grafana.com/tutorials/
@@ -15,7 +15,8 @@ do first, is in RESOURCES.txt at the root of this repository.
 
   Video - English
     https://www.youtube.com/watch?v=fqMOX6JJhGo
-      Docker full course — freeCodeCamp (the compose sections this session builds on)
+      Docker full course — freeCodeCamp (the compose sections this
+      session builds on)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt

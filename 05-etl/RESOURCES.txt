@@ -7,15 +7,17 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://github.com/DataTalksClub/data-engineering-zoomcamp
-      Data Engineering Zoomcamp — DataTalks.Club (free, video + homework)
+      Data Engineering Zoomcamp — DataTalks.Club (free, video +
+      homework)
     https://docs.sqlalchemy.org/en/20/tutorial/
       SQLAlchemy 2.0 Tutorial (free, official)
 
   Video - English
     https://www.youtube.com/watch?v=0sOvCWFmrtA
-      Python API Development — freeCodeCamp (the SQL and SQLAlchemy sections)
+      Python API Development — freeCodeCamp (the SQL and SQLAlchemy
+      sections)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs

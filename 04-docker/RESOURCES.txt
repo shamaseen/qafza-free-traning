@@ -7,7 +7,7 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://docs.docker.com/get-started/
       Get started — Docker official docs (free)
     https://docker-curriculum.com/

@@ -7,11 +7,12 @@ The whole course's list, and the Python / git / command-line groundwork to
 do first, is in RESOURCES.txt at the root of this repository.
 
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://fastapi.tiangolo.com/tutorial/
       FastAPI Tutorial — User Guide (free, official, excellent)
     https://bytebytego.com/guides/rest-api-vs-graphql/
-      REST vs GraphQL — ByteByteGo (the diagram this session's comparison is based on)
+      REST vs GraphQL — ByteByteGo (the diagram this session's
+      comparison is based on)
 
   Video - English
     https://www.youtube.com/watch?v=0sOvCWFmrtA

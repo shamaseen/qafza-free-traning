@@ -43,54 +43,142 @@ free, both are video plus homework, both are run by DataTalks.Club.
 Session 1 - Leakage-proof pipelines (scikit-learn)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
+    https://www.kaggle.com/code/alexisbcook/data-leakage
+      Data Leakage — Kaggle Learn. START HERE: 20 minutes, runs in your
+      browser, nothing to install, and it is about this exact subject
+    https://www.kaggle.com/learn/intermediate-machine-learning
+      Intermediate Machine Learning — the free Kaggle course the lesson
+      above belongs to
+    https://carpentries-incubator.github.io/machine-learning-novice-python/08-leakage/index.html
+      Data leakage — The Carpentries, from their Python ML lesson (free,
+      hands-on)
     https://scikit-learn.org/stable/common_pitfalls.html
-      Common pitfalls and recommended practices — scikit-learn (the official page on exactly this)
-    https://scikit-learn.org/stable/modules/cross_validation.html
-      Cross-validation — scikit-learn user guide
+      Common pitfalls — scikit-learn. A reference page, not a tutorial:
+      read it after one of the above, when you want the exact API rules
+
+  Blogs and articles
+    https://machinelearningmastery.com/data-leakage-machine-learning/
+      Data Leakage in Machine Learning — Jason Brownlee. The plain-
+      English explanation most people learn this from
+    https://machinelearningmastery.com/data-preparation-without-data-leakage/
+      How to Avoid Data Leakage When Performing Data Preparation — Jason
+      Brownlee. This is precisely what this session builds
+    https://www.ibm.com/think/topics/data-leakage-machine-learning
+      What is Data Leakage in Machine Learning? — IBM. Short, with
+      worked examples
+    https://en.wikipedia.org/wiki/Leakage_(machine_learning)
+      Leakage (machine learning) — Wikipedia. The taxonomy, and where
+      the term came from
+
+  Going deeper - the research
+    https://arxiv.org/abs/2207.07048
+      Leakage and the Reproducibility Crisis in ML-based Science —
+      Kapoor & Narayanan (Princeton). Found leakage in 294 published
+      papers across 17 disciplines, and gives a taxonomy of eight kinds.
+      If you read one thing after this session, this
+    https://reproducible.cs.princeton.edu/
+      The project behind that paper — the model info sheets and the
+      REFORMS checklist, both free to use on your own work
 
   Video - English
-    https://www.youtube.com/watch?v=0sOvCWFmrtA
-      Python API Development — freeCodeCamp (covers the sklearn workflow this builds on)
+    https://www.youtube.com/watch?v=n9jz7G68pVg
+      What is Data Leakage In Machine Learning? — Krish Naik
+    https://www.youtube.com/watch?v=UYHCwBUjxeQ
+      What is Data Leakage? Target Leakage and Preprocessing Leakage —
+      Six Sigma Pro SMART (the same split this session teaches)
 
   Video - Arabic
+    https://www.youtube.com/watch?v=Ts0vGcc7fuE
+      الضبط الناقص والزائد — Underfitting and Overfitting — Hesham Asem
+    https://www.youtube.com/watch?v=8zk0aY39nq0
+      شرح بسيط حول K-Fold Cross Validation — أكاديمية الذكاء الإصطناعي
+    https://www.youtube.com/watch?v=KPol_D16gA4
+      Cross validation and its types — شرح عربي — Ahmed ibrahim
     https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
       تعلم الآلة بالعربي — Elgouhary AI
-    https://www.youtube.com/watch?v=dWKffQja3Fs
-      الدورة الكاملة لتعلم الآلة — Hesham Asem
 
-  ! Leakage is rarely taught on its own — the Arabic courses above cover
-  ! the cross-validation it depends on.
+  ! No Arabic video on leakage itself was found. The three above cover
+  ! overfitting and cross-validation, which is the machinery leakage
+  ! breaks — do those first, then read the Kaggle lesson in English.
 
 ==========================================================================
 Session 2 - Deep learning (PyTorch, Hugging Face)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
+    https://course.fast.ai/
+      Practical Deep Learning for Coders — fast.ai. START HERE: you
+      train a working model in lesson one, then learn why it worked
+    https://d2l.ai/
+      Dive into Deep Learning — a free book where every chapter is
+      runnable PyTorch
+    http://neuralnetworksanddeeplearning.com/
+      Neural Networks and Deep Learning — Michael Nielsen. Free, and
+      builds a network from nothing but arithmetic. The site is http-
+      only, so your browser will say 'not secure' — it is a static book,
+      there is nothing to type into it
     https://pytorch.org/tutorials/beginner/basics/intro.html
       Learn the Basics — PyTorch official tutorials (free)
     https://huggingface.co/learn/nlp-course
       The Hugging Face NLP Course (free)
 
+  Blogs and articles
+    https://jalammar.github.io/illustrated-transformer/
+      The Illustrated Transformer — Jay Alammar. The single clearest
+      explanation of the architecture behind every model in session 2's
+      part 2
+    https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+      Understanding LSTMs — Chris Olah. Ten years old and still the
+      reference
+    https://karpathy.github.io/2019/04/25/recipe/
+      A Recipe for Training Neural Networks — Andrej Karpathy. What to
+      do when your network trains but does not learn
+    https://distill.pub/
+      Distill — interactive explanations of deep learning ideas, free
+      and beautiful
+
+  Going deeper - the research
+    https://www.deeplearningbook.org/
+      Deep Learning — Goodfellow, Bengio and Courville. The textbook,
+      free online. Heavy maths; go here when the intuition is already
+      solid
+
   Video - English
-    https://www.youtube.com/watch?v=GJ9-u3ySTmQ
-      Machine Learning theory in one video — Elgouhary AI
+    https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
+      Neural networks — 3Blue1Brown. Watch this before anything else: it
+      shows you what a network is doing, geometrically, with no code at
+      all
+    https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
+      Neural Networks: Zero to Hero — Andrej Karpathy. Twelve hours,
+      from backpropagation by hand to a working GPT, every line typed on
+      screen
 
   Video - Arabic
     https://www.youtube.com/watch?v=p93xuOXP1jI
       الدورة الكاملة للتعلم العميق — Hesham Asem
-    https://www.youtube.com/watch?v=dWKffQja3Fs
-      الدورة الكاملة لتعلم الآلة — Hesham Asem
+    https://www.youtube.com/playlist?list=PLhx4zaYkEjI9kTHTV34iQqRcFoO8RvuxV
+      Introduction to Artificial Neural Networks and Deep Learning —
+      Hashim EduTech
+    https://www.youtube.com/watch?v=hyPHJI-KGf4
+      أساسيات التعلم العميق: كيف تتعلم الشبكة العصبونية — ML Made Simple
+    https://www.youtube.com/watch?v=GJ9-u3ySTmQ
+      الأساسيات النظرية لتعلم الآلة كاملة في فيديو واحد — Elgouhary AI
+
+  ! Deep learning has real Arabic coverage. Even so, watch the
+  ! 3Blue1Brown series above with subtitles — the pictures carry it, and
+  ! nothing in Arabic matches them yet.
 
 ==========================================================================
 Session 3 - Production APIs (FastAPI, REST)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://fastapi.tiangolo.com/tutorial/
       FastAPI Tutorial — User Guide (free, official, excellent)
     https://bytebytego.com/guides/rest-api-vs-graphql/
-      REST vs GraphQL — ByteByteGo (the diagram this session's comparison is based on)
+      REST vs GraphQL — ByteByteGo (the diagram this session's
+      comparison is based on)
 
   Video - English
     https://www.youtube.com/watch?v=0sOvCWFmrtA
@@ -107,7 +195,7 @@ Session 3 - Production APIs (FastAPI, REST)
 Session 4 - Docker
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://docs.docker.com/get-started/
       Get started — Docker official docs (free)
     https://docker-curriculum.com/
@@ -133,15 +221,17 @@ Session 4 - Docker
 Session 5 - ETL and data pipelines (SQLAlchemy)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://github.com/DataTalksClub/data-engineering-zoomcamp
-      Data Engineering Zoomcamp — DataTalks.Club (free, video + homework)
+      Data Engineering Zoomcamp — DataTalks.Club (free, video +
+      homework)
     https://docs.sqlalchemy.org/en/20/tutorial/
       SQLAlchemy 2.0 Tutorial (free, official)
 
   Video - English
     https://www.youtube.com/watch?v=0sOvCWFmrtA
-      Python API Development — freeCodeCamp (the SQL and SQLAlchemy sections)
+      Python API Development — freeCodeCamp (the SQL and SQLAlchemy
+      sections)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs
@@ -151,7 +241,7 @@ Session 5 - ETL and data pipelines (SQLAlchemy)
 Session 6 - MLflow (experiment tracking, model registry)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://github.com/DataTalksClub/mlops-zoomcamp
       MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)
     https://mlflow.org/docs/latest/index.html
@@ -172,7 +262,7 @@ Session 6 - MLflow (experiment tracking, model registry)
 Session 7 - DVC (data and pipeline versioning)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://dvc.org/doc/start
       Get Started — DVC official docs (free, hands-on)
     https://github.com/DataTalksClub/mlops-zoomcamp
@@ -193,13 +283,14 @@ Session 7 - DVC (data and pipeline versioning)
 Session 8 - Distributed training (Ray)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://docs.ray.io/en/latest/ray-overview/getting-started.html
       Ray — Getting Started (free, official)
 
   Video - English
     https://www.youtube.com/watch?v=x3cxvsUFVZA
-      Managing the ML lifecycle — Databricks (context for distributed training)
+      Managing the ML lifecycle — Databricks (context for distributed
+      training)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
@@ -211,7 +302,7 @@ Session 8 - Distributed training (Ray)
 Session 9 - Feature stores (Feast)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://docs.feast.dev/getting-started/quickstart
       Feast Quickstart (free, official)
     https://github.com/DataTalksClub/mlops-zoomcamp
@@ -231,7 +322,7 @@ Session 9 - Feature stores (Feast)
 Session 10 - Monitoring (Prometheus, Grafana)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://prometheus.io/docs/introduction/overview/
       Prometheus — Overview and docs (free)
     https://grafana.com/tutorials/
@@ -239,7 +330,8 @@ Session 10 - Monitoring (Prometheus, Grafana)
 
   Video - English
     https://www.youtube.com/watch?v=fqMOX6JJhGo
-      Docker full course — freeCodeCamp (the compose sections this session builds on)
+      Docker full course — freeCodeCamp (the compose sections this
+      session builds on)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
@@ -251,7 +343,7 @@ Session 10 - Monitoring (Prometheus, Grafana)
 Session 11 - Automation and CI/CD (GitHub Actions)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://docs.github.com/en/actions/get-started/quickstart
       GitHub Actions — Quickstart and docs (free, official)
     https://docs.ray.io/en/latest/serve/getting_started.html
@@ -269,13 +361,14 @@ Session 11 - Automation and CI/CD (GitHub Actions)
 Session 12 - Infrastructure as code (Terraform)
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://developer.hashicorp.com/terraform/tutorials
       Terraform Tutorials — HashiCorp (free, official)
 
   Video - English
     https://www.youtube.com/watch?v=fqMOX6JJhGo
-      DevOps full course — freeCodeCamp (containers, which Terraform provisions here)
+      DevOps full course — freeCodeCamp (containers, which Terraform
+      provisions here)
 
   Video - Arabic
     https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
@@ -287,7 +380,7 @@ Session 12 - Infrastructure as code (Terraform)
 Session 13 - Putting it all together
 ==========================================================================
 
-  Free courses, docs and tutorials
+  Free courses and tutorials
     https://github.com/DataTalksClub/mlops-zoomcamp
       MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)
     https://github.com/DataTalksClub/data-engineering-zoomcamp
