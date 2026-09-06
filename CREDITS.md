@@ -24,25 +24,25 @@ could not establish a clean reuse licence for them.
 Everything else — the charts, the flow diagrams, the screenshots of MLflow's UI, Grafana and
 FastAPI's `/docs` — was produced by running the notebooks in this repository.
 
-## Linked, not embedded
+## Reused with attribution, at the repository owner's request
 
-Three sources were suggested for these slides and are **linked** from the "Where to learn more"
-slide of the session they belong to, rather than copied into it. All three are commercial,
-all-rights-reserved work, and redistributing them inside a public repository is not something
-their licences allow:
+These three were chosen by the repository owner and are embedded in the decks with a source line
+directly beneath each one. They are commercial, all-rights-reserved work — they are **not** covered
+by the open licences above, and anyone reusing this material elsewhere should check with the
+authors first.
 
-| Source | Where it is linked |
-|---|---|
-| [What is Docker? — OPC Router](https://www.opc-router.com/what-is-docker/) | `04-docker` — its container-vs-VM point is already covered by the CC BY 4.0 Kubernetes diagram |
-| [REST vs GraphQL — ByteByteGo](https://bytebytego.com/guides/rest-api-vs-graphql/) | `03-production-api` — the comparison is redrawn for this deck in its own style |
-| Rocky Bhatia's "Top 6 API architecture" post on LinkedIn | `03-production-api` — the same six styles are covered on the "other kinds" slide |
-
-Linking credits the author and costs nothing. Embedding would have contradicted the first line of
-this file.
+| Diagram | Author | Where it appears |
+|---|---|---|
+| [Virtual Machine vs. Docker](https://www.opc-router.com/what-is-docker/) | OPC Router (inray Industriesoftware) | `04-docker` — "Same comparison, with the numbers on it" |
+| [REST vs GraphQL](https://bytebytego.com/guides/rest-api-vs-graphql/) | ByteByteGo | `03-production-api` — "The same comparison, in full" |
+| [Top 6 API Architecture Styles](https://www.linkedin.com/posts/rocky-bhatia-a4801010_activity-7399411247730970625-UDvR) | Rocky Bhatia | `03-production-api` — "All six on one page" |
 
 ## Learning resources
 
-Every link on a "Where to learn more" slide was fetched before it shipped; the YouTube ones were
+`RESOURCES.txt` at the root, and one in each session folder, carry the same links as the
+"Where to learn more" slides — all generated from a single list, so the two cannot drift.
+
+Every link was fetched before it shipped; the YouTube ones were
 checked through the oEmbed endpoint, which fails for a deleted video, and the titles and channel
 names on the slides are the ones it returned.
 

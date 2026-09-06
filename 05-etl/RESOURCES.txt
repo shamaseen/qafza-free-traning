@@ -1,0 +1,34 @@
+==========================================================================
+Session 5 - ETL and data pipelines (SQLAlchemy)
+==========================================================================
+
+Free courses, tutorials and videos for this session. All free, all checked.
+The whole course's list, and the Python / git / command-line groundwork to
+do first, is in RESOURCES.txt at the root of this repository.
+
+
+  Free courses, docs and tutorials
+    https://github.com/DataTalksClub/data-engineering-zoomcamp
+      Data Engineering Zoomcamp — DataTalks.Club (free, video + homework)
+    https://docs.sqlalchemy.org/en/20/tutorial/
+      SQLAlchemy 2.0 Tutorial (free, official)
+
+  Video - English
+    https://www.youtube.com/watch?v=0sOvCWFmrtA
+      Python API Development — freeCodeCamp (the SQL and SQLAlchemy sections)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs
+      Mastering Python — تعلم بايثون — Elzero Web School
+
+
+NOTES
+=====
+* Every link was opened and checked. The YouTube ones were verified through
+  the oEmbed endpoint, which fails on a deleted video.
+* Arabic coverage is genuinely uneven. Docker and the machine-learning
+  fundamentals have excellent Arabic courses. DVC, MLflow, Feast, Ray and
+  Terraform effectively have none - where that is true it says so, and points
+  at the nearest useful Arabic material instead of padding the list.
+* Everything listed is free to watch or read. Some sites ask you to register.
+* Image and diagram credits for the slides are in CREDITS.md.

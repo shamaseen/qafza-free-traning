@@ -1,0 +1,36 @@
+==========================================================================
+Session 10 - Monitoring (Prometheus, Grafana)
+==========================================================================
+
+Free courses, tutorials and videos for this session. All free, all checked.
+The whole course's list, and the Python / git / command-line groundwork to
+do first, is in RESOURCES.txt at the root of this repository.
+
+
+  Free courses, docs and tutorials
+    https://prometheus.io/docs/introduction/overview/
+      Prometheus — Overview and docs (free)
+    https://grafana.com/tutorials/
+      Grafana Tutorials (free, official)
+
+  Video - English
+    https://www.youtube.com/watch?v=fqMOX6JJhGo
+      Docker full course — freeCodeCamp (the compose sections this session builds on)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
+      دورة دوكر بالعربي — Abd AbuGhazaleh
+
+  ! No Arabic Prometheus/Grafana course verified.
+
+
+NOTES
+=====
+* Every link was opened and checked. The YouTube ones were verified through
+  the oEmbed endpoint, which fails on a deleted video.
+* Arabic coverage is genuinely uneven. Docker and the machine-learning
+  fundamentals have excellent Arabic courses. DVC, MLflow, Feast, Ray and
+  Terraform effectively have none - where that is true it says so, and points
+  at the nearest useful Arabic material instead of padding the list.
+* Everything listed is free to watch or read. Some sites ask you to register.
+* Image and diagram credits for the slides are in CREDITS.md.

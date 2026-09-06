@@ -3,6 +3,8 @@ LEARNING RESOURCES - free courses, tutorials and videos
 qafza-free-traning  -  https://github.com/shamaseen/qafza-free-traning
 ==========================================================================
 
+Every session folder also has its own RESOURCES.txt with just its links.
+
 START HERE - the three things everything else assumes
 =====================================================
 You do not need all of this before session 1, but you will need it before

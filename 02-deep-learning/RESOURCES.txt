@@ -1,0 +1,36 @@
+==========================================================================
+Session 2 - Deep learning (PyTorch, Hugging Face)
+==========================================================================
+
+Free courses, tutorials and videos for this session. All free, all checked.
+The whole course's list, and the Python / git / command-line groundwork to
+do first, is in RESOURCES.txt at the root of this repository.
+
+
+  Free courses, docs and tutorials
+    https://pytorch.org/tutorials/beginner/basics/intro.html
+      Learn the Basics — PyTorch official tutorials (free)
+    https://huggingface.co/learn/nlp-course
+      The Hugging Face NLP Course (free)
+
+  Video - English
+    https://www.youtube.com/watch?v=GJ9-u3ySTmQ
+      Machine Learning theory in one video — Elgouhary AI
+
+  Video - Arabic
+    https://www.youtube.com/watch?v=p93xuOXP1jI
+      الدورة الكاملة للتعلم العميق — Hesham Asem
+    https://www.youtube.com/watch?v=dWKffQja3Fs
+      الدورة الكاملة لتعلم الآلة — Hesham Asem
+
+
+NOTES
+=====
+* Every link was opened and checked. The YouTube ones were verified through
+  the oEmbed endpoint, which fails on a deleted video.
+* Arabic coverage is genuinely uneven. Docker and the machine-learning
+  fundamentals have excellent Arabic courses. DVC, MLflow, Feast, Ray and
+  Terraform effectively have none - where that is true it says so, and points
+  at the nearest useful Arabic material instead of padding the list.
+* Everything listed is free to watch or read. Some sites ask you to register.
+* Image and diagram credits for the slides are in CREDITS.md.
