@@ -74,6 +74,7 @@ th{background:#161b22;color:#fff;font-size:13.5px;letter-spacing:.03em}
 td.num{font-family:ui-monospace,Menlo,monospace;white-space:nowrap;color:var(--fg)}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start}
+.two > *{min-width:0}          /* let a wide <pre> scroll instead of stretching the grid */
 @media(max-width:820px){.two{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:1.1em 1.3em}
 .card h4{font-size:16px;margin-bottom:.35em}
@@ -168,6 +169,59 @@ multi     491MB</div>
 <div class="out"><span class="lbl">output</span>uid=10001(appuser) gid=10001(appuser) groups=10001(appuser)</div>
 <p class="win"><b>The one people remember.</b> A container that gets broken into is a much better day when the process inside is not root. Two lines in the Dockerfile: <code>useradd</code>, then <code>USER</code>.</p>
 </div>
+<h2>Build one from scratch, in front of them</h2>
+<p>The five steps above use images you prepared. This is the other demo: three small files, a build, and a container answering — start to finish, with nothing hidden. It is the whole session in about a minute.</p>
+<p class="note"><b>Pre-build it too.</b> The first build takes <b>33 s</b> while pip works. Run it once before the room so the layers are cached, then the live build is seconds. Or run it cold deliberately and talk over it — it is a good moment to explain what a layer is.</p>
+<h3>1 · The three files</h3>
+<p>An API in eight lines, the two things it needs, and the recipe to package it.</p>
+<div class="two"><div>
+<p class="cap" style="text-align:left"><b>app.py</b></p>
+<div class="cmd"><pre><span class="k">from</span> fastapi <span class="k">import</span> FastAPI
+
+app = FastAPI()
+
+<span class="k">@app.get</span>(<span class="s">"/hello"</span>)
+<span class="k">def</span> hello(name: str = <span class="s">"world"</span>):
+    <span class="k">return</span> {<span class="s">"hello"</span>: name, <span class="s">"from"</span>: <span class="s">"inside a container"</span>}</pre></div>
+<p class="cap" style="text-align:left"><b>requirements.txt</b></p>
+<div class="cmd"><pre>fastapi==0.115.2
+uvicorn==0.31.1</pre></div>
+</div><div>
+<p class="cap" style="text-align:left"><b>Dockerfile</b></p>
+<div class="cmd"><pre><span class="k">FROM</span> python:3.12-slim
+<span class="k">WORKDIR</span> /srv
+
+<span class="c"># requirements first: this layer is the expensive one,</span>
+<span class="c"># and it should survive every edit to app.py</span>
+<span class="k">COPY</span> requirements.txt .
+<span class="k">RUN</span> pip install --no-cache-dir -r requirements.txt
+
+<span class="c"># the code last, because it changes constantly</span>
+<span class="k">COPY</span> app.py .
+<span class="k">CMD</span> [<span class="s">"uvicorn"</span>, <span class="s">"app:app"</span>, <span class="s">"--host"</span>, <span class="s">"0.0.0.0"</span>, <span class="s">"--port"</span>, <span class="s">"8000"</span>]</pre></div>
+<p class="sub">Those two <code>COPY</code> lines, in that order, are the entire lesson of this session. Step 4 below proves it.</p>
+</div></div>
+<h3>2 · Build it and run it</h3>
+<div class="cmd"><pre><span class="k">docker</span> build -t hello-api:1.0 .
+<span class="k">docker</span> run -d --name hello -p 8501:8000 hello-api:1.0
+<span class="k">curl</span> -s <span class="s">"localhost:8501/hello?name=Qafza"</span></pre></div>
+<div class="out"><span class="lbl">output</span>built in 33.2 s  ·  135 MB
+{"hello":"Qafza","from":"inside a container"}</div>
+<p>135 MB, because the base is <code>-slim</code> and pip kept no cache — the two fixes from the main session, applied from the start.</p>
+<h3>3 · Change the code, rebuild</h3>
+<p>Edit one line of <code>app.py</code> — add a field to the response — and build again.</p>
+<div class="cmd"><pre><span class="k">docker</span> build -t hello-api:1.1 .</pre></div>
+<div class="out"><span class="lbl">output</span>rebuilt in 1.1 s</div>
+<p class="win"><b>One second.</b> Every layer below <code>COPY app.py</code> was reused — pip never ran. Point at the <code>CACHED</code> lines scrolling past.</p>
+<h3>4 · Now change a dependency</h3>
+<p>Add one line to <code>requirements.txt</code> and build again.</p>
+<div class="cmd"><pre><span class="k">echo</span> <span class="s">"httpx==0.27.2"</span> &gt;&gt; requirements.txt
+<span class="k">docker</span> build -t hello-api:1.2 .</pre></div>
+<div class="out"><span class="lbl">output</span>rebuilt in 30.0 s</div>
+<p class="oops"><b>Thirty seconds, for one line.</b> Touching <code>requirements.txt</code> invalidates the pip layer and everything above it. Same size of edit as step 3, <b>27× the cost</b> — and if you swap those two <code>COPY</code> lines, <i>every</i> edit costs this.</p>
+<div class="cmd"><pre><span class="c"># tidy up</span>
+<span class="k">docker</span> rm -f hello
+<span class="k">docker</span> rmi hello-api:1.0 hello-api:1.1 hello-api:1.2</pre></div>
 <h2>The numbers to read out, not reproduce</h2>
 <p>All measured by the notebook. Quote them from the slides; do not try to produce them in front of anyone.</p>
 <p class="note"><b>Sizes are stable; times are not.</b> The megabytes will match on any machine. The seconds are from one laptop and moved by 30% between two runs of the same notebook — quote them as <i>roughly a hundred seconds against a tenth of one</i>, and the point survives whatever your hardware does.</p>
