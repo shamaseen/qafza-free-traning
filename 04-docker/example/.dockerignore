@@ -1,0 +1,9 @@
+# nothing here belongs inside the image
+.git
+__pycache__/
+*.pyc
+*.ipynb
+notes/
+Dockerfile
+.dockerignore
+build.sh

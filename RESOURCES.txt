@@ -1,0 +1,317 @@
+==========================================================================
+LEARNING RESOURCES - free courses, tutorials and videos
+qafza-free-traning  -  https://github.com/shamaseen/qafza-free-traning
+==========================================================================
+
+START HERE - the three things everything else assumes
+=====================================================
+You do not need all of this before session 1, but you will need it before
+session 4. Each one is free and each one is the best of its kind.
+
+  Python
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs
+      Mastering Python - Elzero Web School            [ARABIC, video course]
+    https://docs.python.org/3/tutorial/
+      The official Python tutorial                    [ENGLISH, reading]
+
+  Git and GitHub  (DVC and CI/CD are built on top of git)
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAw4eOj58MZPakHjaO3frVMF
+      Learn Git and GitHub - Elzero Web School        [ARABIC, video course]
+    https://docs.github.com/en/get-started/start-your-journey
+      GitHub - start your journey                     [ENGLISH, reading]
+
+  The Linux command line  (you will live in a terminal from session 4 onward)
+    https://ubuntu.com/tutorials/command-line-for-beginners
+      Command line for beginners - Ubuntu             [ENGLISH, hands-on]
+
+
+THE TWO FREE COURSES THAT COVER MOST OF THIS COURSE
+===================================================
+If you only do two things after finishing these sessions, do these. Both are
+free, both are video plus homework, both are run by DataTalks.Club.
+
+  https://github.com/DataTalksClub/mlops-zoomcamp
+    MLOps Zoomcamp - 9 weeks. Sessions 6, 7, 9, 10, 11 and 13 in more depth.
+
+  https://github.com/DataTalksClub/data-engineering-zoomcamp
+    Data Engineering Zoomcamp - the pipeline and warehouse side of session 5.
+
+
+==========================================================================
+Session 1 - Leakage-proof pipelines (scikit-learn)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://scikit-learn.org/stable/common_pitfalls.html
+      Common pitfalls and recommended practices — scikit-learn (the official page on exactly this)
+    https://scikit-learn.org/stable/modules/cross_validation.html
+      Cross-validation — scikit-learn user guide
+
+  Video - English
+    https://www.youtube.com/watch?v=0sOvCWFmrtA
+      Python API Development — freeCodeCamp (covers the sklearn workflow this builds on)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
+      تعلم الآلة بالعربي — Elgouhary AI
+    https://www.youtube.com/watch?v=dWKffQja3Fs
+      الدورة الكاملة لتعلم الآلة — Hesham Asem
+
+  ! Leakage is rarely taught on its own — the Arabic courses above cover
+  ! the cross-validation it depends on.
+
+==========================================================================
+Session 2 - Deep learning (PyTorch, Hugging Face)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://pytorch.org/tutorials/beginner/basics/intro.html
+      Learn the Basics — PyTorch official tutorials (free)
+    https://huggingface.co/learn/nlp-course
+      The Hugging Face NLP Course (free)
+
+  Video - English
+    https://www.youtube.com/watch?v=GJ9-u3ySTmQ
+      Machine Learning theory in one video — Elgouhary AI
+
+  Video - Arabic
+    https://www.youtube.com/watch?v=p93xuOXP1jI
+      الدورة الكاملة للتعلم العميق — Hesham Asem
+    https://www.youtube.com/watch?v=dWKffQja3Fs
+      الدورة الكاملة لتعلم الآلة — Hesham Asem
+
+==========================================================================
+Session 3 - Production APIs (FastAPI, REST)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://fastapi.tiangolo.com/tutorial/
+      FastAPI Tutorial — User Guide (free, official, excellent)
+    https://bytebytego.com/guides/rest-api-vs-graphql/
+      REST vs GraphQL — ByteByteGo (the diagram this session's comparison is based on)
+
+  Video - English
+    https://www.youtube.com/watch?v=0sOvCWFmrtA
+      Python API Development, full course — freeCodeCamp
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs
+      Mastering Python — تعلم بايثون — Elzero Web School
+
+  ! No Arabic FastAPI course verified as good enough to list. The Python
+  ! course above is the best Arabic starting point.
+
+==========================================================================
+Session 4 - Docker
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://docs.docker.com/get-started/
+      Get started — Docker official docs (free)
+    https://docker-curriculum.com/
+      Docker Curriculum — a free hands-on tutorial
+    https://www.opc-router.com/what-is-docker/
+      What is Docker? — OPC Router (a clear container-vs-VM explainer)
+
+  Video - English
+    https://www.youtube.com/watch?v=fqMOX6JJhGo
+      Docker Tutorial for Beginners, full DevOps course — freeCodeCamp
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
+      دورة دوكر بالعربي — Abd AbuGhazaleh
+    https://www.youtube.com/watch?v=Xnu-zoqopNM
+      كورس دوكر: Containers و Images و Volumes — أكاديمية ترميز
+    https://www.youtube.com/playlist?list=PLk9nVQF4WDct8p3NrYxgPmSZ89jvwWYGJ
+      Docker Mastering Course in Arabic — CODING MA
+
+  ! Docker has the best Arabic coverage of anything in this course.
+
+==========================================================================
+Session 5 - ETL and data pipelines (SQLAlchemy)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://github.com/DataTalksClub/data-engineering-zoomcamp
+      Data Engineering Zoomcamp — DataTalks.Club (free, video + homework)
+    https://docs.sqlalchemy.org/en/20/tutorial/
+      SQLAlchemy 2.0 Tutorial (free, official)
+
+  Video - English
+    https://www.youtube.com/watch?v=0sOvCWFmrtA
+      Python API Development — freeCodeCamp (the SQL and SQLAlchemy sections)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs
+      Mastering Python — تعلم بايثون — Elzero Web School
+
+==========================================================================
+Session 6 - MLflow (experiment tracking, model registry)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://github.com/DataTalksClub/mlops-zoomcamp
+      MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)
+    https://mlflow.org/docs/latest/index.html
+      MLflow documentation and tutorials (free)
+
+  Video - English
+    https://www.youtube.com/watch?v=x3cxvsUFVZA
+      Managing the ML lifecycle with MLflow — Databricks workshop
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
+      تعلم الآلة بالعربي — Elgouhary AI
+
+  ! No dedicated Arabic MLflow course found. Module 2 of the MLOps
+  ! Zoomcamp is the best free path, in English.
+
+==========================================================================
+Session 7 - DVC (data and pipeline versioning)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://dvc.org/doc/start
+      Get Started — DVC official docs (free, hands-on)
+    https://github.com/DataTalksClub/mlops-zoomcamp
+      MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)
+
+  Video - English
+    https://www.youtube.com/watch?v=kLKBcPonMYw
+      Versioning Data with DVC, hands-on tutorial — DVCorg
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAw4eOj58MZPakHjaO3frVMF
+      Learn Git and GitHub — Elzero Web School
+
+  ! No Arabic DVC course found. DVC sits on top of git, so the Arabic
+  ! git course above is the prerequisite worth doing first.
+
+==========================================================================
+Session 8 - Distributed training (Ray)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://docs.ray.io/en/latest/ray-overview/getting-started.html
+      Ray — Getting Started (free, official)
+
+  Video - English
+    https://www.youtube.com/watch?v=x3cxvsUFVZA
+      Managing the ML lifecycle — Databricks (context for distributed training)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
+      تعلم الآلة بالعربي — Elgouhary AI
+
+  ! No Arabic Ray material found.
+
+==========================================================================
+Session 9 - Feature stores (Feast)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://docs.feast.dev/getting-started/quickstart
+      Feast Quickstart (free, official)
+    https://github.com/DataTalksClub/mlops-zoomcamp
+      MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)
+
+  Video - English
+    https://www.youtube.com/watch?v=x3cxvsUFVZA
+      Managing the ML lifecycle with MLflow — Databricks
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
+      تعلم الآلة بالعربي — Elgouhary AI
+
+  ! No Arabic feature-store material found.
+
+==========================================================================
+Session 10 - Monitoring (Prometheus, Grafana)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://prometheus.io/docs/introduction/overview/
+      Prometheus — Overview and docs (free)
+    https://grafana.com/tutorials/
+      Grafana Tutorials (free, official)
+
+  Video - English
+    https://www.youtube.com/watch?v=fqMOX6JJhGo
+      Docker full course — freeCodeCamp (the compose sections this session builds on)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
+      دورة دوكر بالعربي — Abd AbuGhazaleh
+
+  ! No Arabic Prometheus/Grafana course verified.
+
+==========================================================================
+Session 11 - Automation and CI/CD (GitHub Actions)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://docs.github.com/en/actions/get-started/quickstart
+      GitHub Actions — Quickstart and docs (free, official)
+    https://docs.ray.io/en/latest/serve/getting_started.html
+      Ray Serve — Getting Started
+
+  Video - English
+    https://www.youtube.com/watch?v=fqMOX6JJhGo
+      Docker / DevOps full course — freeCodeCamp
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLDoPjvoNmBAw4eOj58MZPakHjaO3frVMF
+      Learn Git and GitHub — Elzero Web School
+
+==========================================================================
+Session 12 - Infrastructure as code (Terraform)
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://developer.hashicorp.com/terraform/tutorials
+      Terraform Tutorials — HashiCorp (free, official)
+
+  Video - English
+    https://www.youtube.com/watch?v=fqMOX6JJhGo
+      DevOps full course — freeCodeCamp (containers, which Terraform provisions here)
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
+      دورة دوكر بالعربي — Abd AbuGhazaleh
+
+  ! No Arabic Terraform course verified.
+
+==========================================================================
+Session 13 - Putting it all together
+==========================================================================
+
+  Free courses, docs and tutorials
+    https://github.com/DataTalksClub/mlops-zoomcamp
+      MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)
+    https://github.com/DataTalksClub/data-engineering-zoomcamp
+      Data Engineering Zoomcamp — DataTalks.Club (free)
+
+  Video - English
+    https://www.youtube.com/playlist?list=PL3MmuxUbc_hIUISrluw_A7wDSmfOhErJK
+      MLOps Zoomcamp — the full video playlist, DataTalks.Club
+
+  Video - Arabic
+    https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH
+      تعلم الآلة بالعربي — Elgouhary AI
+    https://www.youtube.com/playlist?list=PLzhWJrmO-SPV-yAYiDx7l78zWF4BAtnHt
+      دورة دوكر بالعربي — Abd AbuGhazaleh
+
+  ! This session composes the whole course, so the two Zoomcamps are the
+  ! natural next step after it.
+
+
+NOTES
+=====
+* Every link was opened and checked. The YouTube ones were verified through
+  the oEmbed endpoint, which fails on a deleted video.
+* Arabic coverage is genuinely uneven. Docker and the machine-learning
+  fundamentals have excellent Arabic courses. DVC, MLflow, Feast, Ray and
+  Terraform effectively have none - where that is true it says so, and points
+  at the nearest useful Arabic material instead of padding the list.
+* Everything listed is free to watch or read. Some sites ask you to register.
+* Image and diagram credits for the slides are in CREDITS.md.

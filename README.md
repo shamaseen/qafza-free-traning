@@ -2,7 +2,13 @@
 
 Thirteen self-contained sessions. Each folder holds **a slide deck** (`*_slides.html`, one
 offline file — open it in any browser) and **a notebook** (`*_tutorial.ipynb`) that runs the
-same material on your machine. No prior MLOps experience assumed anywhere.
+same material on your machine. Session 4 is the exception: Docker is a command-line tool, so it
+ships a real [`04-docker/example/`](04-docker/example) folder instead of a notebook. No prior
+MLOps experience assumed anywhere.
+
+New to all of this? [`RESOURCES.txt`](RESOURCES.txt) lists a free course, a tutorial and a
+video in **both Arabic and English** for every subject here, plus the three things to learn
+first.
 
 | # | Session | Core tools | Folder |
 |---|---|---|---|
@@ -26,7 +32,9 @@ from nothing but its run id.
 
 Two sessions need more than `pip`: session 4 and 13 need a running **Docker** daemon, and
 session 12 needs the **Terraform** CLI. Each notebook checks for its tools in the first cells
-and says so plainly if one is missing.
+and says so plainly if one is missing. If you do not have Docker yet,
+[`04-docker/PRESENTING.html`](04-docker/PRESENTING.html) opens with how to install it on
+Linux, macOS and Windows.
 
 ## Using the decks
 
@@ -43,12 +51,14 @@ expected to know Python, and nothing else.
 
 ## Presenting these sessions
 
-Session 4 really builds four Docker images, which is right for a reader and wrong for a live
-room — 351 of its 360 seconds are builds with nothing on screen.
-[`04-docker/PRESENTING.html`](04-docker/PRESENTING.html) is the live path — open it in a
-browser. Five commands that take 1.9 seconds between them, a from-scratch build of a small
-API you can do in front of the room, the numbers to read off the slides instead of
-reproducing, and what to do when a port or the daemon is not where you expect.
+The four Docker images session 4 compares took **6 minutes** to build, 351 of those 360
+seconds spent in `pip install` with nothing on screen. Those numbers belong on a slide, not in
+a live room. [`04-docker/PRESENTING.html`](04-docker/PRESENTING.html) is the live path — open
+it in a browser. It covers installing Docker, the ten commands you will actually be asked
+about with their real output, and a from-scratch build you can run mid-sentence:
+[`04-docker/example/`](04-docker/example) is an API on the Python standard library, so it needs
+**no `pip install` and no network**, and `./build.sh` builds it, runs it and calls it in half a
+second.
 
 ## Using the notebooks
 
@@ -57,6 +67,8 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 jupyter lab
 ```
+
+Session 4 has no notebook — run [`04-docker/example/build.sh`](04-docker/example) instead.
 
 Every notebook builds a **throwaway sandbox folder** beside itself, does all its work there,
 and deletes it in the last cell. Nothing outside the folder is touched, and the sandboxes are
@@ -69,9 +81,10 @@ command output — on GitHub without running anything.
 
 Every notebook here was **executed end to end** before it shipped, and each one has to *prove its
 headline claim* rather than merely run. Session 1 must actually print a cross-validation score of
-0.765 on data containing no signal at all, next to the honest 0.520. Session 4 must show a code
-edit rebuilding in 0.1s against a dependency edit taking 162s. Session 13 must recover a model
-from nothing but a run id and get the same metric back, to six decimal places.
+0.765 on data containing no signal at all, next to the honest 0.520. Session 13 must recover a
+model from nothing but a run id and get the same metric back, to six decimal places. Session 4's
+figures were measured the same way, and every command in its `PRESENTING.html` was run before it
+was written down.
 
 Three rules are enforced mechanically, because each one caught real defects while this course was
 being written:
