@@ -44,9 +44,9 @@ expected to know Python, and nothing else.
 ## Presenting these sessions
 
 Session 4 really builds four Docker images, which is right for a reader and wrong for a live
-room — a cold build is three minutes of silence. [`04-docker/PRESENTING.md`](04-docker/PRESENTING.md)
-is the live path: which commands to run in a terminal (none take more than two seconds), which
-numbers to read off the slides instead of reproducing, and what to do if Docker is unavailable.
+room — 279 of its 288 seconds are builds with nothing on screen.
+[`04-docker/PRESENTING.html`](04-docker/PRESENTING.html) is the live path: five commands that take 1.9 seconds between them, the numbers to read off the
+slides instead of reproducing, and what to do when a port or the daemon is not where you expect.
 
 ## Using the notebooks
 
