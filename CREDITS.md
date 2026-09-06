@@ -23,3 +23,30 @@ could not establish a clean reuse licence for them.
 
 Everything else — the charts, the flow diagrams, the screenshots of MLflow's UI, Grafana and
 FastAPI's `/docs` — was produced by running the notebooks in this repository.
+
+## Linked, not embedded
+
+Three sources were suggested for these slides and are **linked** from the "Where to learn more"
+slide of the session they belong to, rather than copied into it. All three are commercial,
+all-rights-reserved work, and redistributing them inside a public repository is not something
+their licences allow:
+
+| Source | Where it is linked |
+|---|---|
+| [What is Docker? — OPC Router](https://www.opc-router.com/what-is-docker/) | `04-docker` — its container-vs-VM point is already covered by the CC BY 4.0 Kubernetes diagram |
+| [REST vs GraphQL — ByteByteGo](https://bytebytego.com/guides/rest-api-vs-graphql/) | `03-production-api` — the comparison is redrawn for this deck in its own style |
+| Rocky Bhatia's "Top 6 API architecture" post on LinkedIn | `03-production-api` — the same six styles are covered on the "other kinds" slide |
+
+Linking credits the author and costs nothing. Embedding would have contradicted the first line of
+this file.
+
+## Learning resources
+
+Every link on a "Where to learn more" slide was fetched before it shipped; the YouTube ones were
+checked through the oEmbed endpoint, which fails for a deleted video, and the titles and channel
+names on the slides are the ones it returned.
+
+Arabic coverage is uneven and the slides say so. Docker and machine-learning fundamentals have
+genuinely good Arabic courses. DVC, Feast, Ray and Terraform have effectively none, so those
+slides point at the nearest useful Arabic material and state plainly that no course was found,
+rather than filling the column with something weak.

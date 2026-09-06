@@ -33,6 +33,9 @@ li{margin:.55em 0}
 .lead{font-size:clamp(19px,2.15vw,28px);color:var(--dim);max-width:56ch}
 .sub{color:var(--dim)}
 b,strong{color:#fff}
+a{color:var(--dvc);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.22)}
+a:hover{border-bottom-color:currentColor}
+li[dir]{unicode-bidi:plaintext}
 code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
      background:var(--code);padding:.12em .38em;border-radius:4px;font-size:.92em}
 pre{background:var(--code);border:1px solid var(--line);border-left:4px solid var(--dvc);
@@ -1291,6 +1294,25 @@ live.log_param / log_metric / next_step / log_artifact</code></pre>
 </section>
 
 <!-- 37 -->
+<section>
+  <span class="tag">reference — not for reading</span>
+  <h2>Where to learn more</h2>
+  <p class="lead">All free. Every link was opened and checked before it went on this slide.</p>
+  <div class="two">
+    <div class="card">
+      <h4>Free courses and docs</h4>
+      <ul><li><a href="https://dvc.org/doc/start">Get Started — DVC official docs (free, hands-on)</a></li><li><a href="https://github.com/DataTalksClub/mlops-zoomcamp">MLOps Zoomcamp — DataTalks.Club (free, 9 weeks, video + homework)</a></li></ul>
+      <h4 style="margin-top:.8em">Video — English</h4>
+      <ul><li><a href="https://www.youtube.com/watch?v=kLKBcPonMYw">Versioning Data with DVC, hands-on tutorial — DVCorg</a></li></ul>
+    </div>
+    <div class="card">
+      <h4>فيديو — بالعربية</h4>
+      <ul><li dir="auto"><a href="https://www.youtube.com/playlist?list=PLDoPjvoNmBAw4eOj58MZPakHjaO3frVMF">Learn Git and GitHub — Elzero Web School</a></li></ul>
+      <p class="sub" style="margin-top:.5em">No Arabic DVC course found. DVC sits on top of git, so the Arabic git course above is the prerequisite worth doing first.</p>
+    </div>
+  </div>
+</section>
+
 <section class="chapter">
   <h1>Questions?</h1>
   <p class="lead">Now open <code>dvc_tutorial.ipynb</code> and run it top to bottom.</p>

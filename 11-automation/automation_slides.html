@@ -33,6 +33,9 @@ li{margin:.55em 0}
 .lead{font-size:clamp(19px,2.15vw,28px);color:var(--dim);max-width:56ch}
 .sub{color:var(--dim)}
 b,strong{color:#fff}
+a{color:var(--dvc);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.22)}
+a:hover{border-bottom-color:currentColor}
+li[dir]{unicode-bidi:plaintext}
 code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
      background:var(--code);padding:.12em .38em;border-radius:4px;font-size:.92em}
 pre{background:var(--code);border:1px solid var(--line);border-left:4px solid var(--dvc);
@@ -377,6 +380,25 @@ ${{ secrets.X }}  ${{ vars.Y }}  ${{ github.sha }}
   <h3>Docs</h3>
   <p class="sub">docs.ray.io/en/latest/serve &nbsp;·&nbsp; docs.github.com/actions &nbsp;·&nbsp;
   notebook: <code>automation_tutorial.ipynb</code></p>
+</section>
+
+<section>
+  <span class="tag">reference — not for reading</span>
+  <h2>Where to learn more</h2>
+  <p class="lead">All free. Every link was opened and checked before it went on this slide.</p>
+  <div class="two">
+    <div class="card">
+      <h4>Free courses and docs</h4>
+      <ul><li><a href="https://docs.github.com/en/actions/get-started/quickstart">GitHub Actions — Quickstart and docs (free, official)</a></li><li><a href="https://docs.ray.io/en/latest/serve/getting_started.html">Ray Serve — Getting Started</a></li></ul>
+      <h4 style="margin-top:.8em">Video — English</h4>
+      <ul><li><a href="https://www.youtube.com/watch?v=fqMOX6JJhGo">Docker / DevOps full course — freeCodeCamp</a></li></ul>
+    </div>
+    <div class="card">
+      <h4>فيديو — بالعربية</h4>
+      <ul><li dir="auto"><a href="https://www.youtube.com/playlist?list=PLDoPjvoNmBAw4eOj58MZPakHjaO3frVMF">Learn Git and GitHub — Elzero Web School</a></li></ul>
+      
+    </div>
+  </div>
 </section>
 
 <section class="chapter">

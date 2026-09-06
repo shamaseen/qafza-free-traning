@@ -43,3 +43,4 @@ venv/
 # build and check scripts: kept locally, not shipped
 tools/
 04-docker/build_presenting.py
+add_resources.py

@@ -33,6 +33,9 @@ li{margin:.55em 0}
 .lead{font-size:clamp(19px,2.15vw,28px);color:var(--dim);max-width:56ch}
 .sub{color:var(--dim)}
 b,strong{color:#fff}
+a{color:var(--dvc);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.22)}
+a:hover{border-bottom-color:currentColor}
+li[dir]{unicode-bidi:plaintext}
 code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
      background:var(--code);padding:.12em .38em;border-radius:4px;font-size:.92em}
 pre{background:var(--code);border:1px solid var(--line);border-left:4px solid var(--dvc);
@@ -696,6 +699,25 @@ joblib.dump(fitted_pipeline, "pipeline.joblib")  <span class="c"># the pipeline,
   <h3>Docs</h3>
   <p class="sub">scikit-learn.org/stable/common_pitfalls.html &nbsp;·&nbsp;
   modules/cross_validation.html &nbsp;·&nbsp; notebook: <code>leakage_tutorial.ipynb</code></p>
+</section>
+
+<section>
+  <span class="tag">reference — not for reading</span>
+  <h2>Where to learn more</h2>
+  <p class="lead">All free. Every link was opened and checked before it went on this slide.</p>
+  <div class="two">
+    <div class="card">
+      <h4>Free courses and docs</h4>
+      <ul><li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and recommended practices — scikit-learn (the official page on exactly this)</a></li><li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation — scikit-learn user guide</a></li></ul>
+      <h4 style="margin-top:.8em">Video — English</h4>
+      <ul><li><a href="https://www.youtube.com/watch?v=0sOvCWFmrtA">Python API Development — freeCodeCamp (covers the sklearn workflow this builds on)</a></li></ul>
+    </div>
+    <div class="card">
+      <h4>فيديو — بالعربية</h4>
+      <ul><li dir="auto"><a href="https://www.youtube.com/playlist?list=PLtsZ69x5q-X9j44MdSX-NGuOhGXOY0aqH">تعلم الآلة بالعربي — Elgouhary AI</a></li><li dir="auto"><a href="https://www.youtube.com/watch?v=dWKffQja3Fs">الدورة الكاملة لتعلم الآلة — Hesham Asem</a></li></ul>
+      <p class="sub" style="margin-top:.5em">Leakage is rarely taught on its own — the Arabic courses above cover the cross-validation it depends on.</p>
+    </div>
+  </div>
 </section>
 
 <section class="chapter">
