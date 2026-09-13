@@ -361,7 +361,7 @@ feast materialize 2026-03-01T00:00:00 2026-03-11T00:00:00
 store.get_online_features(
     features=[<span class="s">"driver_hourly_stats:conv_rate"</span>],
     entity_rows=[{<span class="s">"driver_id"</span>: 1001}]).to_dict()
-<span class="o">p50 0.40 ms   p95 0.54 ms</span>
+<span class="o">p50 0.07 ms   p95 0.13 ms</span>
 </code></pre>
   <div class="two">
     <div class="oops"><b>An unknown entity returns <code>None</code>, not an error.</b> Your serving
