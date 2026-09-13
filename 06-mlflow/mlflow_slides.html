@@ -74,11 +74,22 @@ svg{max-width:100%;height:auto}
 #bar>i{display:block;height:100%;background:var(--dvc);transition:width .2s}
 #num{position:fixed;bottom:14px;right:20px;color:var(--dim);font:12px ui-monospace,monospace;z-index:9}
 #help{position:fixed;bottom:14px;left:20px;color:var(--dim);font:12px ui-monospace,monospace;z-index:9}
+#wb{position:fixed;inset:0;width:100vw;height:100vh;z-index:8;pointer-events:none;touch-action:none}
+body.drawing #wb{pointer-events:auto;cursor:crosshair}
+body.erasing #wb{cursor:cell}
+#wbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10;display:none;gap:6px;
+  align-items:center;padding:6px 8px;background:#161b22ee;border:1px solid var(--line);border-radius:10px;
+  font:600 12px system-ui,sans-serif}
+body.drawing #wbar{display:flex}
+#wbar button{height:28px;min-width:28px;padding:0 9px;border-radius:7px;border:1px solid var(--line);
+  background:#0d1117;color:var(--fg);font:inherit;cursor:pointer}
+#wbar button[data-c]{width:28px;padding:0;background:var(--c)}
+#wbar button[aria-pressed=true]{outline:2px solid var(--fg);outline-offset:1px}
 @media print{
   html,body{height:auto;overflow:visible}
   section{display:flex!important;position:relative;inset:auto;page-break-after:always;
           min-height:100vh;border:0}
-  #bar,#num,#help{display:none}
+  #bar,#num,#help,#wb,#wbar{display:none}
 }
 </style>
 </head>
@@ -1051,7 +1062,20 @@ $ mlflow doctor / mlflow gc
 
 <div id="bar"><i></i></div>
 <div id="num"></div>
-<div id="help">&larr; &rarr; or space &nbsp;·&nbsp; f fullscreen &nbsp;·&nbsp; p print</div>
+<div id="help">&larr; &rarr; or space &nbsp;·&nbsp; d draw &nbsp;·&nbsp; f fullscreen &nbsp;·&nbsp; p print</div>
+<canvas id="wb"></canvas>
+<div id="wbar">
+  <button data-c="#f85149" style="--c:#f85149" title="red (1)"></button>
+  <button data-c="#e3b341" style="--c:#e3b341" title="yellow (2)"></button>
+  <button data-c="#3fb950" style="--c:#3fb950" title="green (3)"></button>
+  <button data-c="#58a6ff" style="--c:#58a6ff" title="blue (4)"></button>
+  <button data-c="#e6edf3" style="--c:#e6edf3" title="white (5)"></button>
+  <button data-t="eraser" title="eraser (e)">eraser</button>
+  <button data-a="undo" title="undo (z)">undo</button>
+  <button data-a="clear" title="clear this page (c)">clear</button>
+  <button data-a="board" title="blank whiteboard (b)">board</button>
+  <button data-a="close" title="stop drawing (d or Esc)">&#x2715;</button>
+</div>
 <script>
 const s = [...document.querySelectorAll('section')];
 let i = Math.min(+(location.hash.slice(1) || 1), s.length) - 1;
@@ -1063,16 +1087,107 @@ function show(n){
   num.textContent = (i + 1) + ' / ' + s.length;
   history.replaceState(null, '', '#' + (i + 1));
   s[i].scrollTop = 0;
+  paint();
 }
-addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { show(i + 1); e.preventDefault(); }
-  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
-  else if (e.key === 'Home') show(0);
-  else if (e.key === 'End') show(s.length - 1);
-  else if (e.key === 'f') document.documentElement.requestFullscreen?.();
-  else if (e.key === 'p') print();
+
+/* ---- whiteboard: draw on any slide with a mouse, pen or finger ------------------------
+   Strokes are stored per page in 0..1 coordinates, so they stay put through fullscreen
+   and resizing. 's3' is slide 3; 'b3' is the blank board opened from slide 3. */
+// ponytail: annotations live in memory only, so a reload clears them. Key localStorage by
+// location.pathname if presenters need them to survive a refresh.
+const wb = document.getElementById('wb'), g = wb.getContext('2d'), wbar = document.getElementById('wbar');
+const COLORS = ['#f85149', '#e3b341', '#3fb950', '#58a6ff', '#e6edf3'];
+const ink = {};
+let drawing = false, board = false, tool = 'pen', color = COLORS[0], cur = null;
+const key = () => (board ? 'b' : 's') + i;
+const pt = e => [e.clientX / innerWidth, e.clientY / innerHeight];
+
+function paint(){
+  const W = wb.width, H = wb.height;
+  g.clearRect(0, 0, W, H);
+  if (board) { g.fillStyle = getComputedStyle(document.body).backgroundColor; g.fillRect(0, 0, W, H); }
+  g.lineCap = g.lineJoin = 'round';
+  for (const st of ink[key()] || []) {
+    g.strokeStyle = st.c; g.lineWidth = st.w * Math.min(W, H);
+    g.beginPath();
+    st.p.forEach(([x, y], k) => k ? g.lineTo(x * W, y * H) : g.moveTo(x * W, y * H));
+    if (st.p.length === 1) g.lineTo(st.p[0][0] * W + 0.1, st.p[0][1] * H);   // a single click is a dot
+    g.stroke();
+  }
+}
+function size(){ wb.width = innerWidth * devicePixelRatio; wb.height = innerHeight * devicePixelRatio; paint(); }
+function erase([x, y]){
+  const list = ink[key()] || [];
+  const keep = list.filter(st => !st.p.some(([a, b]) => Math.hypot((a - x) * innerWidth, (b - y) * innerHeight) < 18));
+  if (keep.length !== list.length) { ink[key()] = keep; paint(); }
+}
+function ui(){
+  document.body.classList.toggle('drawing', drawing);
+  document.body.classList.toggle('erasing', drawing && tool === 'eraser');
+  wbar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',
+    b.dataset.c ? tool === 'pen' && b.dataset.c === color
+      : b.dataset.t ? tool === 'eraser'
+      : b.dataset.a === 'board' && board));
+  paint();
+}
+const act = {
+  undo(){ (ink[key()] || []).pop(); paint(); },
+  clear(){ ink[key()] = []; paint(); },
+  board(){ board = !board; drawing = true; ui(); },
+  close(){ drawing = false; board = false; ui(); },
+};
+
+wb.addEventListener('pointerdown', e => {
+  wb.setPointerCapture(e.pointerId);
+  if (tool === 'eraser') { cur = 'erase'; return erase(pt(e)); }
+  cur = { c: color, w: 0.004, p: [pt(e)] };
+  (ink[key()] ||= []).push(cur);
+  paint();
 });
-addEventListener('click', e => { if (!e.target.closest('pre')) show(e.clientX < innerWidth / 3 ? i - 1 : i + 1); });
+wb.addEventListener('pointermove', e => {
+  if (!cur) return;
+  if (cur === 'erase') return erase(pt(e));
+  const W = wb.width, H = wb.height, [x0, y0] = cur.p[cur.p.length - 1], [x1, y1] = pt(e);
+  cur.p.push([x1, y1]);
+  g.strokeStyle = cur.c; g.lineWidth = cur.w * Math.min(W, H);
+  g.beginPath(); g.moveTo(x0 * W, y0 * H); g.lineTo(x1 * W, y1 * H); g.stroke();
+});
+wb.addEventListener('pointerup', () => cur = null);
+wb.addEventListener('pointercancel', () => cur = null);
+
+// keep focus off the toolbar, so space still means "next slide" rather than "press that button"
+wbar.addEventListener('pointerdown', e => e.preventDefault());
+wbar.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.c) { color = b.dataset.c; tool = 'pen'; ui(); }
+  else if (b.dataset.t) { tool = tool === 'eraser' ? 'pen' : 'eraser'; ui(); }
+  else act[b.dataset.a]();
+});
+
+/* ---- keyboard: the only way to change slides ------------------------------------------ */
+addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey) {                 // leave browser shortcuts alone, except undo
+    if (drawing && e.key === 'z') { act.undo(); e.preventDefault(); }
+    return;
+  }
+  const k = e.key;
+  if (k === 'ArrowRight' || k === ' ' || k === 'PageDown') { show(i + 1); e.preventDefault(); }
+  else if (k === 'ArrowLeft' || k === 'PageUp') show(i - 1);
+  else if (k === 'Home') show(0);
+  else if (k === 'End') show(s.length - 1);
+  else if (k === 'f') document.documentElement.requestFullscreen?.();
+  else if (k === 'p') print();
+  else if (k === 'd') { drawing = !drawing; board = board && drawing; tool = 'pen'; ui(); }
+  else if (k === 'e') { tool = drawing && tool === 'eraser' ? 'pen' : 'eraser'; drawing = true; ui(); }
+  else if (k === 'b') act.board();
+  else if (k === 'Escape') act.close();
+  else if (!drawing) return;
+  else if (k === 'z') act.undo();
+  else if (k === 'c') act.clear();
+  else if (k >= '1' && k <= '5') { color = COLORS[k - 1]; tool = 'pen'; ui(); }
+});
+addEventListener('resize', size);
+size();
 show(i);
 </script>
 </body>

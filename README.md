@@ -41,8 +41,15 @@ Linux, macOS and Windows.
 Open the `.html` file in a browser. Everything is embedded, so **no internet is needed** in
 the room.
 
-`←` `→` or `space` to move · click the left/right third of the screen · `f` fullscreen ·
-`p` print (one slide per page, which is how you get a PDF)
+`←` `→` or `space` to move · `Home` / `End` first and last · `f` fullscreen · `p` print (one
+slide per page, which is how you get a PDF). Slides change from the **keyboard only** — a mouse
+click never moves you, so you can point and click on a slide freely.
+
+**Drawing on slides.** Press `d` and draw with the mouse, a pen or a finger; a small toolbar
+appears at the top. `1`–`5` pick a colour, `e` is the eraser, `z` (or `Ctrl+Z`) undoes, `c` clears
+the page, and `b` opens a blank whiteboard over the current slide. `Esc` or `d` again stops
+drawing and leaves the ink on screen. Each slide keeps its own drawings as you move back and
+forth; they are not saved, so reloading the page clears them.
 
 Two markers appear throughout: a slide tagged **skip on first read** is depth you can come back
 to, and one tagged **reference — not for reading** is a lookup table, not a slide to present.
