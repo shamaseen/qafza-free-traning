@@ -13,6 +13,10 @@ Each one also carries its source and licence on the slide it appears on.
 | Prometheus architecture — pull, store, query, alert | `10-monitoring` | [prometheus.io/docs/introduction/overview](https://prometheus.io/docs/introduction/overview/) | Apache 2.0 |
 | Feast architecture — sources, store, online and offline serving | `09-feature-management` | [feast.dev](https://docs.feast.dev/) | Apache 2.0 |
 | Image layers — the stack, and layer reuse across images | `04-docker` | [docs.docker.com/get-started/docker-concepts/building-images](https://docs.docker.com/get-started/docker-concepts/building-images/understanding-image-layers/) | Apache 2.0 — © Docker, Inc. |
+| Map of Ray — Cloud, Ray Core, Ray AI Libraries | `08-distributed-ml` | [docs.ray.io/en/latest/ray-overview](https://docs.ray.io/en/latest/ray-overview/index.html) | Apache 2.0 — © The Ray Team |
+| Ray cluster — head node, worker nodes, raylet, object store | `08-distributed-ml` | [docs.ray.io/en/latest/cluster/key-concepts](https://docs.ray.io/en/latest/cluster/key-concepts.html) | Apache 2.0 — © The Ray Team |
+| `ray.get` in a loop against one batched `ray.get` | `08-distributed-ml` | [docs.ray.io/en/latest/ray-core/patterns/ray-get-loop](https://docs.ray.io/en/latest/ray-core/patterns/ray-get-loop.html) | Apache 2.0 — © The Ray Team |
+| Ray Train overview — Trainer, scaling config, workers | `08-distributed-ml` | [docs.ray.io/en/latest/train/overview](https://docs.ray.io/en/latest/train/overview.html) | Apache 2.0 — © The Ray Team |
 | The parts of an HTTP request, and of a response | `03-production-api` | [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview) | CC BY-SA 2.5 — © Mozilla contributors |
 
 Most are used unmodified; the Kubernetes one is cropped to two panels and Docker's layer

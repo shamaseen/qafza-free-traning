@@ -116,7 +116,7 @@ Session 11 builds a CI workflow that runs exactly these checks over the whole re
 
 ## Image credits
 
-Diagrams come from the official Docker, MLflow, DVC and MDN documentation, reused under
+Diagrams come from the official Docker, MLflow, DVC, Ray and MDN documentation, reused under
 Apache 2.0 and CC BY-SA 2.5 with attribution on the slide. Three more — OPC Router's
 VM-vs-Docker, ByteByteGo's REST-vs-GraphQL and Rocky Bhatia's six API styles — are
 all-rights-reserved work, embedded here with attribution at the repository owner's request;
