@@ -56,12 +56,16 @@ to cycle through them:
 
 * **EN** — English only, exactly as written.
 * **ترجمة** — key terms get their Arabic word in brackets: *container (حاوية)*.
-* **شرح** — the Arabic word plus a very short explanation in simple Arabic:
-  *container (حاوية: صندوق فيه برنامجك وكل ما يحتاجه ليعمل)*.
+* **شرح** — one short line of plain, simple Arabic under every line of text on the slide:
+  paragraphs, bullets, table cells, headings and callouts. It explains what the whole sentence
+  means, rather than word by word. Under *"You compute features in a notebook for training, and
+  again in an API for serving."* you get *تحسب الميزات مرة في الدفتر لتدريب النموذج، ثم تحسبها مرة
+  ثانية داخل الخدمة عند استخدامه.*
 
-If an explanation is harder than the term, go back to **ترجمة** for just the word. Each term is
-glossed once per slide, code is never touched, and **EN** puts every slide back precisely as it
-was. Everything is built into each file, so this works offline too.
+If a line is harder than it needs to be, **ترجمة** is one click away and shows just the words.
+Code is never touched, **EN** puts every slide back precisely as it was, and everything is
+built into each file, so it works offline too. All 2,208 lines across the 13 decks have their
+Arabic line.
 
 Two markers appear throughout: a slide tagged **skip on first read** is depth you can come back
 to, and one tagged **reference — not for reading** is a lookup table, not a slide to present.
