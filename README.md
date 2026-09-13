@@ -51,6 +51,13 @@ the page, and `b` opens a blank whiteboard over the current slide. `Esc` or `d` 
 drawing and leaves the ink on screen. Each slide keeps its own drawings as you move back and
 forth; they are not saved, so reloading the page clears them.
 
+**Arabic next to the English.** Press `t`, or the **ع Arabic** button at the top right, and key
+technical terms get their Arabic in brackets right after them — *data leakage (تسرّب البيانات)*,
+*container (حاوية)*, *object store (مخزن الكائنات)*. The English stays exactly as it is. Each
+term is glossed once per slide, code is never touched, and pressing it again (**Undo Arabic**)
+puts every slide back precisely as it was. The translations are built into each file, so this
+works offline too.
+
 Two markers appear throughout: a slide tagged **skip on first read** is depth you can come back
 to, and one tagged **reference — not for reading** is a lookup table, not a slide to present.
 Every session defines its vocabulary in a **crash course** slide before using it — you are

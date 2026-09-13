@@ -85,11 +85,17 @@ body.drawing #wbar{display:flex}
   background:#0d1117;color:var(--fg);font:inherit;cursor:pointer}
 #wbar button[data-c]{width:28px;padding:0;background:var(--c)}
 #wbar button[aria-pressed=true]{outline:2px solid var(--fg);outline-offset:1px}
+#tr{position:fixed;top:12px;right:14px;z-index:10;height:30px;padding:0 11px;border-radius:8px;
+  border:1px solid var(--line);background:#161b22ee;color:var(--fg);font:600 13px system-ui,sans-serif;cursor:pointer}
+#tr:hover{border-color:var(--fg)}
+#tr[aria-pressed=true]{border-color:#e3b341;color:#e3b341}
+.ar{color:#e3b341;font-weight:500;font-size:.88em}
+.ar bdi{font-family:"Noto Naskh Arabic","Noto Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif}
 @media print{
   html,body{height:auto;overflow:visible}
   section{display:flex!important;position:relative;inset:auto;page-break-after:always;
           min-height:100vh;border:0}
-  #bar,#num,#help,#wb,#wbar{display:none}
+  #bar,#num,#help,#wb,#wbar,#tr{display:none}
 }
 </style>
 </head>
@@ -739,7 +745,9 @@ joblib.dump(fitted_pipeline, "pipeline.joblib")  <span class="c"># the pipeline,
 
 <div id="bar"><i></i></div>
 <div id="num"></div>
-<div id="help">&larr; &rarr; or space &nbsp;·&nbsp; d draw &nbsp;·&nbsp; f fullscreen &nbsp;·&nbsp; p print</div>
+<div id="help">&larr; &rarr; or space &nbsp;·&nbsp; d draw &nbsp;·&nbsp; t Arabic &nbsp;·&nbsp; f fullscreen &nbsp;·&nbsp; p print</div>
+<button id="tr" type="button" aria-pressed="false" title="Add the Arabic after key English terms, or take it away again (t)">ع&nbsp; Arabic</button>
+<script id="ar-glossary" type="application/json">[["serialising arguments and results","تسلسل الوسائط والنتائج"],["serializing arguments and results","تسلسل الوسائط والنتائج"],["machine learning","تعلم الآلة"],["deep learning","التعلم العميق"],["model","نموذج"],["models","نماذج"],["dataset","مجموعة بيانات"],["datasets","مجموعات بيانات"],["training","التدريب"],["training set","مجموعة التدريب"],["training data","بيانات التدريب"],["training loop","حلقة التدريب"],["training run","عملية تدريب"],["training script","سكربت التدريب"],["training rows","صفوف التدريب"],["test set","مجموعة الاختبار"],["test rows","صفوف الاختبار"],["validation","التحقق"],["validation set","مجموعة التحقق"],["cross-validation","التحقق المتقاطع"],["cross validation","التحقق المتقاطع"],["nested cross-validation","التحقق المتقاطع المتداخل"],["fold","طيّة"],["folds","الطيّات"],["feature","ميزة"],["features","الميزات"],["label","تسمية"],["labels","التسميات"],["target","المتغير الهدف"],["prediction","تنبؤ"],["predictions","تنبؤات"],["prediction time","وقت التنبؤ"],["inference","الاستدلال"],["accuracy","الدقة"],["metric","مقياس"],["metrics","المقاييس"],["loss","الخسارة"],["overfitting","فرط التخصيص"],["underfitting","نقص التخصيص"],["hyperparameter","معامل فائق"],["hyperparameters","المعاملات الفائقة"],["parameter","معامل"],["parameters","المعاملات"],["params","المعاملات"],["weights","الأوزان"],["gradient","التدرّج"],["gradients","التدرّجات"],["gradient accumulation","تجميع التدرّجات"],["learning rate","معدل التعلّم"],["epoch","حقبة تدريب"],["batch","دفعة"],["batches","دفعات"],["batch size","حجم الدفعة"],["batching","التجميع في دفعات"],["neural network","شبكة عصبية"],["neural networks","الشبكات العصبية"],["layer","طبقة"],["layers","الطبقات"],["optimiser","المُحسِّن"],["optimizer","المُحسِّن"],["tokeniser","مُجزِّئ النص"],["tokenizer","مُجزِّئ النص"],["transformer","مُحوِّل"],["transformers","المُحوِّلات"],["pretrained","مُدرَّب مسبقاً"],["pretrained model","نموذج مُدرَّب مسبقاً"],["fine-tuning","الضبط الدقيق"],["embedding","تضمين"],["embeddings","التضمينات"],["checkpoint","نقطة حفظ"],["checkpoints","نقاط الحفظ"],["preprocessing","المعالجة المسبقة"],["scaler","أداة التحجيم"],["imputer","أداة تعويض القيم المفقودة"],["missing values","القيم المفقودة"],["encoding","الترميز"],["one-hot encoding","الترميز الأحادي"],["estimator","المُقدِّر"],["pipeline","خط المعالجة"],["pipelines","خطوط المعالجة"],["data leakage","تسرّب البيانات"],["target leakage","تسرّب الهدف"],["leakage","التسرّب"],["leak","تسرّب"],["leaks","تسرّبات"],["leaky","مُسرِّب"],["seed","البذرة العشوائية"],["random seed","البذرة العشوائية"],["baseline","خط الأساس"],["time series","السلاسل الزمنية"],["resampling","إعادة أخذ العينات"],["duplicates","التكرارات"],["noise","الضوضاء"],["distribution","التوزيع"],["drift","الانحراف"],["data drift","انحراف البيانات"],["concept drift","انحراف المفهوم"],["training-serving skew","انحراف التدريب عن التقديم"],["skew","التباين"],["reproducible","قابل لإعادة الإنتاج"],["reproducibility","قابلية إعادة الإنتاج"],["reproduce","إعادة الإنتاج"],["tensor","موتر"],["tensors","الموترات"],["forward pass","التمرير الأمامي"],["backward pass","التمرير العكسي"],["backpropagation","الانتشار العكسي"],["dataloader","مُحمِّل البيانات"],["mixed precision","الدقة المختلطة"],["export","التصدير"],["tracing","التتبّع"],["device","الجهاز"],["kernel","النواة"],["GPU","معالج الرسوميات"],["CPU","المعالج"],["cores","أنوية المعالج"],["API","واجهة برمجة التطبيقات"],["APIs","واجهات برمجة التطبيقات"],["endpoint","نقطة النهاية"],["endpoints","نقاط النهاية"],["request","طلب"],["requests","الطلبات"],["HTTP request","طلب HTTP"],["response","استجابة"],["responses","الاستجابات"],["status code","رمز الحالة"],["status codes","رموز الحالة"],["client","العميل"],["clients","العملاء"],["server","الخادم"],["servers","الخوادم"],["schema","المخطط"],["payload","الحمولة"],["latency","زمن الاستجابة"],["throughput","الإنتاجية"],["middleware","البرمجيات الوسيطة"],["authentication","المصادقة"],["rate limiting","تحديد معدل الطلبات"],["health check","فحص السلامة"],["readiness","الجاهزية"],["stack trace","تتبّع المكدّس"],["serialisation","التسلسل"],["serialization","التسلسل"],["serialising","تسلسل"],["serializing","تسلسل"],["pickling","التسلسل بـ pickle"],["argument","وسيط"],["arguments","الوسائط"],["async","غير متزامن"],["asynchronous","غير متزامن"],["concurrency","التزامن"],["webhook","خطاف ويب"],["webhooks","خطافات الويب"],["contract","العقد"],["boundary","الحدّ الفاصل"],["route","المسار"],["handler","المعالج"],["caller","الجهة المستدعية"],["callers","الجهات المستدعية"],["container","حاوية"],["containers","الحاويات"],["image","صورة"],["images","الصور"],["base image","الصورة الأساسية"],["cache","الذاكرة المؤقتة"],["cached","مخزَّن مؤقتاً"],["layer cache","ذاكرة الطبقات المؤقتة"],["build context","سياق البناء"],["multi-stage build","البناء متعدد المراحل"],["registry","السجل"],["model registry","سجل النماذج"],["volume","وحدة تخزين"],["volumes","وحدات التخزين"],["port","المنفذ"],["ports","المنافذ"],["daemon","الخدمة الخلفية"],["virtual machine","آلة افتراضية"],["virtual machines","الآلات الافتراضية"],["operating system","نظام التشغيل"],["orchestrator","المُنسِّق"],["orchestration","التنسيق"],["dependency","اعتمادية"],["dependencies","الاعتماديات"],["environment","البيئة"],["environments","البيئات"],["environment variable","متغير البيئة"],["deployment","النشر"],["deploy","نشر"],["production","بيئة الإنتاج"],["staging","بيئة التجهيز"],["rollback","التراجع إلى إصدار سابق"],["tag","وسم"],["tags","الوسوم"],["ETL","الاستخراج والتحويل والتحميل"],["extract","الاستخراج"],["transform","التحويل"],["warehouse","مستودع البيانات"],["data warehouse","مستودع البيانات"],["database","قاعدة بيانات"],["databases","قواعد البيانات"],["column","عمود"],["columns","الأعمدة"],["row","صف"],["rows","الصفوف"],["row count","عدد الصفوف"],["idempotent","آمن عند التكرار"],["idempotency","الأمان عند التكرار"],["upsert","إدراج أو تحديث"],["transaction","معاملة"],["transactions","المعاملات"],["watermark","علامة آخر معالجة"],["incremental","تزايدي"],["retry","إعادة المحاولة"],["retries","إعادات المحاولة"],["backoff","التراجع التدريجي"],["exponential backoff","التراجع الأسّي"],["natural key","المفتاح الطبيعي"],["primary key","المفتاح الأساسي"],["upstream","المصدر السابق"],["downstream","الجهة اللاحقة"],["scheduler","المُجدوِل"],["data quality","جودة البيانات"],["deduplication","إزالة التكرار"],["null","قيمة فارغة"],["timestamp","الطابع الزمني"],["timestamps","الطوابع الزمنية"],["timezone","المنطقة الزمنية"],["experiment tracking","تتبّع التجارب"],["experiment","تجربة"],["experiments","التجارب"],["run id","معرّف التشغيل"],["tracking server","خادم التتبّع"],["artifact","مُخرَج محفوظ"],["artifacts","المُخرَجات المحفوظة"],["artifact store","مخزن المُخرَجات"],["autolog","التسجيل التلقائي"],["logging","التسجيل"],["signature","التوقيع"],["model signature","توقيع النموذج"],["alias","الاسم المستعار"],["aliases","الأسماء المستعارة"],["lineage","تتبّع الأصل"],["provenance","مصدر المنشأ"],["backend store","مخزن الخلفية"],["lifecycle","دورة الحياة"],["versioning","إدارة الإصدارات"],["version","إصدار"],["versions","الإصدارات"],["version control","التحكم في الإصدارات"],["repository","المستودع"],["repo","المستودع"],["commit","إيداع"],["commits","الإيداعات"],["branch","فرع"],["branches","الفروع"],["merge","دمج"],["pull request","طلب دمج"],["remote","بعيد"],["pointer file","ملف المؤشر"],["pointer","مؤشر"],["hash","قيمة التجزئة"],["fingerprint","البصمة"],["stage","مرحلة"],["stages","المراحل"],["lock file","ملف القفل"],["workspace","مساحة العمل"],["snapshot","لقطة"],["bucket","سلة التخزين"],["distributed","موزَّع"],["distributed training","التدريب الموزَّع"],["distributed computing","الحوسبة الموزَّعة"],["task","مهمة"],["tasks","المهام"],["actor","كائن فاعل"],["actors","الكائنات الفاعلة"],["object store","مخزن الكائنات"],["object reference","مرجع الكائن"],["worker","عامل"],["workers","العمّال"],["worker node","عقدة عاملة"],["worker nodes","العُقد العاملة"],["worker process","عملية عاملة"],["worker processes","العمليات العاملة"],["head node","العقدة الرئيسية"],["node","عقدة"],["nodes","العُقد"],["cluster","عنقود"],["clusters","العناقيد"],["parallel","متوازٍ"],["in parallel","بالتوازي"],["parallelism","التوازي"],["sequential","تسلسلي"],["serial","تسلسلي"],["process","عملية"],["processes","العمليات"],["thread","خيط تنفيذ"],["threads","خيوط التنفيذ"],["threading","تعدد الخيوط"],["multiprocessing","المعالجة المتعددة"],["reference","مرجع"],["shard","جزء"],["shards","الأجزاء"],["sharding","التقسيم إلى أجزاء"],["autoscaler","أداة التوسّع التلقائي"],["autoscaling","التوسّع التلقائي"],["resource","مورد"],["resources","الموارد"],["memory","الذاكرة"],["shared memory","الذاكرة المشتركة"],["speedup","التسريع"],["overhead","الحِمل الإضافي"],["bottleneck","عنق الزجاجة"],["fault tolerance","تحمّل الأعطال"],["feature store","مخزن الميزات"],["online store","المخزن الفوري"],["offline store","المخزن غير الفوري"],["entity","كيان"],["entities","الكيانات"],["feature view","عرض الميزات"],["point-in-time","حسب اللحظة الزمنية"],["point-in-time join","ربط حسب اللحظة الزمنية"],["join","ربط الجداول"],["materialisation","التجسيد"],["materialization","التجسيد"],["serving","التقديم"],["model serving","تقديم النموذج"],["freshness","حداثة البيانات"],["monitoring","المراقبة"],["observability","قابلية الرصد"],["counter","عدّاد"],["counters","العدّادات"],["gauge","مقياس لحظي"],["histogram","مدرّج تكراري"],["alert","تنبيه"],["alerts","التنبيهات"],["alerting","التنبيه"],["dashboard","لوحة المعلومات"],["dashboards","لوحات المعلومات"],["scrape","سحب المقاييس"],["scraping","سحب المقاييس"],["query","استعلام"],["queries","الاستعلامات"],["percentile","المئين"],["quantile","الكمّية"],["error rate","معدل الأخطاء"],["error ratio","نسبة الأخطاء"],["threshold","العتبة"],["anomaly","شذوذ"],["incident","حادثة"],["on-call","المناوبة"],["logs","السجلات"],["uptime","مدة التشغيل المتواصل"],["continuous integration","التكامل المستمر"],["continuous delivery","التسليم المستمر"],["continuous deployment","النشر المستمر"],["CI/CD","التكامل والتسليم المستمر"],["workflow","سير العمل"],["workflows","مسارات العمل"],["trigger","مُشغِّل الحدث"],["job","وظيفة"],["jobs","الوظائف"],["runner","المُنفِّذ"],["gate","بوابة فحص"],["quality gate","بوابة الجودة"],["retraining","إعادة التدريب"],["retrain","إعادة التدريب"],["canary","النشر التجريبي التدريجي"],["replica","نسخة مطابقة"],["replicas","النسخ المطابقة"],["secret","سرّ"],["secrets","الأسرار"],["credentials","بيانات الاعتماد"],["code review","مراجعة الكود"],["linting","فحص جودة الكود"],["unit test","اختبار الوحدة"],["unit tests","اختبارات الوحدة"],["integration test","اختبار التكامل"],["infrastructure as code","البنية التحتية ككود"],["infrastructure","البنية التحتية"],["provider","المزوّد"],["providers","المزوّدون"],["state","الحالة"],["state file","ملف الحالة"],["state lock","قفل الحالة"],["locking","القفل"],["module","وحدة"],["modules","الوحدات"],["variable","متغير"],["variables","المتغيرات"],["output","مُخرَج"],["outputs","المُخرَجات"],["declarative","تصريحي"],["cloud","السحابة"],["cloud provider","مزوّد الخدمة السحابية"],["backend","الواجهة الخلفية"],["network","الشبكة"],["storage","التخزين"],["end-to-end","من البداية إلى النهاية"],["recovery","الاستعادة"],["notebook","الدفتر التفاعلي"],["notebooks","الدفاتر التفاعلية"],["script","سكربت"],["scripts","السكربتات"],["function","دالة"],["functions","الدوال"],["class","صنف"],["classes","الأصناف"],["library","مكتبة"],["libraries","المكتبات"],["package","حزمة"],["packages","الحزم"],["framework","إطار عمل"],["command line","سطر الأوامر"],["terminal","الطرفية"],["configuration","الإعدادات"],["config","الإعدادات"],["debugging","تصحيح الأخطاء"],["bug","خلل برمجي"],["bugs","الأخطاء البرمجية"],["exception","استثناء"],["error message","رسالة الخطأ"],["disk","القرص"],["in-process","داخل العملية نفسها"],["cheat sheet","ورقة مرجعية مختصرة"],["crash course","دورة مكثّفة"],["best practices","أفضل الممارسات"],["trade-off","مفاضلة"],["anti-pattern","نمط خاطئ"],["remote storage","التخزين البعيد"],["target encoding","ترميز الهدف"],["training/serving skew","انحراف التدريب عن التقديم"],["join key","مفتاح الربط"]]</script>
 <canvas id="wb"></canvas>
 <div id="wbar">
   <button data-c="#f85149" style="--c:#f85149" title="red (1)"></button>
@@ -854,6 +862,7 @@ addEventListener('keydown', e => {
   else if (k === 'End') show(s.length - 1);
   else if (k === 'f') document.documentElement.requestFullscreen?.();
   else if (k === 'p') print();
+  else if (k === 't') setArabic(!arabic);
   else if (k === 'd') { drawing = !drawing; board = board && drawing; tool = 'pen'; ui(); }
   else if (k === 'e') { tool = drawing && tool === 'eraser' ? 'pen' : 'eraser'; drawing = true; ui(); }
   else if (k === 'b') act.board();
@@ -865,6 +874,52 @@ addEventListener('keydown', e => {
 });
 addEventListener('resize', size);
 size();
+/* ---- Arabic glossary: add (العربية) after key English terms, and take it away again ----
+   Each term is glossed once per slide, so a slide does not fill up with repeats. Code
+   blocks are never touched. Undo removes every added span and re-joins the text, so the
+   page is exactly as it was. The glossary itself is the JSON in #ar-glossary. */
+const trBtn = document.getElementById('tr');
+const GLOSS = JSON.parse(document.getElementById('ar-glossary').textContent);
+const AR = new Map(GLOSS.map(([en, ar]) => [en.toLowerCase(), ar]));
+const TERMS = new RegExp("(?<![\\w'’-])(" + GLOSS.map(g => g[0]).sort((a, b) => b.length - a.length)
+  .map(x => x.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')).join('|') + ")(?![\\w'’-])", 'gi');
+const NO_GLOSS = 'pre, code, script, style, svg, .tag, .ar, button, #wbar, #help, #num, [dir="rtl"]';
+let arabic = false, glosses = [];
+
+function addArabic(){
+  for (const sec of s) {
+    const seen = new Set(), texts = [];
+    const walk = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT);
+    while (walk.nextNode()) if (!walk.currentNode.parentElement.closest(NO_GLOSS)) texts.push(walk.currentNode);
+    for (const node of texts) {
+      const text = node.nodeValue; let last = 0, frag = null;
+      for (const m of text.matchAll(TERMS)) {
+        const key = m[1].toLowerCase();
+        if (seen.has(key) || !AR.has(key)) continue;
+        seen.add(key);
+        const end = m.index + m[0].length, span = document.createElement('span'), bdi = document.createElement('bdi');
+        bdi.lang = 'ar'; bdi.textContent = AR.get(key);
+        span.className = 'ar'; span.append(' (', bdi, ')');
+        (frag ||= document.createDocumentFragment()).append(text.slice(last, end), span);
+        glosses.push(span); last = end;
+      }
+      if (frag) { frag.append(text.slice(last)); node.replaceWith(frag); }
+    }
+  }
+}
+function removeArabic(){
+  for (const span of glosses) { const parent = span.parentNode; span.remove(); parent.normalize(); }
+  glosses = [];
+}
+function setArabic(on){
+  if (on === arabic) return;
+  arabic = on;
+  on ? addArabic() : removeArabic();
+  trBtn.innerHTML = on ? '&#x21BA;&nbsp; Undo Arabic' : 'ع&nbsp; Arabic';
+  trBtn.setAttribute('aria-pressed', on);
+}
+trBtn.addEventListener('pointerdown', e => e.preventDefault());   // keep focus off it, so space still turns the page
+trBtn.addEventListener('click', () => setArabic(!arabic));
 show(i);
 </script>
 </body>
