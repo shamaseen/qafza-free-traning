@@ -523,7 +523,7 @@ loaded = mlflow.pyfunc.load_model(<span class="s">f"runs:/{run_id}/model"</span>
   <p class="lead">A run is something that happened. Registering promotes one to a named, versioned model that serving code can ask for by name.</p>
 <!-- mo:mlf-alias -->
 <figure>
-<svg viewBox="0 0 860 190" style="width:100%;max-width:1000px;margin:.2em auto;display:block"
+<svg viewBox="0 0 860 182" style="width:100%;max-width:760px;margin:.1em auto;display:block"
      role="img" aria-label="Three registered versions of one model; the champion alias moves from version 2 to version 3, and the serving code that loads models slash churn-classifier at champion does not change">
 <style>
 .mr-al{animation:mr-al 9s infinite}
@@ -544,8 +544,8 @@ loaded = mlflow.pyfunc.load_model(<span class="s">f"runs:/{run_id}/model"</span>
   <rect x="270" y="100" width="200" height="34" rx="8" fill="var(--mlf)" opacity=".85"></rect>
   <text x="370" y="123" text-anchor="middle" style="fill:#0d1117;font:600 15px ui-monospace,monospace">@champion</text>
 </g>
-<text x="40" y="168" class="fig-t">serving loads models:/churn-classifier@champion — unchanged</text>
-<text class="mr-say fig-d" x="40" y="190" fill="var(--ok)">promotion is moving the alias; rollback is moving it back</text>
+<text x="40" y="150" class="fig-t">serving loads models:/churn-classifier@champion — unchanged</text>
+<text class="mr-say fig-d" x="40" y="174" fill="var(--ok)">promotion is moving the alias; rollback is moving it back</text>
 </svg>
 <figcaption>Deployment code stops mentioning run ids, and a rollback stops being a deployment.</figcaption>
 </figure>

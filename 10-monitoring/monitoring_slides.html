@@ -164,7 +164,7 @@ body.ar-on section>*{flex-shrink:0}
   <h2>Crash course — how Prometheus sees the world</h2>
 <!-- mo:mon-scrape -->
 <figure>
-<svg viewBox="0 0 860 190" style="width:100%;max-width:1000px;margin:.2em auto;display:block"
+<svg viewBox="0 0 860 154" style="width:100%;max-width:840px;margin:.2em auto;display:block"
      role="img" aria-label="Prometheus pulls the /metrics page on a timer; the counter only climbs, and rate turns it into requests per second">
 <style>
 .mo-pull{animation:mo-pull 4s infinite}
@@ -186,13 +186,13 @@ body.ar-on section>*{flex-shrink:0}
 <g class="mo-pull"><rect x="470" y="78" width="84" height="24" rx="6" fill="var(--dvc)" opacity=".9"></rect>
   <text x="512" y="95" text-anchor="middle" style="fill:#0d1117;font:600 13px ui-monospace,monospace">scrape</text></g>
 <text x="390" y="46" class="fig-d" text-anchor="middle">it pulls — nothing is pushed</text>
-<text x="40" y="164" class="fig-d">api_requests_total</text>
+<text x="40" y="146" class="fig-d">api_requests_total</text>
 <g class="fig-t" fill="var(--ok)">
-<text class="mo-c1" x="250" y="164">1 204</text>
-<text class="mo-c2" x="380" y="164">1 331</text>
-<text class="mo-c3" x="510" y="164">1 460</text>
+<text class="mo-c1" x="250" y="146">1 204</text>
+<text class="mo-c2" x="380" y="146">1 331</text>
+<text class="mo-c3" x="510" y="146">1 460</text>
 </g>
-<text class="mo-tick fig-t" x="620" y="164" fill="var(--warn)">rate(...[1m]) → 64 req/s</text>
+<text class="mo-tick fig-t" x="620" y="146" fill="var(--warn)">rate(...[1m]) → 64 req/s</text>
 </svg>
 <figcaption>The counter only ever climbs; <code>rate()</code> is what turns it into a number worth looking at.</figcaption>
 </figure>
