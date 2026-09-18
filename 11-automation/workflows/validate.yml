@@ -25,7 +25,9 @@ jobs:
               t = open(f).read()
               if t.count("<section") != t.count("</section>"):
                   bad.append(f"{f}: unbalanced sections")
-              ext = re.findall(r'(?:src|href)="(?!#|data:)[^"]+"', t)
+              # src, not href: a deck must carry its own pictures, but the reading list
+              # at the end is allowed to link out to the docs it recommends
+              ext = re.findall(r'src="(?!#|data:)[^"]+"', t)
               if ext:
                   bad.append(f"{f}: external reference {ext[:2]}")
               print(f"{f}: {t.count('<section')} slides")
