@@ -17,11 +17,13 @@ Each one also carries its source and licence on the slide it appears on.
 | Ray cluster — a head node holding your code, and worker nodes (cropped to the cluster) | `08-distributed-ml` | [docs.ray.io/en/latest/cluster/kubernetes/user-guides/storage](https://docs.ray.io/en/latest/cluster/kubernetes/user-guides/storage.html) | Apache 2.0 — © The Ray Team |
 | `ray.get` in a loop against one batched `ray.get` | `08-distributed-ml` | [docs.ray.io/en/latest/ray-core/patterns/ray-get-loop](https://docs.ray.io/en/latest/ray-core/patterns/ray-get-loop.html) | Apache 2.0 — © The Ray Team |
 | Ray Train overview — Trainer, scaling config, workers | `08-distributed-ml` | [docs.ray.io/en/latest/train/overview](https://docs.ray.io/en/latest/train/overview.html) | Apache 2.0 — © The Ray Team |
+| Ray Serve architecture — controller, proxies, request queues and replicas | `11-automation` | [docs.ray.io/en/latest/serve/architecture](https://docs.ray.io/en/latest/serve/architecture.html) | Apache 2.0 — © The Ray Team |
+| MLOps with CI/CD — the numbered chain from experiment to monitoring | `13-end-to-end` | [Google Cloud Architecture Center](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | CC BY 4.0 — © Google LLC |
 | Airflow's own architecture — DAG files, scheduler, API server, metadata database | `05-etl` | [airflow.apache.org/docs/apache-airflow/stable/core-concepts/overview](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/overview.html) | Apache 2.0 — © The Apache Software Foundation |
 | Sources → extract, transform, load → targets | `05-etl` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Extract,_Transform,_Load_Data_Flow_Diagram.svg) — by Bamyers99 | CC0 1.0, public domain |
 | The parts of an HTTP request, and of a response | `03-production-api` | [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview) | CC BY-SA 2.5 — © Mozilla contributors |
 
-Most are used unmodified; Airflow's is trimmed to its content and the public-domain ETL diagram is recoloured for the dark deck (its CC0 dedication allows any change); the Kubernetes one is cropped to two panels and Docker's layer
+Most are used unmodified; Airflow's is trimmed to its content, Ray's and Google's are rendered from their SVG originals and the public-domain ETL diagram is recoloured for the dark deck (its CC0 dedication allows any change); the Kubernetes one is cropped to two panels and Docker's layer
 diagrams are trimmed of their white margins to its two right-hand panels, as its
 licence permits with attribution. All are embedded rather than linked, so the decks keep working with no
 network. Terraform's diagrams were deliberately left out: HashiCorp's licensing changed and I
