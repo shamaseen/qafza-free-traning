@@ -44,3 +44,6 @@ venv/
 tools/
 04-docker/build_presenting.py
 add_resources.py
+
+# a stray copy of the dataset at the repo root; the session ships 07-dvc/data.zip
+/data.zip
