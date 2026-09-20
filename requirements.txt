@@ -18,6 +18,11 @@ httpx
 
 # --- session 5 (ETL) ---
 sqlalchemy
+apache-airflow>=3.3       # install with the official constraints file for your Python:
+#   pip install "apache-airflow==3.3.2" \
+#     --constraint https://raw.githubusercontent.com/apache/airflow/constraints-3.3.2/constraints-3.12.txt
+# Note: airflow-core pins fastapi<0.137, which caps session 3's FastAPI in a shared
+# environment. Both sessions work at that version; it is a ceiling, not a conflict.
 
 # --- session 2 (deep learning) ---
 torch

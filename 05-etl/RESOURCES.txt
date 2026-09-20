@@ -1,5 +1,5 @@
 ==========================================================================
-Session 5 - ETL and data pipelines (SQLAlchemy)
+Session 5 - ETL and data pipelines (Airflow, SQLAlchemy)
 ==========================================================================
 
 Free courses, tutorials and videos for this session. All free, all checked.
@@ -8,6 +8,8 @@ do first, is in RESOURCES.txt at the root of this repository.
 
 
   Free courses and tutorials
+    https://airflow.apache.org/docs/apache-airflow/stable/tutorial/
+      Airflow Tutorial, TaskFlow included (free, official)
     https://github.com/DataTalksClub/data-engineering-zoomcamp
       Data Engineering Zoomcamp — DataTalks.Club (free, video +
       homework)
@@ -15,11 +17,15 @@ do first, is in RESOURCES.txt at the root of this repository.
       SQLAlchemy 2.0 Tutorial (free, official)
 
   Video - English
+    https://www.youtube.com/playlist?list=PLc2EZr8W2QIAI0cS1nZGNxoLzppb7XbqM
+      Apache Airflow Complete Tutorial, Hands-on Course — SleekData
     https://www.youtube.com/watch?v=0sOvCWFmrtA
       Python API Development — freeCodeCamp (the SQL and SQLAlchemy
       sections)
 
   Video - Arabic
+    https://www.youtube.com/watch?v=fWcoGSBynQ4
+      Apache Airflow بالعربى — Mohamed Alansary
     https://www.youtube.com/playlist?list=PLDoPjvoNmBAyE_gei5d18qkfIe-Z8mocs
       Mastering Python — تعلم بايثون — Elzero Web School
 

@@ -16,7 +16,7 @@ first.
 | 2 | Deep Learning Pipeline | PyTorch, Hugging Face | [`02-deep-learning`](02-deep-learning) |
 | 3 | Production API | FastAPI, Pydantic | [`03-production-api`](03-production-api) |
 | 4 | Docker | Docker Engine | [`04-docker`](04-docker) |
-| 5 | ETL Pipeline | Python, SQLAlchemy | [`05-etl`](05-etl) |
+| 5 | ETL Pipeline | **Airflow**, SQLAlchemy | [`05-etl`](05-etl) |
 | 6 | **Experiment tracking** | **MLflow** | [`06-mlflow`](06-mlflow) |
 | 7 | **Versioning** | **DVC** | [`07-dvc`](07-dvc) |
 | 8 | Distributed ML | Ray Core, Ray Train | [`08-distributed-ml`](08-distributed-ml) |
