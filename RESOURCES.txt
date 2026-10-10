@@ -335,6 +335,9 @@ Session 10 - Monitoring (Prometheus, Grafana)
       Grafana Tutorials (free, official)
 
   Video - English
+    https://www.youtube.com/watch?v=vf5MJLoXUG0
+      Grafana tutorial for beginners — Tech With Diego (what Grafana
+      is, data sources, metrics/logs/traces; 7 min)
     https://www.youtube.com/watch?v=fqMOX6JJhGo
       Docker full course — freeCodeCamp (the compose sections this
       session builds on)
