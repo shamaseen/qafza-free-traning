@@ -1,33 +1,33 @@
 # The workflow from session 11
 
 `validate.yml` is the CI job the session builds. It checks that every deck in this repository is
-balanced and has no external references, that no notebook ships stored error outputs, and that the
-course index links every built session.
+balanced and carries its own pictures, that no notebook ships stored error outputs, that the course
+index links every built session, and that the example written by the notebook is still the file
+GitHub runs.
 
-Run locally over the whole repo it passes across **11 decks and 12 notebooks**.
+Run locally over the whole repo it passes across **13 decks and 12 notebooks**.
 
-## Activating it
+## It is live
 
-It lives here rather than in `.github/workflows/` because GitHub refuses a push that creates a
-workflow file unless the token has the `workflow` scope:
+The same file is committed as `.github/workflows/validate.yml`, so it runs on every push and every
+pull request; `gh run list` shows the runs.
+
+Getting it there took one extra step. GitHub refuses a push that creates or changes a workflow file
+unless the token carries the `workflow` scope:
 
 ```
 ! [remote rejected] main -> main (refusing to allow an OAuth App to create or
   update workflow `.github/workflows/validate.yml` without `workflow` scope)
 ```
 
-To turn it on:
-
 ```bash
 gh auth refresh -s workflow          # grant the scope, once
-mkdir -p .github/workflows
-cp 11-automation/workflows/validate.yml .github/workflows/
-git add .github/workflows/validate.yml
-git commit -m "ci: validate decks and notebooks on every push"
-git push
 ```
 
-Then it runs on every push and pull request, and `gh run list` will show it.
+Three copies have to stay identical: the `%%writefile ci-example.yml` cell in
+`automation_tutorial.ipynb` (what the session teaches), this file, and `.github/workflows/validate.yml`
+(what GitHub runs). The workflow's last step compares the first against the third, so drift fails CI
+instead of going unnoticed.
 
 ## Running the same checks now, without GitHub
 
@@ -38,7 +38,8 @@ bad = []
 for f in glob.glob("*/*_slides.html"):
     t = open(f).read()
     if t.count("<section") != t.count("</section>"): bad.append(f + ": unbalanced")
-    ext = re.findall(r'(?:src|href)="(?!#|data:)[^"]+"', t)
+    # src, not href: the pictures must be embedded, the reading list may link out
+    ext = re.findall(r'src="(?!#|data:)[^"]+"', t)
     if ext: bad.append(f"{f}: external {ext[:2]}")
 for f in glob.glob("*/*_tutorial.ipynb"):
     nb = json.load(open(f))
