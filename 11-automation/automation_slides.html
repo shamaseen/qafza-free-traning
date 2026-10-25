@@ -264,7 +264,7 @@ body.ar-on section>*{flex-shrink:0}
 
 serve.run(ChurnService.bind(), name=<span class="s">"churn"</span>, route_prefix=<span class="s">"/churn"</span>)
 </code></pre>
-<pre><code><span class="o">requests answered per replica pid: {1905411: 33, 1905402: 27}</span>
+<pre><code><span class="o">requests answered per replica pid: {1803995: 31, 1803990: 29}</span>
 </code></pre>
   <p class="win"><b>Measured:</b> 60 requests, two distinct process ids. You declared
   <code>num_replicas=2</code>; you did not write a load balancer, a health check or a restart loop.</p>
@@ -667,6 +667,26 @@ ${{ secrets.X }}  ${{ vars.Y }}  ${{ github.sha }}
 const s = [...document.querySelectorAll('section')];
 let i = Math.min(+(location.hash.slice(1) || 1), s.length) - 1;
 const bar = document.querySelector('#bar>i'), num = document.getElementById('num');
+/* ---- fit: shrink a slide that does not fit, rather than cut it off -------------------
+   A <pre> is a flex item: when the code is too tall it scrolls inside itself and the
+   section still measures as fine, so the children have to be measured too. zoom keeps
+   the layout and the line breaks exactly as they are. */
+function over(el){
+  let d = el.scrollHeight - el.clientHeight;
+  for (const c of el.querySelectorAll('*')){
+    if (getComputedStyle(c).overflowY === 'visible') continue;   // not clipped: the section counts it
+    d = Math.max(d, c.scrollHeight - c.clientHeight);
+  }
+  return d;
+}
+function fit(el){
+  if (!el) return;
+  el.style.zoom = '';
+  for (let k = 0; k < 8 && over(el) > 2; k++){
+    const z = +(el.style.zoom || 1), h = el.clientHeight;
+    el.style.zoom = Math.max(.5, z * h / (h + over(el)) * .995).toFixed(3);
+  }
+}
 function show(n){
   i = Math.max(0, Math.min(n, s.length - 1));
   s.forEach((el, k) => el.classList.toggle('active', k === i));
@@ -674,6 +694,7 @@ function show(n){
   num.textContent = (i + 1) + ' / ' + s.length;
   history.replaceState(null, '', '#' + (i + 1));
   s[i].scrollTop = 0;
+  fit(s[i]);
   paint();
 }
 
@@ -752,6 +773,8 @@ wbar.addEventListener('click', e => {
 });
 
 /* ---- keyboard: the only way to change slides ------------------------------------------ */
+addEventListener('resize', () => fit(s[i]));
+addEventListener('keydown', () => requestAnimationFrame(() => fit(s[i])));
 addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey) {                 // leave browser shortcuts alone, except undo
     if (drawing && e.key === 'z') { act.undo(); e.preventDefault(); }
